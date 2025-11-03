@@ -77,18 +77,12 @@ python -m venv venv
 pip install -r requirements.txt
 python run_backend.py
 ```
-
-Backend runs on: **http://127.0.0.1:8000**  
-Swagger UI: **http://127.0.0.1:8000/docs**
-
 **Frontend**:
 ```powershell
 cd frontend
 npm install
 npm run dev
 ```
-
-Frontend runs on: **http://localhost:5173**
 
 ### Database Reset
 ```powershell
@@ -126,7 +120,6 @@ ping-champions/
 ├── setup.py                   # Unified project setup script
 ├── run_backend.py             # Quick backend startup
 ├── recreate_db.py             # Database reset utility
-└── 00_READ_ME_FIRST.md        # Start here (2 min)
 ```
 
 ---
@@ -158,21 +151,6 @@ ping-champions/
 - Admin authentication
 - Pagination & filtering
 - CI/CD pipeline
-
----
-
-## 📊 Assessment & Findings
-
-This project is in **MVP phase**:
-- 5 critical issues (P0), 7 high-priority (P1), 10 medium (P2)
-- 24 prioritized tasks with clear acceptance criteria
-- 4-week realistic roadmap to production-ready state
-
----
-
-## 📄 License
-
-MIT License — see LICENSE file for details.
 
 ---
 
