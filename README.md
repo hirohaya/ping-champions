@@ -12,8 +12,6 @@
 ## 📋 Quick Links
 
 - **🚀 Get Started**: Run `python setup.py` (automated setup)
-- **🤖 AI Agent Guide**: Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
-- **🎯 Architecture Review**: [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
 
 ---
 
@@ -106,7 +104,7 @@ python recreate_db.py
 ```
 ping-champions/
 ├── .github/
-│   └── copilot-instructions.md # AI agent guidance (GitHub Copilot, Claude, etc.)
+│   └── copilot-instructions.md # AI agent guidance
 │
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # Entry point
@@ -125,12 +123,9 @@ ping-champions/
 │   ├── package.json           # Node dependencies
 │   └── README.md              # Frontend documentation
 │
-├── docs/                      # (Archived - see ARCHITECTURE_REVIEW.md)
-│
 ├── setup.py                   # Unified project setup script
 ├── run_backend.py             # Quick backend startup
 ├── recreate_db.py             # Database reset utility
-├── ARCHITECTURE_REVIEW.md     # Technical analysis
 └── 00_READ_ME_FIRST.md        # Start here (2 min)
 ```
 
@@ -147,7 +142,7 @@ ping-champions/
 - Breadcrumb navigation
 
 ### 🔄 In Progress (Sprint 1–4)
-See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for detailed roadmap.
+Check implementation roadmap in the code.
 
 **Next Priority (Sprint 1)**:
 1. Fix SFC error in EventsView.vue
@@ -189,20 +184,10 @@ See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for detailed roadmap.
 
 ## 📊 Assessment & Findings
 
-This project includes a comprehensive **architecture review** with:
-- ✅ Complexity analysis (currently **low**)
-- ✅ Abstraction levels (2 layers; recommend service layer)
-- ✅ Method responsibilities (well-focused)
-- ✅ Growth potential (**medium/high** after base improvements)
-- ✅ Maintainability scores (**medium** → **high** with suggested fixes)
-- ✅ Onboarding difficulty (**medium** → **high** after Sprint 4)
-
-**Key findings**:
+This project is in **MVP phase**:
 - 5 critical issues (P0), 7 high-priority (P1), 10 medium (P2)
 - 24 prioritized tasks with clear acceptance criteria
 - 4-week realistic roadmap to production-ready state
-
-👉 **Read full review**: [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
 
 ---
 
@@ -216,16 +201,14 @@ This project includes a comprehensive **architecture review** with:
 
 ## 📚 Documentation
 
-| Document | Purpose | Read Time |
-|----------|---------|-----------|
-| [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) | Technical analysis & roadmap | 20 min |
-| [`.github/copilot-instructions.md`](./.github/copilot-instructions.md) | AI agent guidance | 10 min |
+- Core setup: `setup.py` script
+- Backend: `backend/` folder
+- Frontend: `frontend/` folder
 
 ---
 
 ## 🐛 Known Issues
 
-See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for details:
 - SFC error in EventsView.vue (T001)
 - ORM relationship issues (T003)
 - Inconsistent trailing slashes (T004)
@@ -235,9 +218,9 @@ See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for details:
 
 ## 📞 Support
 
-- 🚀 **Setup not working?** → Run `python setup.py` again or check [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
-- 🤖 **Need AI assistance?** → Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md) for full context
-- ️ **Architecture & roadmap?** → Read [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
+- 🚀 **Setup not working?** → Run `python setup.py` again
+- 🐍 **Backend issues?** → Check `backend/` folder or test with Swagger UI at `http://127.0.0.1:8000/docs`
+- ⚙️ **Frontend issues?** → Check `frontend/` folder or test at `http://localhost:5173`
 
 ---
 
@@ -257,11 +240,8 @@ GitHub: [@hirohaya](https://github.com/hirohaya)
 ## 🎉 Status
 
 ✅ **Repository created**: November 2, 2025  
-✅ **Initial documentation complete**: 9 files, ~8500 lines  
 ✅ **Setup automation complete**: Unified `setup.py` script (cross-platform)  
-✅ **AI guidance added**: [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)  
-🟢 **Ready for Sprint 1**: Begin implementation now  
-📍 **Estimated completion (MVP)**: ~4 weeks (Sprints 1–4)
+🟢 **Ready for development**: Begin Sprint 1 implementation
 
 ---
 
