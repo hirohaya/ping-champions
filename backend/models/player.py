@@ -13,7 +13,3 @@ class Player(Base):
     active = Column(Integer, default=1)  # 1=active, 0=removed
 
     event = relationship("Event", back_populates="players", passive_deletes=True)
-
-# Relacionamento reverso
-from .event import Event
-Event.players = relationship("Player", back_populates="event")
