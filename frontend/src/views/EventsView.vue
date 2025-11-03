@@ -2,11 +2,13 @@
   <div>
     <h2>Events</h2>
     <!-- Form to create a new event -->
-  <form class="event-create-form" @submit.prevent="createEvent">
-  <input v-model="name" placeholder="Event name" required style="margin-right: 0.5em;" />
-  <input v-model="date" type="date" required style="margin-right: 0.5em;" />
-  <input v-model="time" type="time" required style="margin-right: 0.5em;" />
-       <button type="submit">Create Event</button>
+    <form class="event-create-form" @submit.prevent="createEvent">
+      <div class="form-row">
+        <input v-model="name" placeholder="Event name" required />
+        <input v-model="date" type="date" required />
+        <input v-model="time" type="time" required />
+        <button type="submit">Create Event</button>
+      </div>
     </form>
     <!-- Feedback message -->
     <div v-if="message" :style="{color: error ? 'red' : 'green', margin: '1em 0'}">{{ message }}</div>
@@ -76,20 +78,27 @@ onMounted(listEvents)
 <style scoped>
 .event-create-form {
   display: flex;
-  flex-direction: column;
-  gap: 2em;
+  flex-direction: row;
+  gap: 0.5em;
   margin-bottom: 3em;
-  margin-right: 3em;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .event-create-form input {
-  flex: 1 1 180px;
-  min-width: 0;
   padding: 0.6em 1em;
   border-radius: 6px;
-  margin-right: 3em;
   border: 1px solid #bdbdbd;
   font-size: 1em;
+  flex: 1 1 150px;
+  min-width: 120px;
 }
 
 .event-create-form button[type="submit"] {
@@ -101,6 +110,7 @@ onMounted(listEvents)
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  flex: 0 0 auto;
 }
 
 .event-create-form button[type="submit"]:hover {

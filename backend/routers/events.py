@@ -30,7 +30,7 @@ def get_db():
 
 
 # List all active events
-@router.get("/")
+@router.get("")
 def list_events(db: Session = Depends(get_db)):
     return db.query(Event).filter(Event.active == True).all()
 
@@ -45,7 +45,7 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
 
 
 # Create a new event
-@router.post("/create")
+@router.post("")
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
     try:
         # Parse date string to datetime object
@@ -60,7 +60,7 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
 
 
 # Soft delete an event (mark as inactive)
-@router.post("/delete/{event_id}")
+@router.delete("/{event_id}")
 def delete_event(event_id: int, db: Session = Depends(get_db)):
     event = db.query(Event).filter(Event.id == event_id).first()
     if not event:

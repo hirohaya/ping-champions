@@ -1,5 +1,5 @@
 # Model for Match
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -11,9 +11,9 @@ class Match(Base):
     player2_id = Column(Integer, ForeignKey("players.id"), nullable=False)
     winner_id = Column(Integer, ForeignKey("players.id"), nullable=True)
     best_of = Column(Integer, default=5)
-    finished = Column(Integer, default=0)  # 0=ongoing, 1=finished
+    finished = Column(Boolean, default=False)  # Match completion status
 
-    event = relationship("Event")
-    player1 = relationship("Player", foreign_keys=[player1_id])
-    player2 = relationship("Player", foreign_keys=[player2_id])
+    event = relationship("Event", back_populates="matches")
+    player1 = relationship("Player", foreign_keys=[player1_id], back_populates="matches_as_player1")
+    player2 = relationship("Player", foreign_keys=[player2_id], back_populates="matches_as_player2")
     winner = relationship("Player", foreign_keys=[winner_id])

@@ -14,3 +14,4 @@ class Event(Base):
     active = Column(Boolean, default=True)  # Visibility flag (soft delete)
     created_at = Column(DateTime, default=datetime.utcnow)
     players = relationship("Player", back_populates="event", cascade="all, delete-orphan")
+    matches = relationship("Match", back_populates="event", cascade="all, delete-orphan")
