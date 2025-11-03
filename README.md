@@ -11,11 +11,11 @@
 
 ## 📋 Quick Links
 
-- **🚀 Get Started**: Read [`00_READ_ME_FIRST.md`](./00_READ_ME_FIRST.md) (2 min)
+- **🚀 Get Started**: Run `python setup.py` (automated setup)
+- **🤖 AI Agent Guide**: Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
 - **📖 Full Documentation**: See [`docs/00_START_HERE.md`](./docs/00_START_HERE.md)
 - **🎯 Architecture Review**: [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
 - **📊 Roadmap**: [`docs/TASKS_QUICK_VIEW.md`](./docs/TASKS_QUICK_VIEW.md)
-- **🔧 Setup Guide**: See [backend](./backend/README.md) and [frontend](./frontend/README.md)
 
 ---
 
@@ -55,22 +55,38 @@
 - Node.js 20+ and `npm`
 - Git
 
-### Backend Setup
-```bash
+### Automated Setup (Recommended)
+```powershell
+python setup.py
+```
+
+This script automatically:
+1. Creates Python virtual environment
+2. Installs backend dependencies
+3. Installs frontend dependencies
+4. Creates `.env` and `.env.local` files
+5. Shows next steps
+
+**Cross-platform**: Supports Windows, macOS, and Linux.
+
+### Manual Setup (Alternative)
+
+**Backend**:
+```powershell
 cd backend
 python -m venv venv
 .\venv\Scripts\activate          # Windows
 # or: source venv/bin/activate   # macOS/Linux
 
 pip install -r requirements.txt
-uvicorn main:app --reload
+python run_backend.py
 ```
 
-Backend runs on: **http://localhost:8000**  
-Swagger UI: **http://localhost:8000/docs**
+Backend runs on: **http://127.0.0.1:8000**  
+Swagger UI: **http://127.0.0.1:8000/docs**
 
-### Frontend Setup
-```bash
+**Frontend**:
+```powershell
 cd frontend
 npm install
 npm run dev
@@ -78,12 +94,22 @@ npm run dev
 
 Frontend runs on: **http://localhost:5173**
 
+### Database Reset
+```powershell
+python recreate_db.py
+```
+
+**⚠️ Warning**: This deletes all data and recreates the schema.
+
 ---
 
 ## 📁 Project Structure
 
 ```
 ping-champions/
+├── .github/
+│   └── copilot-instructions.md # AI agent guidance (GitHub Copilot, Claude, etc.)
+│
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # Entry point
 │   ├── database.py            # Database configuration
@@ -108,9 +134,11 @@ ping-champions/
 │   ├── ACTION_PLAN_4WEEKS.md  # 4-week implementation plan
 │   └── GITHUB_ISSUE_TEMPLATES.md  # Issue templates
 │
+├── setup.py                   # Unified project setup script
+├── run_backend.py             # Quick backend startup
+├── recreate_db.py             # Database reset utility
 ├── ARCHITECTURE_REVIEW.md     # Technical analysis
-├── 00_READ_ME_FIRST.md        # Start here (2 min)
-└── QUICK_REFERENCE.md         # Quick lookup guide
+└── 00_READ_ME_FIRST.md        # Start here (2 min)
 ```
 
 ---
@@ -221,7 +249,8 @@ See [ARCHITECTURE_REVIEW.md](./ARCHITECTURE_REVIEW.md) → **Achados principais*
 
 ## 📞 Support
 
-- 📖 **Setup issues?** → Check backend/README.md or frontend/README.md
+- � **Setup not working?** → Run `python setup.py` again or check [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
+- 🤖 **Need AI assistance?** → Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md) for full context
 - 🎯 **What to work on?** → See [`docs/TASKS_QUICK_VIEW.md`](./docs/TASKS_QUICK_VIEW.md)
 - 🏗️ **Architecture questions?** → Read [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
 - 📋 **Contribution guidelines?** → See [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md) (coming Sprint 4)
@@ -245,9 +274,11 @@ GitHub: [@hirohaya](https://github.com/hirohaya)
 
 ✅ **Repository created**: November 2, 2025  
 ✅ **Initial documentation complete**: 9 files, ~8500 lines  
+✅ **Setup automation complete**: Unified `setup.py` script (cross-platform)  
+✅ **AI guidance added**: [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)  
 🟢 **Ready for Sprint 1**: Begin implementation now  
 📍 **Estimated completion (MVP)**: ~4 weeks (Sprints 1–4)
 
 ---
 
-**Start here**: Read [`00_READ_ME_FIRST.md`](./00_READ_ME_FIRST.md) in 2 minutes.
+**Quick start**: Run `python setup.py` or read [`00_READ_ME_FIRST.md`](./00_READ_ME_FIRST.md) in 2 minutes.
