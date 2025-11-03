@@ -35,6 +35,15 @@ def list_events(db: Session = Depends(get_db)):
     return db.query(Event).filter(Event.active == True).all()
 
 
+# Get a specific event
+@router.get("/{event_id}")
+def get_event(event_id: int, db: Session = Depends(get_db)):
+    event = db.query(Event).filter(Event.id == event_id, Event.active == True).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return event
+
+
 # Create a new event
 @router.post("/create")
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
