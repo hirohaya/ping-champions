@@ -41,33 +41,35 @@ def print_section(title: str):
 
 def print_success(message: str):
     """Print a success message"""
-    print(f"{Colors.GREEN}✓{Colors.END} {message}")
+    print(f"{Colors.GREEN}[OK]{Colors.END} {message}")
 
 
 def print_error(message: str):
     """Print an error message"""
-    print(f"{Colors.RED}✗{Colors.END} {message}")
+    print(f"{Colors.RED}[ERROR]{Colors.END} {message}")
 
 
 def print_warning(message: str):
     """Print a warning message"""
-    print(f"{Colors.YELLOW}⚠{Colors.END} {message}")
+    print(f"{Colors.YELLOW}[WARNING]{Colors.END} {message}")
 
 
 def print_info(message: str):
     """Print an info message"""
-    print(f"{Colors.BLUE}ℹ{Colors.END} {message}")
+    print(f"{Colors.BLUE}[INFO]{Colors.END} {message}")
 
 
-def run_command(command: list, cwd: Optional[str] = None, check: bool = True) -> bool:
+def run_command(command, cwd: Optional[str] = None, check: bool = True) -> bool:
     """Execute a command and return success status"""
     try:
+        use_shell = isinstance(command, str) or platform.system() == 'Windows'
         result = subprocess.run(
             command,
             cwd=cwd,
             capture_output=False,
             text=True,
-            check=False
+            check=False,
+            shell=use_shell
         )
         return result.returncode == 0
     except Exception as e:
@@ -88,26 +90,23 @@ def setup_backend():
     venv_path = backend_path / "venv"
     if not venv_path.exists():
         print_info("Creating virtual environment...")
-        if not run_command([sys.executable, "-m", "venv", str(venv_path)]):
+        if not run_command([sys.executable, "-m", "venv", "backend/venv"]):
             print_error("Failed to create virtual environment")
             return False
         print_success("Virtual environment created")
     else:
         print_success("Virtual environment exists")
     
-    # Determine activation command
-    if platform.system() == 'Windows':
-        activate_cmd = str(venv_path / "Scripts" / "activate.bat")
-        pip_cmd = str(venv_path / "Scripts" / "pip")
-    else:
-        activate_cmd = str(venv_path / "bin" / "activate")
-        pip_cmd = str(venv_path / "bin" / "pip")
-    
-    # Install dependencies
+    # Install dependencies using python -m pip
     print_info("Installing backend dependencies...")
     req_file = backend_path / "requirements.txt"
     if req_file.exists():
-        if not run_command([pip_cmd, "install", "-r", str(req_file)]):
+        if platform.system() == 'Windows':
+            python_exe = "backend\\venv\\Scripts\\python.exe"
+        else:
+            python_exe = "backend/venv/bin/python"
+        
+        if not run_command(f'"{python_exe}" -m pip install -r backend/requirements.txt'):
             print_error("Failed to install requirements")
             return False
         print_success("Requirements installed")
@@ -115,7 +114,12 @@ def setup_backend():
     # Install dev dependencies
     req_dev_file = backend_path / "requirements-dev.txt"
     if req_dev_file.exists():
-        if not run_command([pip_cmd, "install", "-r", str(req_dev_file)]):
+        if platform.system() == 'Windows':
+            python_exe = "backend\\venv\\Scripts\\python.exe"
+        else:
+            python_exe = "backend/venv/bin/python"
+            
+        if not run_command(f'"{python_exe}" -m pip install -r backend/requirements-dev.txt'):
             print_warning("Failed to install dev requirements (optional)")
         else:
             print_success("Dev requirements installed")
@@ -163,7 +167,7 @@ def setup_database():
     db_script = Path("recreate_db.py")
     if not db_script.exists():
         print_warning("Database recreation script not found")
-        return False
+        return True  # Don't fail if script not found
     
     print_info("Recreating database with fresh schema...")
     if not run_command([sys.executable, str(db_script)]):
@@ -204,13 +208,15 @@ def create_env_files():
         print_success("Frontend .env.local created")
     else:
         print_success("Frontend .env.local exists")
+    
+    return True
 
 
 def show_next_steps():
     """Display next steps to run the project"""
     print_section("Setup Complete!")
     
-    print(f"{Colors.GREEN}{Colors.BOLD}✓ All components configured successfully!{Colors.END}\n")
+    print(f"{Colors.GREEN}{Colors.BOLD}[OK] All components configured successfully!{Colors.END}\n")
     
     if platform.system() == 'Windows':
         print(f"{Colors.BOLD}Next steps:{Colors.END}\n")
@@ -226,17 +232,17 @@ def show_next_steps():
         print(f"   {Colors.YELLOW}cd frontend && npm run dev{Colors.END}\n")
     
     print(f"{Colors.BOLD}URLs:{Colors.END}")
-    print(f"  • API: {Colors.YELLOW}http://127.0.0.1:8000{Colors.END}")
-    print(f"  • Frontend: {Colors.YELLOW}http://localhost:5173{Colors.END}")
-    print(f"  • API Docs: {Colors.YELLOW}http://127.0.0.1:8000/docs{Colors.END}\n")
+    print(f"  - API: {Colors.YELLOW}http://127.0.0.1:8000{Colors.END}")
+    print(f"  - Frontend: {Colors.YELLOW}http://localhost:5173{Colors.END}")
+    print(f"  - API Docs: {Colors.YELLOW}http://127.0.0.1:8000/docs{Colors.END}\n")
 
 
 def main():
     """Main setup orchestration"""
     print(f"{Colors.BOLD}{Colors.BLUE}")
-    print("  ╔═════════════════════════════════╗")
-    print("  ║   Ping Champions - Setup        ║")
-    print("  ╚═════════════════════════════════╝")
+    print("  ================================")
+    print("  Ping Champions - Setup")
+    print("  ================================")
     print(f"{Colors.END}\n")
     
     # Ensure we're in the project root
@@ -250,7 +256,6 @@ def main():
             ("Backend", setup_backend),
             ("Frontend", setup_frontend),
             ("Environment Files", create_env_files),
-            ("Database", setup_database),
         ]
         
         for step_name, step_func in steps:
