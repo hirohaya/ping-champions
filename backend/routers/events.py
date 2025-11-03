@@ -36,7 +36,7 @@ def list_events(db: Session = Depends(get_db)):
 
 
 # Create a new event
-@router.post("/create/")
+@router.post("/create")
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
     try:
         # Parse date string to datetime object
