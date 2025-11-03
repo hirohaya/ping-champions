@@ -13,9 +13,7 @@
 
 - **🚀 Get Started**: Run `python setup.py` (automated setup)
 - **🤖 AI Agent Guide**: Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
-- **📖 Full Documentation**: See [`docs/00_START_HERE.md`](./docs/00_START_HERE.md)
 - **🎯 Architecture Review**: [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
-- **📊 Roadmap**: [`docs/TASKS_QUICK_VIEW.md`](./docs/TASKS_QUICK_VIEW.md)
 
 ---
 
@@ -127,12 +125,7 @@ ping-champions/
 │   ├── package.json           # Node dependencies
 │   └── README.md              # Frontend documentation
 │
-├── docs/                      # Documentation & Roadmap
-│   ├── README_ASSESSMENT.md   # Evaluation & findings
-│   ├── TASKS.md               # 24 prioritized tasks (T001–T024)
-│   ├── TASKS_QUICK_VIEW.md    # Dashboard & sprint breakdown
-│   ├── ACTION_PLAN_4WEEKS.md  # 4-week implementation plan
-│   └── GITHUB_ISSUE_TEMPLATES.md  # Issue templates
+├── docs/                      # (Archived - see ARCHITECTURE_REVIEW.md)
 │
 ├── setup.py                   # Unified project setup script
 ├── run_backend.py             # Quick backend startup
@@ -154,7 +147,7 @@ ping-champions/
 - Breadcrumb navigation
 
 ### 🔄 In Progress (Sprint 1–4)
-See [TASKS_QUICK_VIEW.md](./docs/TASKS_QUICK_VIEW.md) for prioritized roadmap.
+See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for detailed roadmap.
 
 **Next Priority (Sprint 1)**:
 1. Fix SFC error in EventsView.vue
@@ -215,10 +208,9 @@ This project includes a comprehensive **architecture review** with:
 
 ## 🤝 Contributing
 
-1. Read [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md) (will be created in Sprint 4)
-2. Check [`docs/TASKS.md`](./docs/TASKS.md) for current priorities
+1. Check [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for current priorities
+2. Follow code style: PEP 8 (Python), ES6 (JavaScript)
 3. Open an issue for bugs or features
-4. Follow code style: PEP 8 (Python), ES6 (JavaScript)
 
 ---
 
@@ -226,22 +218,16 @@ This project includes a comprehensive **architecture review** with:
 
 | Document | Purpose | Read Time |
 |----------|---------|-----------|
-| [`00_READ_ME_FIRST.md`](./00_READ_ME_FIRST.md) | Start here | 2 min |
-| [`docs/README_ASSESSMENT.md`](./docs/README_ASSESSMENT.md) | Executive summary | 10 min |
-| [`docs/TASKS.md`](./docs/TASKS.md) | All tasks + criteria | 30-45 min |
-| [`docs/TASKS_QUICK_VIEW.md`](./docs/TASKS_QUICK_VIEW.md) | Dashboard | 5 min |
-| [`docs/ACTION_PLAN_4WEEKS.md`](./docs/ACTION_PLAN_4WEEKS.md) | Weekly plan | 15 min |
-| [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) | Technical analysis | 20 min |
-
-**Full index**: [`docs/INDEX.md`](./docs/INDEX.md)
+| [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) | Technical analysis & roadmap | 20 min |
+| [`.github/copilot-instructions.md`](./.github/copilot-instructions.md) | AI agent guidance | 10 min |
 
 ---
 
 ## 🐛 Known Issues
 
-See [ARCHITECTURE_REVIEW.md](./ARCHITECTURE_REVIEW.md) → **Achados principais** section:
+See [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md) for details:
 - SFC error in EventsView.vue (T001)
-- ORM relationship override in Player model (T003)
+- ORM relationship issues (T003)
 - Inconsistent trailing slashes (T004)
 - Missing Pydantic schemas (T006–T008)
 
@@ -249,11 +235,9 @@ See [ARCHITECTURE_REVIEW.md](./ARCHITECTURE_REVIEW.md) → **Achados principais*
 
 ## 📞 Support
 
-- � **Setup not working?** → Run `python setup.py` again or check [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
+- 🚀 **Setup not working?** → Run `python setup.py` again or check [`.github/copilot-instructions.md`](./.github/copilot-instructions.md)
 - 🤖 **Need AI assistance?** → Read [`.github/copilot-instructions.md`](./.github/copilot-instructions.md) for full context
-- 🎯 **What to work on?** → See [`docs/TASKS_QUICK_VIEW.md`](./docs/TASKS_QUICK_VIEW.md)
-- 🏗️ **Architecture questions?** → Read [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
-- 📋 **Contribution guidelines?** → See [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md) (coming Sprint 4)
+- ️ **Architecture & roadmap?** → Read [`ARCHITECTURE_REVIEW.md`](./ARCHITECTURE_REVIEW.md)
 
 ---
 
@@ -281,4 +265,4 @@ GitHub: [@hirohaya](https://github.com/hirohaya)
 
 ---
 
-**Quick start**: Run `python setup.py` or read [`00_READ_ME_FIRST.md`](./00_READ_ME_FIRST.md) in 2 minutes.
+**Quick start**: Run `python setup.py` to get started.
