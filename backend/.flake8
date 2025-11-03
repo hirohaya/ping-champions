@@ -1,0 +1,40 @@
+[flake8]
+# Flake8 Configuration
+
+# Maximum line length
+max-line-length = 127
+
+# Ignore rules
+# E203: Whitespace before ':'
+# W503: Line break before binary operator
+# E501: Line too long (we use formatter for this)
+ignore = E203, W503, E501
+
+# Include these codes in the output
+select = E9,F63,F7,F82,E302,E305,E711,E712,E713,E714,E721,E722,E731,E741,E742,E743
+
+# Exclude directories
+exclude = 
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env,
+    .eggs,
+    *.egg,
+    .pytest_cache,
+    .mypy_cache,
+    build,
+    dist
+
+# Complexity (McCabe)
+max-complexity = 10
+
+# Per-file ignores
+# F401: imported but unused
+per-file-ignores =
+    __init__.py:F401
+
+# Statistics
+count = True
+statistics = True

@@ -1,0 +1,35 @@
+# Development Dependencies for Trunk-Based Development
+
+# Production deps (from requirements.txt)
+-r requirements.txt
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+httpx==0.25.1  # For testing async endpoints
+
+# Linting & Formatting
+flake8==6.1.0
+black==23.11.0
+isort==5.12.0
+autopep8==2.0.4
+
+# Type Checking
+mypy==1.7.1
+types-requests==2.31.0.10
+
+# Code Quality
+pylint==3.0.3
+bandit==1.7.5  # Security linter
+
+# Development
+ipython==8.17.2
+python-dotenv==1.0.0  # .env support
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+
+# Pre-commit hooks
+pre-commit==3.5.0
