@@ -1,9 +1,12 @@
 
 # Modelo para Event (Evento)
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
-from sqlalchemy.orm import relationship
-from database import Base
 from datetime import datetime
+
+from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy.orm import relationship
+
+from database import Base
+
 
 class Event(Base):
     __tablename__ = "events"

@@ -1,0 +1,55 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "ping-champions"
+version = "0.1.0"
+description = "Table Tennis Tournament Management System"
+authors = [{name = "Lucas Hiroshi Hayashida", email = "hirohaya@example.com"}]
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+extend-exclude = [".venv", "venv", "__pycache__", ".pytest_cache"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "C90",    # mccabe
+]
+ignore = [
+    "E501",   # Line too long (handled by formatter)
+    "E203",   # Whitespace before ':'
+    "B008",   # Do not perform function call in defaults (FastAPI Depends() is standard pattern)
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+known-first-party = ["database", "models", "routers", "schemas", "main"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/.venv/*",
+    "*/venv/*",
+]

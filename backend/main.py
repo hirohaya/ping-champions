@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from routers import events, players, matches, ranking
-from database import engine, Base
-from models import Event, Player, Match  # Import models to register them
 from fastapi.middleware.cors import CORSMiddleware
+
+from database import Base, engine
+from routers import events, matches, players, ranking
 
 # Cria as tabelas no banco de dados
 Base.metadata.create_all(bind=engine)

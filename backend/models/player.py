@@ -1,7 +1,9 @@
 # Modelo para Player (Jogador)
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+
 from database import Base
+
 
 class Player(Base):
     __tablename__ = "players"

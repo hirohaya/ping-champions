@@ -11,6 +11,17 @@ This document provides essential context for AI coding agents (GitHub Copilot, C
 - **Setup**: Single unified entry point via `setup.py` (handles backend, frontend, environment)
 - **Database**: SQLite with 3 core entities (Events, Players, Matches)
 
+## Coding Philosophy
+
+- **Simplicity**: Prioritize clear, maintainable code over complex optimizations
+- **Conventions**: Follow established patterns in existing code (see below)
+- **Documentation**: Comment non-obvious logic; refer to this file for architecture/context
+- **Virtual Environments**: Always works on and use virtual environments for Python dependencies; isolate frontend with npm
+- **README Updates**: Keep `README.md` updated with architecture changes and project progress from tasks
+- **Testing**: Always run a complete tests, unit and e2e after making any changes. Write tests for new features and bug fixes; use existing test files as reference
+- **Branch Cleaning**: Delete feature branches after merging to main to keep repo tidy
+- **Terminal**: always close terminal sessions after use to avoid resource leaks
+
 ## Backend Architecture
 
 ### Stack & Dependencies

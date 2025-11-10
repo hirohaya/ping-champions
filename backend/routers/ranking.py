@@ -3,15 +3,19 @@
 # FastAPI imports for API routing and dependency injection
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func
+
 # SQLAlchemy imports for database session management
 from sqlalchemy.orm import Session
+
 from database import SessionLocal
+from models.event import Event
+from models.match import Match
+
 # Import Player and Match models
 from models.player import Player
-from models.match import Match
-from models.event import Event
+
 # Import schemas
-from schemas import RankingEntry, RankingResponse
+from schemas import RankingEntry
 
 # Router for ranking endpoints
 router = APIRouter(prefix="/ranking", tags=["ranking"])
@@ -29,42 +33,42 @@ def get_db():
 def event_ranking(event_id: int = Query(..., gt=0), db: Session = Depends(get_db)):
     """
     Get player ranking for an event based on wins/losses.
-    
+
     - **event_id**: Event ID to get ranking for
-    
+
     Returns players sorted by wins (descending) then by win rate (descending)
     """
     # Verify event exists
-    event = db.query(Event).filter(Event.id == event_id, Event.active == True).first()
+    event = db.query(Event).filter(Event.id == event_id, Event.active).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
-    
+
     players = db.query(Player).filter(
         Player.event_id == event_id,
-        Player.active == True
+        Player.active
     ).all()
-    
+
     ranking_data = []
-    
+
     for player in players:
         # Count wins
         wins = db.query(func.count(Match.id)).filter(
             Match.event_id == event_id,
             Match.winner_id == player.id,
-            Match.finished == True
+            Match.finished
         ).scalar() or 0
-        
+
         # Count losses
         losses = db.query(func.count(Match.id)).filter(
             Match.event_id == event_id,
             ((Match.player1_id == player.id) | (Match.player2_id == player.id)),
-            Match.finished == True,
+            Match.finished,
             Match.winner_id != player.id
         ).scalar() or 0
-        
+
         total_matches = wins + losses
         win_rate = (wins / total_matches) if total_matches > 0 else 0.0
-        
+
         ranking_data.append(RankingEntry(
             player_id=player.id,
             name=player.name,
@@ -72,8 +76,8 @@ def event_ranking(event_id: int = Query(..., gt=0), db: Session = Depends(get_db
             losses=losses,
             win_rate=round(win_rate, 2)
         ))
-    
+
     # Sort by wins (desc), then by win_rate (desc)
     ranking_data.sort(key=lambda x: (x.wins, x.win_rate), reverse=True)
-    
+
     return ranking_data

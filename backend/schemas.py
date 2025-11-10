@@ -1,8 +1,10 @@
 # Pydantic schemas for request/response validation
-from pydantic import BaseModel, Field, validator
-from typing import Optional
-from datetime import datetime
 import re
+from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, Field, validator
+
 
 # ============ Event Schemas ============
 class EventCreate(BaseModel):
@@ -10,20 +12,23 @@ class EventCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=100, description="Event name")
     date: str = Field(..., description="Event date in YYYY-MM-DD format")
     time: str = Field(..., description="Event time in HH:MM format")
-    
+
     @validator('date')
+    @classmethod
     def validate_date_format(cls, v):
         """Validate date is in YYYY-MM-DD format"""
         if not re.match(r'^\d{4}-\d{2}-\d{2}$', v):
             raise ValueError('Date must be in YYYY-MM-DD format')
         return v
-    
+
     @validator('time')
+    @classmethod
     def validate_time_format(cls, v):
         """Validate time is in HH:MM format"""
         if not re.match(r'^\d{2}:\d{2}$', v):
             raise ValueError('Time must be in HH:MM format')
         return v
+
 
 class EventRead(BaseModel):
     """Schema for reading event data"""
@@ -33,7 +38,7 @@ class EventRead(BaseModel):
     time: str
     active: bool
     created_at: Optional[datetime] = None
-    
+
     class Config:
         from_attributes = True
 
@@ -51,7 +56,7 @@ class PlayerRead(BaseModel):
     score: int
     ranking: int
     active: bool
-    
+
     class Config:
         from_attributes = True
 
@@ -68,8 +73,9 @@ class MatchCreate(BaseModel):
     player1_id: int = Field(..., gt=0, description="First player ID")
     player2_id: int = Field(..., gt=0, description="Second player ID")
     best_of: int = Field(default=5, ge=1, le=7, description="Best of N sets (1, 3, 5, or 7)")
-    
+
     @validator('best_of')
+    @classmethod
     def validate_best_of(cls, v):
         """Validate best_of is odd number"""
         if v not in [1, 3, 5, 7]:
@@ -85,7 +91,7 @@ class MatchRead(BaseModel):
     winner_id: Optional[int] = None
     best_of: int
     finished: bool
-    
+
     class Config:
         from_attributes = True
 
@@ -102,7 +108,7 @@ class RankingEntry(BaseModel):
     wins: int = Field(default=0, ge=0)
     losses: int = Field(default=0, ge=0)
     win_rate: float = Field(default=0.0, ge=0.0, le=1.0)
-    
+
     class Config:
         from_attributes = True
 

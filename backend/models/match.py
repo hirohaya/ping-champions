@@ -1,7 +1,9 @@
 # Model for Match
-from sqlalchemy import Column, Integer, Boolean, ForeignKey
+from sqlalchemy import Boolean, Column, ForeignKey, Integer
 from sqlalchemy.orm import relationship
+
 from database import Base
+
 
 class Match(Base):
     __tablename__ = "matches"
