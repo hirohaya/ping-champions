@@ -133,10 +133,15 @@ ping-champions/
 - ✅ Cleaned up corrupted database reset script
 - ✅ All models validated and imported successfully
 
-### Sprint 2: API Contracts (2-3 days)
-- Add Pydantic schemas
-- Validate requests/responses
-- Document Swagger
+### Sprint 2: API Contracts 🟡 IN PROGRESS
+- ✅ Enhanced Pydantic schemas with validation (T006, T007, T008)
+  - EventCreate/EventRead with date/time format validation
+  - PlayerCreate/PlayerRead/PlayerUpdate with constraints
+  - MatchCreate/MatchRead/MatchUpdate with best_of validation
+  - RankingEntry with numeric constraints
+- ✅ Added docstrings to all endpoints (T010)
+- ✅ Implemented request/response validation (T009)
+- ⏳ Final validation and Swagger UI testing
 
 ### Sprint 3: Infrastructure (2-3 days)
 - Setup linting (Ruff, ESLint)
@@ -168,7 +173,8 @@ GitHub: [@hirohaya](https://github.com/hirohaya)
 ✅ **Repository created**: November 2, 2025  
 ✅ **Setup automation complete**: Unified `setup.py` script (cross-platform)  
 ✅ **Sprint 1 Completed**: Critical bugs fixed (Nov 3, 2025)  
-🟡 **Next**: Sprint 2 - API Contracts & Validation (2-3 days)
+🟡 **Sprint 2 In Progress**: API Contracts & Validation (Nov 10, 2025)  
+⏳ **Next**: Sprint 3 - Infrastructure (linting, tests, migrations)
 
 ---
 
