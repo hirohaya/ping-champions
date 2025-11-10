@@ -1,4 +1,4 @@
-import { test, expect, beforeEach, afterEach } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { createTestEvent, deleteTestEvent, registerPlayer, recordMatch, getTodayDate, clearTestDatabase } from './helpers';
 
 /**
@@ -10,7 +10,7 @@ let testEventId;
 let player1Id;
 let player2Id;
 
-beforeEach(async () => {
+test.beforeEach(async () => {
   // Clear any existing test data
   await clearTestDatabase();
   
@@ -25,7 +25,7 @@ beforeEach(async () => {
   player2Id = player2.id;
 });
 
-afterEach(async () => {
+test.afterEach(async () => {
   // Cleanup
   if (testEventId) {
     try {

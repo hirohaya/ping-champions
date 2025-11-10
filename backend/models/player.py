@@ -1,5 +1,5 @@
 # Modelo para Player (Jogador)
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 from database import Base
@@ -10,8 +10,9 @@ class Player(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     event_id = Column(Integer, ForeignKey("events.id", ondelete="CASCADE"), nullable=False)
-    score = Column(Integer, default=0)
-    ranking = Column(Integer, default=0)
+    elo_rating = Column(Float, default=1600.0)  # Elo rating (starts at 1600)
+    score = Column(Integer, default=0)  # Legacy: number of wins
+    ranking = Column(Integer, default=0)  # Position in tournament ranking
     active = Column(Boolean, default=True)  # Soft delete flag
 
     event = relationship("Event", back_populates="players", passive_deletes=True)

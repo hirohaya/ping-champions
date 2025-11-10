@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import SessionLocal
+from elo import update_ratings
 from models.event import Event
 
 # Import Match and Player models
@@ -106,6 +107,9 @@ def get_match(match_id: int, db: Session = Depends(get_db)):
 def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends(get_db)):
     """
     Update match result (set winner and finish status).
+    
+    When a winner is set, automatically updates both players' Elo ratings
+    based on their pre-match ratings and the match outcome.
 
     - **winner_id**: ID of the winning player (must be player1 or player2)
     - **finished**: Whether the match is finished
@@ -114,13 +118,42 @@ def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends
     if not match:
         raise HTTPException(status_code=404, detail="Match not found")
 
-    # If setting a winner, validate it's one of the players
+    # If setting a winner, validate it's one of the players and update Elo ratings
     if match_update.winner_id is not None:
         if match_update.winner_id not in [match.player1_id, match.player2_id]:
             raise HTTPException(
                 status_code=400,
                 detail="Winner must be one of the match players"
             )
+        
+        # Get both players
+        player1 = db.query(Player).filter(Player.id == match.player1_id).first()
+        player2 = db.query(Player).filter(Player.id == match.player2_id).first()
+        
+        if not player1 or not player2:
+            raise HTTPException(
+                status_code=404,
+                detail="One or both players not found"
+            )
+        
+        # Calculate new Elo ratings
+        new_p1_rating, new_p2_rating = update_ratings(
+            player1.elo_rating,
+            player2.elo_rating,
+            match_update.winner_id,
+            player1.id,
+            player2.id
+        )
+        
+        # Update player ratings and increment win count for winner
+        player1.elo_rating = new_p1_rating
+        player2.elo_rating = new_p2_rating
+        
+        if match_update.winner_id == player1.id:
+            player1.score += 1  # Increment wins
+        else:
+            player2.score += 1  # Increment wins
+        
         match.winner_id = match_update.winner_id
 
     if match_update.finished is not None:

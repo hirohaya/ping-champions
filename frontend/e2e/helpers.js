@@ -9,7 +9,7 @@ const API_URL = 'http://127.0.0.1:8000';
  * Create a test event
  */
 export async function createTestEvent(name = 'Test Tournament', date = getTodayDate(), time = '14:00') {
-  const response = await fetch(`${API_URL}/events/create`, {
+  const response = await fetch(`${API_URL}/events`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, date, time }),
@@ -45,7 +45,7 @@ export async function deleteTestEvent(eventId) {
  * Register a player for an event
  */
 export async function registerPlayer(eventId, name = 'Test Player') {
-  const response = await fetch(`${API_URL}/players/register`, {
+  const response = await fetch(`${API_URL}/players`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ event_id: eventId, name }),
@@ -58,7 +58,7 @@ export async function registerPlayer(eventId, name = 'Test Player') {
  * Record a match result
  */
 export async function recordMatch(eventId, player1Id, player2Id, winnerId) {
-  const response = await fetch(`${API_URL}/matches/record`, {
+  const response = await fetch(`${API_URL}/matches`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
