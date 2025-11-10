@@ -56,6 +56,7 @@ class PlayerRead(BaseModel):
     event_id: int
     score: int
     ranking: int
+    elo_rating: Optional[float] = None
     active: bool
 
 class PlayerUpdate(BaseModel):
@@ -70,6 +71,10 @@ class MatchCreate(BaseModel):
     event_id: int = Field(..., gt=0, description="Event ID")
     player1_id: int = Field(..., gt=0, description="First player ID")
     player2_id: int = Field(..., gt=0, description="Second player ID")
+    winner_id: Optional[int] = Field(None, gt=0, description="Winning player ID (optional)")
+    player1_games: int = Field(0, ge=0, description="Number of games won by player 1")
+    player2_games: int = Field(0, ge=0, description="Number of games won by player 2")
+    games_score: Optional[str] = Field(None, description="Detailed score per game (e.g., '11-9,10-12,11-8')")
     best_of: int = Field(default=5, ge=1, le=7, description="Best of N sets (1, 3, 5, or 7)")
 
     @field_validator('best_of')
@@ -91,10 +96,16 @@ class MatchRead(BaseModel):
     winner_id: Optional[int] = None
     best_of: int
     finished: bool
+    player1_games: int
+    player2_games: int
+    games_score: Optional[str] = None
 
 class MatchUpdate(BaseModel):
     """Schema for updating match data"""
     winner_id: Optional[int] = Field(None, gt=0)
+    player1_games: Optional[int] = Field(None, ge=0)
+    player2_games: Optional[int] = Field(None, ge=0)
+    games_score: Optional[str] = None
     finished: Optional[bool] = None
 
 # ============ Ranking Schemas ============

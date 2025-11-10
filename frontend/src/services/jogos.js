@@ -1,12 +1,19 @@
-// TODO: Implement when matches backend is ready (Sprint 2+)
-// This service will contain methods for managing matches/games (jogos)
-// Methods: create, list, update, delete matches
-// Endpoint: /matches
+import api from "./api";
 
 export default {
-  listarTodos() {
-    // Placeholder - returns empty list until backend is implemented
-    return Promise.resolve({ data: [] });
+  create(data) {
+    return api.post("/matches", data);
   },
-  // Future methods: create, update, delete matches
+  getEventMatches(event_id) {
+    return api.get("/matches", { params: { event_id } });
+  },
+  get(id) {
+    return api.get(`/matches/${id}`);
+  },
+  update(id, data) {
+    return api.put(`/matches/${id}`, data);
+  },
+  delete(id) {
+    return api.delete(`/matches/${id}`);
+  },
 };

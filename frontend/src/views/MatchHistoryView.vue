@@ -17,19 +17,19 @@
         </div>
         
         <div class="match-result">
-          <div class="player player-1" :class="{ winner: match.winner_id === match.player_1_id }">
-            <div class="player-name">{{ getPlayerName(match.player_1_id) }}</div>
-            <div class="elo-change" :class="{ gain: match.winner_id === match.player_1_id, loss: match.winner_id !== match.player_1_id }">
-              {{ getEloChange(match, match.player_1_id) }}
+          <div class="player player-1" :class="{ winner: match.winner_id === match.player1_id }">
+            <div class="player-name">{{ getPlayerName(match.player1_id) }}</div>
+            <div class="elo-change" :class="{ gain: match.winner_id === match.player1_id, loss: match.winner_id !== match.player1_id }">
+              {{ getEloChange(match, match.player1_id) }}
             </div>
           </div>
           
           <div class="vs">vs</div>
           
-          <div class="player player-2" :class="{ winner: match.winner_id === match.player_2_id }">
-            <div class="player-name">{{ getPlayerName(match.player_2_id) }}</div>
-            <div class="elo-change" :class="{ gain: match.winner_id === match.player_2_id, loss: match.winner_id !== match.player_2_id }">
-              {{ getEloChange(match, match.player_2_id) }}
+          <div class="player player-2" :class="{ winner: match.winner_id === match.player2_id }">
+            <div class="player-name">{{ getPlayerName(match.player2_id) }}</div>
+            <div class="elo-change" :class="{ gain: match.winner_id === match.player2_id, loss: match.winner_id !== match.player2_id }">
+              {{ getEloChange(match, match.player2_id) }}
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ const fetchData = async () => {
   try {
     const [matchRes, playerRes] = await Promise.all([
       jogosService.getEventMatches(eventId),
-      playersService.getEventPlayers(eventId)
+      playersService.list(eventId)
     ]);
     
     matches.value = (matchRes.data || []).reverse();
