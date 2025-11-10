@@ -8,15 +8,8 @@ from database import SessionLocal
 from models.event import Event
 # Utilities
 from datetime import datetime
-# Pydantic for request validation
-from pydantic import BaseModel
-
-
-# Pydantic schema for event creation requests
-class EventCreate(BaseModel):
-    name: str  # Event name
-    date: str  # Event date in YYYY-MM-DD format
-    time: str  # Event time (HH:MM)
+# Import schemas
+from schemas import EventCreate, EventRead
 
 router = APIRouter(prefix="/events", tags=["events"])
 
@@ -30,14 +23,24 @@ def get_db():
 
 
 # List all active events
-@router.get("")
+@router.get("", response_model=list[EventRead])
 def list_events(db: Session = Depends(get_db)):
+    """
+    List all active events.
+    
+    Returns a list of all non-deleted events.
+    """
     return db.query(Event).filter(Event.active == True).all()
 
 
 # Get a specific event
-@router.get("/{event_id}")
+@router.get("/{event_id}", response_model=EventRead)
 def get_event(event_id: int, db: Session = Depends(get_db)):
+    """
+    Get details of a specific event.
+    
+    - **event_id**: The event ID to retrieve
+    """
     event = db.query(Event).filter(Event.id == event_id, Event.active == True).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
@@ -45,14 +48,22 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
 
 
 # Create a new event
-@router.post("")
+@router.post("", response_model=EventRead, status_code=201)
 def create_event(event: EventCreate, db: Session = Depends(get_db)):
+    """
+    Create a new event.
+    
+    - **name**: Event name (1-100 characters)
+    - **date**: Event date in YYYY-MM-DD format
+    - **time**: Event time in HH:MM format
+    """
     try:
         # Parse date string to datetime object
         date_dt = datetime.strptime(event.date, "%Y-%m-%d")
     except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid date format")
-    new_event = Event(name=event.name, date=date_dt, time=event.time)
+        raise HTTPException(status_code=400, detail="Invalid date format. Use YYYY-MM-DD")
+    
+    new_event = Event(name=event.name, date=event.date, time=event.time)
     db.add(new_event)
     db.commit()
     db.refresh(new_event)
@@ -62,9 +73,14 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
 # Soft delete an event (mark as inactive)
 @router.delete("/{event_id}")
 def delete_event(event_id: int, db: Session = Depends(get_db)):
+    """
+    Soft delete an event (mark as inactive).
+    
+    - **event_id**: The event ID to delete
+    """
     event = db.query(Event).filter(Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
     event.active = False  # Soft delete
     db.commit()
-    return {"detail": "Event marked as inactive (soft deleted) successfully"}
+    return {"detail": "Event marked as inactive"}
