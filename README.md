@@ -23,7 +23,9 @@
 - 🎉 **Event Management**: Create and organize tournaments
 - 👥 **Player Registration**: Register players for events
 - 🎮 **Match Recording**: Record match results and winners
-- 📈 **Ranking System**: Automatic ranking calculation by score
+- � **Elo Rating System**: Automatic skill-based ranking calculation
+- 📈 **Ranking System**: Automatic ranking with leaderboard view
+- 🏆 **Match History**: View all matches with rating changes
 - 📱 **Responsive UI**: Vue 3 frontend with modern styling
 - 🔄 **RESTful API**: FastAPI backend with SQLAlchemy ORM
 - 💾 **Persistent Storage**: SQLite database
@@ -160,7 +162,7 @@ ping-champions/
   - Fixed all code issues: **0 errors, 0 warnings**
   - Added `npm run lint` script for automated linting
 
-### Sprint 4: Testing & Migrations (In Progress)
+### Sprint 4: Testing & Migrations ✅ COMPLETED (Nov 10)
 - ✅ **Task 1**: vitest setup for Vue 3 component testing
   - Installed vitest, @vue/test-utils, @testing-library/vue, jsdom
   - Created vitest.config.js with coverage configuration
@@ -173,7 +175,21 @@ ping-champions/
   - Configured env.py with model imports and auto-detection
   - Migration applied successfully: database created with proper schema
   - Added Alembic commands documentation to README
-- Task 3: Full test coverage and pytest debugging
+- ✅ **Task 3**: Elo rating system and high-priority frontend features
+  - Implemented complete Elo rating calculation backend (54 tests passing)
+  - Built RankingView.vue with leaderboard, medals, and sorting
+  - Built MatchHistoryView.vue with match history and rating changes
+  - Created PlayerStatistics.vue component with stats display
+  - Enhanced PlayersView.vue with Elo ratings and wins counter
+  - **92.25% test coverage**, all endpoints validated
+
+### Sprint 5: High-Priority Frontend Features ✅ COMPLETED (Nov 10)
+- ✅ **Display Elo on Player List**: Purple gradient badges showing current rating
+- ✅ **Display Elo on Ranking View**: Complete leaderboard with medals, sorting, win rate
+- ✅ **Create Match History View**: Cards showing match results with ±Elo changes
+- ✅ **Add Player Statistics Component**: Win/loss record, win rate %, progress bar
+- ✅ **Fix API endpoints**: Corrected all frontend service layer calls to match backend
+- ✅ **All 54 backend tests passing** with no integration issues
 
 ---
 
@@ -316,7 +332,16 @@ GitHub: [@hirohaya](https://github.com/hirohaya)
   - Ruff linting: All 93 errors fixed
   - ESLint frontend: All passing
   - pytest fixtures: Created and documented  
-🟡 **Sprint 4 In Progress**: Testing & migrations
+✅ **Sprint 4 Completed**: Testing & migrations (Nov 10, 2025)
+  - Elo rating system: 54 tests passing, 92.25% coverage
+  - Alembic migrations: Configured and working
+  - vitest setup: 17 tests passing
+✅ **Sprint 5 Completed**: High-priority frontend features (Nov 10, 2025)
+  - ✅ Elo display on player list (with gradient badges)
+  - ✅ Leaderboard ranking view (with medals and sorting)
+  - ✅ Match history view (with rating changes)
+  - ✅ Player statistics component (reusable)
+  - ⏳ E2E tests with Playwright (selectors need adjustment)
 
 ---
 
