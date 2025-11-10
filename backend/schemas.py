@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 # ============ Event Schemas ============
@@ -13,7 +13,7 @@ class EventCreate(BaseModel):
     date: str = Field(..., description="Event date in YYYY-MM-DD format")
     time: str = Field(..., description="Event time in HH:MM format")
 
-    @validator('date')
+    @field_validator('date')
     @classmethod
     def validate_date_format(cls, v):
         """Validate date is in YYYY-MM-DD format"""
@@ -21,7 +21,7 @@ class EventCreate(BaseModel):
             raise ValueError('Date must be in YYYY-MM-DD format')
         return v
 
-    @validator('time')
+    @field_validator('time')
     @classmethod
     def validate_time_format(cls, v):
         """Validate time is in HH:MM format"""
@@ -32,15 +32,14 @@ class EventCreate(BaseModel):
 
 class EventRead(BaseModel):
     """Schema for reading event data"""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     name: str
     date: str
     time: str
     active: bool
     created_at: Optional[datetime] = None
-
-    class Config:
-        from_attributes = True
 
 # ============ Player Schemas ============
 class PlayerCreate(BaseModel):
@@ -50,15 +49,14 @@ class PlayerCreate(BaseModel):
 
 class PlayerRead(BaseModel):
     """Schema for reading player data"""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     name: str
     event_id: int
     score: int
     ranking: int
     active: bool
-
-    class Config:
-        from_attributes = True
 
 class PlayerUpdate(BaseModel):
     """Schema for updating player data"""
@@ -74,7 +72,7 @@ class MatchCreate(BaseModel):
     player2_id: int = Field(..., gt=0, description="Second player ID")
     best_of: int = Field(default=5, ge=1, le=7, description="Best of N sets (1, 3, 5, or 7)")
 
-    @validator('best_of')
+    @field_validator('best_of')
     @classmethod
     def validate_best_of(cls, v):
         """Validate best_of is odd number"""
@@ -84,6 +82,8 @@ class MatchCreate(BaseModel):
 
 class MatchRead(BaseModel):
     """Schema for reading match data"""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     event_id: int
     player1_id: int
@@ -91,9 +91,6 @@ class MatchRead(BaseModel):
     winner_id: Optional[int] = None
     best_of: int
     finished: bool
-
-    class Config:
-        from_attributes = True
 
 class MatchUpdate(BaseModel):
     """Schema for updating match data"""
@@ -103,16 +100,17 @@ class MatchUpdate(BaseModel):
 # ============ Ranking Schemas ============
 class RankingEntry(BaseModel):
     """Schema for ranking entry"""
+    model_config = ConfigDict(from_attributes=True)
+    
     player_id: int
     name: str
     wins: int = Field(default=0, ge=0)
     losses: int = Field(default=0, ge=0)
     win_rate: float = Field(default=0.0, ge=0.0, le=1.0)
 
-    class Config:
-        from_attributes = True
-
 class RankingResponse(BaseModel):
     """Schema for ranking response"""
+    model_config = ConfigDict(from_attributes=True)
+    
     event_id: int
     entries: list[RankingEntry]
