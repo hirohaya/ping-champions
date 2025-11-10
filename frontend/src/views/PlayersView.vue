@@ -1,4 +1,3 @@
-
 <template>
   <div class="players-view">
     <h2>Players</h2>
@@ -9,14 +8,49 @@
     <div class="players-list">
       <div v-for="player in players" :key="player.id" class="player-card">
         <div class="player-info">
-          <span v-if="editId !== player.id" class="player-name">{{ player.name }}</span>
-          <input v-else v-model="editName" @keyup.enter="saveEdit(player)" @blur="cancelEdit" class="edit-input" />
+          <span v-if="editId !== player.id" class="player-name">{{
+            player.name
+          }}</span>
+          <input
+            v-else
+            v-model="editName"
+            class="edit-input"
+            @keyup.enter="saveEdit(player)"
+            @blur="cancelEdit"
+          />
         </div>
         <div class="player-actions">
-          <button @click="startEdit(player)" v-if="editId !== player.id" title="Edit" class="icon-btn">✏️</button>
-          <button @click="saveEdit(player)" v-if="editId === player.id" title="Save" class="icon-btn">💾</button>
-          <button @click="cancelEdit" v-if="editId === player.id" title="Cancel" class="icon-btn">❌</button>
-          <button @click="deletePlayer(player)" title="Delete" class="icon-btn delete">🗑️</button>
+          <button
+            v-if="editId !== player.id"
+            title="Edit"
+            class="icon-btn"
+            @click="startEdit(player)"
+          >
+            ✏️
+          </button>
+          <button
+            v-if="editId === player.id"
+            title="Save"
+            class="icon-btn"
+            @click="saveEdit(player)"
+          >
+            💾
+          </button>
+          <button
+            v-if="editId === player.id"
+            title="Cancel"
+            class="icon-btn"
+            @click="cancelEdit"
+          >
+            ❌
+          </button>
+          <button
+            title="Delete"
+            class="icon-btn delete"
+            @click="deletePlayer(player)"
+          >
+            🗑️
+          </button>
         </div>
       </div>
     </div>
@@ -24,55 +58,55 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import playersService from '../services/players'
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import playersService from "../services/players";
 
-const route = useRoute()
-const eventId = route.params.id
-const players = ref([])
-const name = ref('')
-const editId = ref(null)
-const editName = ref('')
+const route = useRoute();
+const eventId = route.params.id;
+const players = ref([]);
+const name = ref("");
+const editId = ref(null);
+const editName = ref("");
 
 const listPlayers = async () => {
-  if (!eventId) return
-  const res = await playersService.list(eventId)
-  players.value = res.data
-}
+  if (!eventId) return;
+  const res = await playersService.list(eventId);
+  players.value = res.data;
+};
 
 const createPlayer = async () => {
-  await playersService.create(name.value, eventId)
-  name.value = ''
-  listPlayers()
-}
+  await playersService.create(name.value, eventId);
+  name.value = "";
+  listPlayers();
+};
 
 const startEdit = (player) => {
-  editId.value = player.id
-  editName.value = player.name
-}
+  editId.value = player.id;
+  editName.value = player.name;
+};
 
 const saveEdit = async (player) => {
-  if (!editName.value.trim()) return
-  await playersService.update(player.id, editName.value)
-  editId.value = null
-  editName.value = ''
-  listPlayers()
-}
+  if (!editName.value.trim()) return;
+  await playersService.update(player.id, editName.value);
+  editId.value = null;
+  editName.value = "";
+  listPlayers();
+};
 
 const cancelEdit = () => {
-  editId.value = null
-  editName.value = ''
-}
+  editId.value = null;
+  editName.value = "";
+};
 
 const deletePlayer = async (player) => {
-  if (confirm('Are you sure you want to delete this player?')) {
-    await playersService.delete(player.id)
-    listPlayers()
+  if (confirm("Are you sure you want to delete this player?")) {
+    await playersService.delete(player.id);
+    listPlayers();
   }
-}
+};
 
-onMounted(listPlayers)
+onMounted(listPlayers);
 </script>
 
 <style scoped>
@@ -100,7 +134,10 @@ onMounted(listPlayers)
   border-radius: 8px;
   padding: 0.8em 1em;
   box-shadow: 0 1px 4px #0001;
-  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    background 0.2s,
+    color 0.2s;
 }
 .player-card:hover {
   box-shadow: 0 2px 8px #0002;
@@ -131,7 +168,9 @@ onMounted(listPlayers)
   cursor: pointer;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 .icon-btn:hover {
   background: #e3f2fd;

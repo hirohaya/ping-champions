@@ -11,68 +11,80 @@
       </div>
     </form>
     <!-- Feedback message -->
-    <div v-if="message" :style="{color: error ? 'red' : 'green', margin: '1em 0'}">{{ message }}</div>
+    <div
+      v-if="message"
+      :style="{ color: error ? 'red' : 'green', margin: '1em 0' }"
+    >
+      {{ message }}
+    </div>
     <!-- List of events -->
-    <div style="display: flex; flex-wrap: wrap; gap: 1em;">
-      <EventCard v-for="event in events" :key="event.id" :event="event" @delete-event="deleteEvent" />
+    <div style="display: flex; flex-wrap: wrap; gap: 1em">
+      <EventCard
+        v-for="event in events"
+        :key="event.id"
+        :event="event"
+        @delete-event="deleteEvent"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import eventsService from '../services/events'
-import EventCard from '../components/EventCard.vue'
+import { ref, onMounted } from "vue";
+import eventsService from "../services/events";
+import EventCard from "../components/EventCard.vue";
 
 // Reactive state for events and form fields
-const events = ref([])
-const name = ref('')
-const date = ref('')
-const time = ref('')
-const message = ref('')
-const error = ref(false)
+const events = ref([]);
+const name = ref("");
+const date = ref("");
+const time = ref("");
+const message = ref("");
+const error = ref(false);
 
 // Fetch all active events
 const listEvents = async () => {
-  const res = await eventsService.list()
-  events.value = res.data
-}
+  const res = await eventsService.list();
+  events.value = res.data;
+};
 
 // Create a new event
 const createEvent = async () => {
-  message.value = ''
-  error.value = false
+  message.value = "";
+  error.value = false;
   try {
-    await eventsService.create(name.value, date.value, time.value)
-    message.value = 'Event created successfully!'
-    error.value = false
-    name.value = ''
-    date.value = ''
-    time.value = ''
-    listEvents()
-  } catch (e) {
-    message.value = 'Error creating event.'
-    error.value = true
+    await eventsService.create(name.value, date.value, time.value);
+    message.value = "Event created successfully!";
+    error.value = false;
+    name.value = "";
+    date.value = "";
+    time.value = "";
+    listEvents();
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {
+    message.value = "Error creating event.";
+    error.value = true;
   }
-}
+};
 
 // Remove an event (soft delete)
 const deleteEvent = async (id) => {
-  message.value = ''
-  error.value = false
+  message.value = "";
+  error.value = false;
   try {
-    await eventsService.delete(id)
-    message.value = 'Event removed successfully!'
-    error.value = false
-    listEvents()
-  } catch (e) {
-    message.value = 'Error removing event.'
-    error.value = true
+    await eventsService.delete(id);
+    message.value = "Event removed successfully!";
+    error.value = false;
+    listEvents();
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {
+    message.value = "Error removing event.";
+    error.value = true;
   }
-}
+};
 
 // Load events on component mount
-onMounted(listEvents)
+onMounted(listEvents);
 </script>
 
 <style scoped>
@@ -117,5 +129,3 @@ onMounted(listEvents)
   background: #36976b;
 }
 </style>
-
-

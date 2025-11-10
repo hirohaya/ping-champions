@@ -1,4 +1,3 @@
-
 <template>
   <nav aria-label="breadcrumb" class="breadcrumbs">
     <router-link to="/">Home</router-link>
@@ -11,13 +10,17 @@
       </template>
       <template v-else-if="$route.name === 'event-players'">
         <span> / </span>
-        <router-link :to="`/events/${$route.params.id}`">{{ eventName ? eventName : `Event ${$route.params.id}` }}</router-link>
+        <router-link :to="`/events/${$route.params.id}`">{{
+          eventName ? eventName : `Event ${$route.params.id}`
+        }}</router-link>
         <span> / </span>
         <span>Players</span>
       </template>
       <template v-else-if="$route.name === 'event-matches'">
         <span> / </span>
-        <router-link :to="`/events/${$route.params.id}`">{{ eventName ? eventName : `Event ${$route.params.id}` }}</router-link>
+        <router-link :to="`/events/${$route.params.id}`">{{
+          eventName ? eventName : `Event ${$route.params.id}`
+        }}</router-link>
         <span> / </span>
         <span>Matches</span>
       </template>
@@ -43,37 +46,42 @@
 
 <script setup>
 // Breadcrumbs component dynamically fetches and displays the event name in the breadcrumb trail
-import { ref, watch, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import eventsService from '../services/events'
+import { ref, watch, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import eventsService from "../services/events";
 
-const route = useRoute()
-const eventName = ref('')
+const route = useRoute();
+const eventName = ref("");
 
 // Fetch the event name from the backend using the event id in the route
 const fetchEventName = async (id) => {
   if (!id) {
-    eventName.value = ''
-    return
+    eventName.value = "";
+    return;
   }
   try {
-    const res = await eventsService.list()
-    const event = res.data.find(e => String(e.id) === String(id))
-    eventName.value = event ? event.name : ''
-  } catch (e) {
-    eventName.value = ''
+    const res = await eventsService.list();
+    const event = res.data.find((e) => String(e.id) === String(id));
+    eventName.value = event ? event.name : "";
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {
+    eventName.value = "";
   }
-}
+};
 
 // Watch for changes in the route event id and update the event name accordingly
-watch(() => route.params.id, (id) => {
-  fetchEventName(id)
-}, { immediate: true })
+watch(
+  () => route.params.id,
+  (id) => {
+    fetchEventName(id);
+  },
+  { immediate: true },
+);
 
 // Fetch event name on component mount
 onMounted(() => {
-  fetchEventName(route.params.id)
-})
+  fetchEventName(route.params.id);
+});
 </script>
 
 <style scoped>

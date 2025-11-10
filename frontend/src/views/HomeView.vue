@@ -1,16 +1,23 @@
 <template>
   <div class="home-container">
     <div class="home-hero">
-      <img src="/src/assets/logo.svg" alt="Logo Ping Champions" class="home-logo" />
-  <h2>Welcome to Ping Champions</h2>
-  <p class="home-desc">Organize events, add players, record matches, and track your table tennis club's ranking.</p>
+      <img
+        src="/src/assets/logo.svg"
+        alt="Logo Ping Champions"
+        class="home-logo"
+      />
+      <h2>Welcome to Ping Champions</h2>
+      <p class="home-desc">
+        Organize events, add players, record matches, and track your table
+        tennis club's ranking.
+      </p>
       <div class="home-actions">
-  <router-link to="/events" class="home-btn">Events</router-link>
+        <router-link to="/events" class="home-btn">Events</router-link>
       </div>
     </div>
 
     <div class="home-stats">
-  <h3>System Panel</h3>
+      <h3>System Panel</h3>
       <div class="stats-grid">
         <div class="stat-card">
           <span class="stat-label">Events</span>
@@ -31,41 +38,49 @@
       <h3>How to use Ping Champions</h3>
       <ol>
         <li><b>Create an event</b> by clicking "Events".</li>
-        <li><b>Add players</b> by accessing the created event and registering participants.</li>
+        <li>
+          <b>Add players</b> by accessing the created event and registering
+          participants.
+        </li>
         <li><b>Record matches</b> within the event, entering results.</li>
         <li><b>Track the ranking</b> of players for each event.</li>
       </ol>
     </div>
 
     <div class="home-dev-blog-btn">
-  <router-link to="/dev-blog" class="dev-blog-btn">Follow the Project Dev Blog</router-link>
+      <router-link to="/dev-blog" class="dev-blog-btn"
+        >Follow the Project Dev Blog</router-link
+      >
     </div>
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
-import eventsService from '../services/events'
-import playersService from '../services/players'
-import jogosService from '../services/jogos'
+import { ref, onMounted } from "vue";
+import eventsService from "../services/events";
+import playersService from "../services/players";
+import jogosService from "../services/jogos";
 
-const stats = ref({ events: 0, players: 0, matches: 0 })
+const stats = ref({ events: 0, players: 0, matches: 0 });
 
 const loadStats = async () => {
   try {
     const [resEvents, resPlayers, resMatches] = await Promise.all([
       eventsService.list(),
       playersService.listAll(),
-      jogosService && jogosService.listarTodos ? jogosService.listarTodos() : Promise.resolve({ data: [] })
-    ])
-    stats.value.events = resEvents.data.length
-    stats.value.players = resPlayers.data.length
-    stats.value.matches = resMatches.data.length
-  } catch (e) {
+      jogosService && jogosService.listarTodos
+        ? jogosService.listarTodos()
+        : Promise.resolve({ data: [] }),
+    ]);
+    stats.value.events = resEvents.data.length;
+    stats.value.players = resPlayers.data.length;
+    stats.value.matches = resMatches.data.length;
+    // eslint-disable-next-line no-unused-vars
+  } catch (_) {
     // fallback: show zero
   }
-}
+};
 
-onMounted(loadStats)
+onMounted(loadStats);
 </script>
 
 <style scoped>

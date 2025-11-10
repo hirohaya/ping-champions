@@ -12,29 +12,29 @@
 
 <script>
 // Main App component: handles global feedback and renders breadcrumbs and router views
-import Breadcrumbs from './components/Breadcrumbs.vue';
+import Breadcrumbs from "./components/Breadcrumbs.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: { Breadcrumbs },
   data() {
     return {
       // feedback: stores the current feedback message and type
       feedback: {
-        message: '',
-        type: 'success', // 'success' | 'error'
+        message: "",
+        type: "success", // 'success' | 'error'
       },
       feedbackTimeout: null, // timeout id for auto-hiding feedback
     };
   },
   methods: {
     // showFeedback: displays a feedback message for a set duration
-    showFeedback({ message, type = 'success', duration = 3000 }) {
+    showFeedback({ message, type = "success", duration = 3000 }) {
       this.feedback.message = message;
       this.feedback.type = type;
       if (this.feedbackTimeout) clearTimeout(this.feedbackTimeout);
       this.feedbackTimeout = setTimeout(() => {
-        this.feedback.message = '';
+        this.feedback.message = "";
       }, duration);
     },
   },
@@ -59,7 +59,7 @@ h1 {
   border-radius: 8px;
   color: #fff;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   text-align: center;
   transition: opacity 0.3s;
 }

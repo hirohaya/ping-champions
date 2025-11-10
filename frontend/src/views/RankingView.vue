@@ -1,8 +1,7 @@
 <template>
   <div>
-  <h2>Ranking</h2>
-  <!-- Event ranking view -->
+    <h2>Ranking</h2>
+    <!-- Event ranking view -->
   </div>
 </template>
-<script setup>
-</script>
+<script setup></script>

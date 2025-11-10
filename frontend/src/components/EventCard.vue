@@ -2,28 +2,28 @@
   <div class="evento-card" @click="goToEvent">
     <div class="card-content">
       <h3>{{ event.name }}</h3>
-      <p>Data: {{ event.date?.substring(0, 10) }} </p>
-      <p> Start-time: {{ event.time }}</p>
+      <p>Data: {{ event.date?.substring(0, 10) }}</p>
+      <p>Start-time: {{ event.time }}</p>
     </div>
     <button class="excluir-btn" @click.stop="emitDeleteEvent">🗑️</button>
   </div>
 </template>
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 // Receives the event object as a prop
-const props = defineProps({ event: Object })
-const emit = defineEmits(['delete-event'])
-const router = useRouter()
+const props = defineProps({ event: Object });
+const emit = defineEmits(["delete-event"]);
+const router = useRouter();
 
 // Navigates to the event detail page when the card is clicked
 const goToEvent = () => {
-  router.push(`/events/${props.event.id}`)
-}
+  router.push(`/events/${props.event.id}`);
+};
 
 // Emits the delete-event event to the parent component when the delete button is clicked
 const emitDeleteEvent = () => {
-  emit('delete-event', props.event.id)
-}
+  emit("delete-event", props.event.id);
+};
 </script>
 <style scoped>
 .evento-card {
@@ -32,7 +32,10 @@ const emitDeleteEvent = () => {
   padding: 1em;
   margin: 1em 0;
   cursor: pointer;
-  transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    background 0.2s,
+    color 0.2s;
   background: var(--color-background-soft);
   color: var(--color-text);
   display: flex;
