@@ -22,6 +22,108 @@ This document provides essential context for AI coding agents (GitHub Copilot, C
 - **Branch Cleaning**: Delete feature branches after merging to main to keep repo tidy
 - **Terminal**: always close terminal sessions after use to avoid resource leaks
 
+## Implementation & Testing Workflow
+
+**⚠️ CRITICAL REQUIREMENT**: Every implementation must follow this workflow - No exceptions.
+
+### 1. Project State Before Implementation
+- Start with **both backend and frontend running**:
+  - Backend: `python run_backend.py` (on `http://127.0.0.1:8000`)
+  - Frontend: `npm run dev` in `frontend/` directory (on `http://localhost:5173`)
+- Verify both are responding before making code changes
+
+### 2. Development Cycle
+1. **Make code changes** (backend, frontend, or both)
+2. **Save files** - Vite and uvicorn will auto-reload
+3. **Immediately test in browser** using Playwright MCP
+4. **Verify changes** before moving to next feature
+5. **Repeat** for each component/feature
+
+### 3. Playwright MCP Testing Protocol
+
+**Purpose**: Automated browser testing with real UI interaction
+
+**When to Test**:
+- ✅ After every backend endpoint modification
+- ✅ After every frontend component change
+- ✅ After database schema changes
+- ✅ After service layer updates
+- ✅ Before committing code to git
+
+**Testing Approach**:
+1. Navigate to relevant page: `mcp_microsoft_pla_browser_navigate(url)`
+2. Wait for content to load: `mcp_microsoft_pla_browser_wait_for(time)`
+3. Take snapshot of page state: `mcp_microsoft_pla_browser_snapshot()`
+4. Interact with UI: click, type, select, fill forms
+5. Verify results: check alerts, inspect page state, API responses
+6. Test edge cases: validation, error states, empty states
+
+**Example Test Flow**:
+```
+Navigate → Wait → Snapshot (verify page loaded)
+→ Click button → Type text → Submit form
+→ Check alert message → Verify data in list
+→ Refresh page → Verify persistence
+```
+
+**Key Playwright Commands**:
+- `mcp_microsoft_pla_browser_navigate(url)` - Navigate to page
+- `mcp_microsoft_pla_browser_snapshot()` - Get page accessibility snapshot
+- `mcp_microsoft_pla_browser_click(element, ref)` - Click element
+- `mcp_microsoft_pla_browser_type(element, ref, text)` - Type into field
+- `mcp_microsoft_pla_browser_select_option(element, ref, values)` - Select dropdown
+- `mcp_microsoft_pla_browser_fill_form(fields)` - Fill multiple fields
+- `mcp_microsoft_pla_browser_wait_for(time)` - Wait for time or condition
+- `mcp_microsoft_pla_browser_handle_dialog(accept)` - Handle alert/confirm dialogs
+- `mcp_microsoft_pla_browser_take_screenshot(filename)` - Take visual screenshot
+
+### 4. Test Coverage Requirements
+
+**Minimum Testing Per Feature**:
+- ✅ Happy path (successful operation)
+- ✅ Validation failures (invalid input)
+- ✅ API error handling (404, 500, etc.)
+- ✅ Data persistence (page refresh)
+- ✅ Related features (rankings, calculations, etc.)
+
+**For Match Creation** (example):
+- Create match with valid data → verify appears in list
+- Create match with invalid data → verify error message
+- Create match without required field → verify validation alert
+- Refresh page → verify match still exists
+- Check rankings updated → verify Elo calculations
+
+### 5. Success Criteria
+- All Playwright tests pass without errors
+- No browser console errors ([ERROR] messages)
+- Form validation works as designed
+- Data persists after page refresh
+- Related calculations/rankings update correctly
+- No breaking changes to existing features
+
+### 6. Documentation of Test Results
+After testing, document:
+- Test scenarios attempted
+- Pass/fail status for each scenario
+- Any alerts or error messages displayed
+- Final state verification (rankings, data, etc.)
+- Screenshots of successful UI if complex feature
+
+### 7. Common Testing Mistakes to Avoid
+- ❌ Making changes without running backend/frontend
+- ❌ Skipping browser testing and only running unit tests
+- ❌ Not waiting for async operations (use `mcp_microsoft_pla_browser_wait_for`)
+- ❌ Not checking page state after actions (use `mcp_microsoft_pla_browser_snapshot`)
+- ❌ Forgetting to test data persistence (page refresh)
+- ❌ Not testing validation and error cases
+- ❌ Leaving browser in inconsistent state (always navigate fresh)
+
+### 8. Terminal Management
+- **Keep servers running**: Background process with `isBackground=true`
+- **Check output**: Use `get_terminal_output(id)` to verify no errors
+- **Close on completion**: Kill terminals after final testing complete
+- **Monitor logs**: Watch for exceptions or warnings in output
+
 ## Backend Architecture
 
 ### Stack & Dependencies
