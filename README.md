@@ -160,10 +160,15 @@ ping-champions/
   - Fixed all code issues: **0 errors, 0 warnings**
   - Added `npm run lint` script for automated linting
 
-### Sprint 4: Testing & Migrations (Next)
-- Task 4: vitest setup for Vue 3 component testing
-- Task 5: Alembic migrations framework
-- Task 6: Full test coverage and documentation
+### Sprint 4: Testing & Migrations (In Progress)
+- ✅ **Task 1**: vitest setup for Vue 3 component testing
+  - Installed vitest, @vue/test-utils, @testing-library/vue, jsdom
+  - Created vitest.config.js with coverage configuration
+  - Component tests for EventCard, Breadcrumbs, API service
+  - **17 tests passing** with proper Vue Router integration
+  - Added npm scripts: `test`, `test:ui`, `test:coverage`
+- Task 2: Alembic migrations framework
+- Task 3: Full test coverage and documentation
 
 ---
 
@@ -204,12 +209,20 @@ npm run lint                        # Check and fix
 
 ### Running Tests
 
-**Backend Tests** (when fixtures are debugged):
+**Backend Tests** (pytest):
 ```bash
 cd backend
 pytest                              # Run all tests
 pytest -v                           # Verbose output
 pytest --cov                        # With coverage report
+```
+
+**Frontend Tests** (vitest):
+```bash
+cd frontend
+npm test                            # Run tests in headless mode
+npm run test:ui                     # Run with interactive UI
+npm run test:coverage               # Run with coverage report
 ```
 
 ---
