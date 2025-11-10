@@ -167,8 +167,13 @@ ping-champions/
   - Component tests for EventCard, Breadcrumbs, API service
   - **17 tests passing** with proper Vue Router integration
   - Added npm scripts: `test`, `test:ui`, `test:coverage`
-- Task 2: Alembic migrations framework
-- Task 3: Full test coverage and documentation
+- ✅ **Task 2**: Alembic migrations framework
+  - Initialized Alembic with autogenerate enabled
+  - Created initial migration for events, players, matches tables
+  - Configured env.py with model imports and auto-detection
+  - Migration applied successfully: database created with proper schema
+  - Added Alembic commands documentation to README
+- Task 3: Full test coverage and pytest debugging
 
 ---
 
@@ -224,6 +229,44 @@ npm test                            # Run tests in headless mode
 npm run test:ui                     # Run with interactive UI
 npm run test:coverage               # Run with coverage report
 ```
+
+---
+
+## �️ Database Migrations
+
+Migrations are managed with **Alembic**. The database schema is version-controlled through migration files.
+
+### Migration Commands
+
+**Create a new migration** (when schema changes):
+```bash
+cd backend
+alembic revision --autogenerate -m "Description of changes"
+```
+
+**Apply migrations to database**:
+```bash
+cd backend
+alembic upgrade head              # Apply all pending migrations
+alembic upgrade +1                # Apply next migration
+alembic downgrade -1              # Revert last migration
+```
+
+**Check migration status**:
+```bash
+cd backend
+alembic current                   # Show current revision
+alembic history                   # Show migration history
+```
+
+**Configuration**: `backend/alembic.ini`
+- Database URL: `sqlite:///pingchampions.db`
+- Migration scripts: `backend/migrations/versions/`
+- Auto-detected changes: Table/column additions, deletions, modifications
+
+### First-Time Setup
+
+The database is automatically initialized when running the backend for the first time. No manual migration needed.
 
 ---
 
