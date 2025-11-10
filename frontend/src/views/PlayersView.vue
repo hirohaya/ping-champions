@@ -18,6 +18,16 @@
             @keyup.enter="saveEdit(player)"
             @blur="cancelEdit"
           />
+          <div class="player-stats">
+            <div class="stat-item">
+              <span class="stat-label">Elo:</span>
+              <span class="stat-value elo-rating">{{ formatElo(player.elo_rating) }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Wins:</span>
+              <span class="stat-value wins">{{ player.score }}</span>
+            </div>
+          </div>
         </div>
         <div class="player-actions">
           <button
@@ -99,6 +109,11 @@ const cancelEdit = () => {
   editName.value = "";
 };
 
+const formatElo = (elo) => {
+  if (!elo) return "1600";
+  return Math.round(elo).toString();
+};
+
 const deletePlayer = async (player) => {
   if (confirm("Are you sure you want to delete this player?")) {
     await playersService.delete(player.id);
@@ -150,6 +165,36 @@ onMounted(listPlayers);
 .player-name {
   font-size: 1.1em;
   font-weight: 500;
+}
+.player-stats {
+  display: flex;
+  gap: 1.5em;
+  margin-top: 0.4em;
+  font-size: 0.9em;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.stat-label {
+  color: var(--color-text-secondary, #666);
+  font-weight: 500;
+}
+.stat-value {
+  font-weight: 600;
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+}
+.elo-rating {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+.wins {
+  background: #e8f5e9;
+  color: #2e7d32;
 }
 .edit-input {
   font-size: 1em;

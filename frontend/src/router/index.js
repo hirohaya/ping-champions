@@ -23,6 +23,11 @@ const routes = [
         name: "event-matches",
         component: () => import("../views/MatchesView.vue"),
       },
+      {
+        path: "history",
+        name: "event-history",
+        component: () => import("../views/MatchHistoryView.vue"),
+      },
     ],
   },
   // Rotas de jogadores e jogos agora são acessadas via detalhes do evento
