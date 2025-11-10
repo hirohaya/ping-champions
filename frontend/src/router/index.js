@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
 import EventsView from "../views/EventsView.vue";
-import RankingView from "../views/RankingView.vue";
 import StatusView from "../views/StatusView.vue";
 
 const routes = [
@@ -31,7 +30,7 @@ const routes = [
     ],
   },
   // Rotas de jogadores e jogos agora são acessadas via detalhes do evento
-  { path: "/ranking", name: "ranking", component: RankingView },
+  { path: "/ranking", name: "ranking", component: () => import("../views/RankingView.vue") },
   { path: "/status", name: "status", component: StatusView },
   {
     path: "/dev-blog",

@@ -60,6 +60,12 @@ const loading = ref(true);
 const sortByElo = ref(false);
 
 const fetchRanking = async () => {
+  // If no eventId, show empty state
+  if (!eventId) {
+    loading.value = false;
+    return;
+  }
+  
   loading.value = true;
   try {
     const res = await rankingService.getEventRanking(eventId);
