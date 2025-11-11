@@ -1,4 +1,4 @@
-# Ping Champions# Ping Champions # Ping Champions
+# Ping Champions# Ping Champions# Ping Champions # Ping Champions
 
 
 
@@ -6,7 +6,7 @@ Tournament management system for table tennis events.
 
 
 
-## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
+## FeaturesTournament management system for table tennis events.
 
 
 
@@ -14,7 +14,7 @@ Tournament management system for table tennis events.
 
 - Player Registration
 
-- Match Recording with automatic Elo calculations## Quick Start
+- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
 
 - Ranking System with leaderboard
 
@@ -22,127 +22,277 @@ Tournament management system for table tennis events.
 
 - Responsive Design
 
-- 15+ API Endpoints```powershell
+- 15+ API Endpoints- Event Management
 
 - 94.4% Test Coverage
 
-python setup.py
+- Player Registration
 
 ## Quick Start
 
-python run_backend.py        # Terminal 1: http://127.0.0.1:8000## Quick StartTournament management system for table tennis events. A professional web application for organizing tournaments, managing players, recording matches, and tracking rankings with Elo rating system.
+- Match Recording with automatic Elo calculations## Quick Start
 
 ```powershell
 
-python setup.pycd frontend && npm run dev   # Terminal 2: http://localhost:5173
+python setup.py- Ranking System with leaderboard
 
+python run_backend.py
 
-
-python run_backend.py```
-
-cd frontend && npm run dev
+cd frontend && npm run dev- Multiple Language Support (Portuguese, English)
 
 ```
 
+- Responsive Design
 
+## Setup
 
-## Setup## Features
-
-
+- 15+ API Endpoints```powershell
 
 ### Prerequisites
 
+- 94.4% Test Coverage
 
+- Python 3.9+
 
-- Python 3.9+- Event Management: Create and organize tournamentspython setup.py
+- Node.js 20+python setup.py
 
-- Node.js 20+
+- Git
 
-- Git- Player Registration: Register players for events
+## Quick Start
 
+### Automated Setup
 
+python run_backend.py        
 
-### Automated Setup- Match Recording: Record results with automatic Elo calculations## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
-
-
-
-```powershell- Ranking System: Leaderboard with skill-based rankings
+```powershell# Terminal 1:
 
 python setup.py
 
-```- Internationalization: Portuguese (BR) and English (US)# Terminal 1: Backend
+``````powershell
 
+python setup.py
 
+This will:cd frontend && npm run dev
 
-This will:- Responsive Design: Mobile-friendly interface
+- Create Python virtual environment```
 
-- Create Python virtual environment
+- Install backend dependencies
 
-- Install backend dependencies- RESTful API: 15+ endpointspython run_backend.py
-
-- Install frontend dependencies
+- Install frontend dependencies# Terminal 2: 
 
 - Configure environment files
 
 
 
-### Manual Setup## Tech Stack
+### Manual Setup```
 
+python run_backend.py
 
-
-Backend:
+Backend:```
 
 ```powershell
 
-cd backend- Backend: FastAPI, SQLAlchemy, SQLite```powershell
+cd backend
 
 python -m venv venv
 
-.\venv\Scripts\activate- Frontend: Vue 3, Vite, Vue Router
+.\venv\Scripts\activate## Setup
 
-pip install -r requirements.txt
-
-```- Database: SQLite with Alembic migrations# Terminal 2: Frontend
-
-
-
-Frontend:- Testing: pytest (94.4% coverage), vitest
-
-```powershell
-
-cd frontend- Quality: Ruff (Python), ESLint (JavaScript)cd frontend# Automated setup (2 minutes)
-
-npm install
+pip install -r requirements.txt## Features
 
 ```
 
 
 
-## Development## Project Structure
+Frontend:
 
+```powershell### Prerequisites
 
+cd frontend
+
+npm install
+
+```
+
+- Python 3.9+- Event Management: Create and organize tournamentspython setup.py
+
+## Development
+
+- Node.js 20+
 
 ### Running Servers
 
-
-
-```powershell```**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
-
-python run_backend.py
-
-```ping-champions/
-
-
-
-In another terminal:├── docs/            # Documentation (START_HERE, GETTING_STARTED, etc)```
+- Git- Player Registration: Register players for events
 
 ```powershell
 
+python run_backend.py
+
+```
+
+### Automated Setup- Match Recording: Record results with automatic Elo calculations## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
+
+In another terminal:
+
+```powershell
+
+cd frontend
+
+npm run dev```powershell- Ranking System: Leaderboard with skill-based rankings
+
+```
+
+python setup.py
+
+### Running Tests
+
+```- Internationalization: Portuguese (BR) and English (US)# Terminal 1: Backend
+
+```powershell
+
+cd backend
+
+pytest
+
+pytest --covThis will:- Responsive Design: Mobile-friendly interface
+
+```
+
+- Create Python virtual environment
+
+### Code Quality
+
+- Install backend dependencies- RESTful API: 15+ endpointspython run_backend.py
+
+Backend:
+
+```powershell- Install frontend dependencies
+
+cd backend
+
+python -m ruff check .- Configure environment files
+
+python -m ruff check . --fix
+
+```
+
+
+
+Frontend:### Manual Setup## Tech Stack
+
+```powershell
+
+cd frontend
+
+npm run lint
+
+```Backend:
+
+
+
+## Database```powershell
+
+
+
+Reset database:cd backend- Backend: FastAPI, SQLAlchemy, SQLite```powershell
+
+```powershell
+
+python recreate_db.pypython -m venv venv
+
+```
+
+.\venv\Scripts\activate- Frontend: Vue 3, Vite, Vue Router
+
+Run migrations:
+
+```powershellpip install -r requirements.txt
+
+cd backend
+
+alembic revision --autogenerate -m "description"```- Database: SQLite with Alembic migrations# Terminal 2: Frontend
+
+alembic upgrade head
+
+```
+
+
+
+## Project StructureFrontend:- Testing: pytest (94.4% coverage), vitest
+
+
+
+``````powershell
+
+ping-champions/
+
+├── docs/            Documentation filescd frontend- Quality: Ruff (Python), ESLint (JavaScript)cd frontend# Automated setup (2 minutes)
+
+├── backend/         FastAPI application
+
+├── frontend/        Vue 3 applicationnpm install
+
+├── setup.py         Setup script
+
+└── recreate_db.py   Database reset utility```
+
+```
+
+
+
+## Documentation
+
+## Development## Project Structure
+
+- docs/START_HERE.md - Quick overview
+
+- docs/GETTING_STARTED.md - Setup guide
+
+- docs/README.md - Full documentation
+
+- docs/BLOG_DEV.md - Development journey### Running Servers
+
+- docs/INDEX.md - Navigation guide
+
+
+
+## Built With
+
+```powershell```**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
+
+- FastAPI and SQLAlchemy
+
+- Vue 3 and Vitepython run_backend.py
+
+- SQLite
+
+- pytest and vitest```ping-champions/
+
+- vue-i18n for translations
+
+
+
+## License
+
+In another terminal:├── docs/            # Documentation (START_HERE, GETTING_STARTED, etc)```
+
+MIT - See LICENSE file
+
+```powershell
+
+## Repository
+
 cd frontend├── backend/         # FastAPI application
+
+https://github.com/hirohaya/ping-champions
 
 npm run dev
 
+---
+
 ```├── frontend/        # Vue 3 application
+
+Ready for production.
 
 
 
