@@ -5,5 +5,6 @@
   "errorLoadingData": "Error loading data",
   "errorSavingData": "Error saving data",
   "errorDeletingData": "Error deleting data",
-  "tryAgain": "Try again"
+  "tryAgain": "Try again",
+  "languageChanged": "Language changed successfully! The page will be reloaded..."
 }

@@ -22,12 +22,29 @@ import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { setLocale, getAvailableLocales } from '@/i18n'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const currentLocale = ref(locale.value)
 const availableLocales = getAvailableLocales()
+const isChanging = ref(false)
 
 const changeLocale = () => {
-  setLocale(currentLocale.value)
+  // Prevent multiple changes while processing
+  if (isChanging.value) return
+  
+  isChanging.value = true
+  const newLocale = currentLocale.value
+  
+  // Save the new locale
+  setLocale(newLocale)
+  
+  // Show loading message and reload after a brief delay
+  setTimeout(() => {
+    // Alert user about language change
+    alert(t('messages.languageChanged') || `Language changed to ${availableLocales.find(l => l.code === newLocale)?.name}`)
+    
+    // Reload the page to ensure all text updates
+    window.location.reload()
+  }, 300)
 }
 
 // Watch for external changes

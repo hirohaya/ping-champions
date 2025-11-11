@@ -114,7 +114,8 @@
     "errorLoadingData": "Erro ao carregar dados",
     "errorSavingData": "Erro ao salvar dados",
     "errorDeletingData": "Erro ao deletar dados",
-    "tryAgain": "Tentar novamente"
+    "tryAgain": "Tentar novamente",
+    "languageChanged": "Idioma alterado com sucesso! A página será recarregada..."
   },
   "settings": {
     "title": "Configurações",
