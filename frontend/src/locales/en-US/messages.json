@@ -1,0 +1,9 @@
+{
+  "confirmDelete": "Are you sure you want to delete?",
+  "noDataToDisplay": "No data to display",
+  "loadingData": "Loading data...",
+  "errorLoadingData": "Error loading data",
+  "errorSavingData": "Error saving data",
+  "errorDeletingData": "Error deleting data",
+  "tryAgain": "Try again"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Ranking",
+  "noMatches": "Nenhum jogo neste evento",
+  "position": "Posição",
+  "player": "Jogador",
+  "elo": "ELO",
+  "matches": "Jogos",
+  "events": "Eventos"
+}

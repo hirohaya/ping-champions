@@ -1,0 +1,16 @@
+{
+  "title": "Jogadores",
+  "playerName": "Nome do Jogador",
+  "initialElo": "ELO Inicial",
+  "currentElo": "ELO Atual",
+  "registerPlayer": "Registrar Jogador",
+  "playerRegisteredSuccess": "Jogador registrado com sucesso!",
+  "playerDeletedSuccess": "Jogador deletado com sucesso!",
+  "playerUpdatedSuccess": "Jogador atualizado com sucesso!",
+  "selectPlayer": "Selecione um jogador",
+  "noPlayers": "Nenhum jogador registrado",
+  "wins": "Vitórias",
+  "losses": "Derrotas",
+  "winRate": "Taxa de Vitória",
+  "eloRating": "Classificação ELO"
+}

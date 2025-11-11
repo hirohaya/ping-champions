@@ -1,0 +1,16 @@
+{
+  "title": "Players",
+  "playerName": "Player Name",
+  "initialElo": "Initial ELO",
+  "currentElo": "Current ELO",
+  "registerPlayer": "Register Player",
+  "playerRegisteredSuccess": "Player registered successfully!",
+  "playerDeletedSuccess": "Player deleted successfully!",
+  "playerUpdatedSuccess": "Player updated successfully!",
+  "selectPlayer": "Select a player",
+  "noPlayers": "No players registered",
+  "wins": "Wins",
+  "losses": "Losses",
+  "winRate": "Win Rate",
+  "eloRating": "ELO Rating"
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Eventos",
+  "createEvent": "Criar Evento",
+  "eventName": "Nome do Evento",
+  "eventDate": "Data do Evento",
+  "eventTime": "Hora do Evento",
+  "newEvent": "Novo Evento",
+  "deleteEvent": "Deletar Evento",
+  "editEvent": "Editar Evento",
+  "eventCreatedSuccess": "Evento criado com sucesso!",
+  "eventDeletedSuccess": "Evento deletado com sucesso!",
+  "eventUpdatedSuccess": "Evento atualizado com sucesso!",
+  "selectEvent": "Selecione um evento",
+  "noEvents": "Nenhum evento encontrado",
+  "eventDetails": "Detalhes do Evento",
+  "date": "Data",
+  "time": "Hora",
+  "status": "Status",
+  "actions": "Ações"
+}

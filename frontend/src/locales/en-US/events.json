@@ -1,0 +1,20 @@
+{
+  "title": "Events",
+  "createEvent": "Create Event",
+  "eventName": "Event Name",
+  "eventDate": "Event Date",
+  "eventTime": "Event Time",
+  "newEvent": "New Event",
+  "deleteEvent": "Delete Event",
+  "editEvent": "Edit Event",
+  "eventCreatedSuccess": "Event created successfully!",
+  "eventDeletedSuccess": "Event deleted successfully!",
+  "eventUpdatedSuccess": "Event updated successfully!",
+  "selectEvent": "Select an event",
+  "noEvents": "No events found",
+  "eventDetails": "Event Details",
+  "date": "Date",
+  "time": "Time",
+  "status": "Status",
+  "actions": "Actions"
+}

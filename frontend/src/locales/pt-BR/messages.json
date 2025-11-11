@@ -1,0 +1,9 @@
+{
+  "confirmDelete": "Tem certeza que deseja deletar?",
+  "noDataToDisplay": "Nenhum dado para exibir",
+  "loadingData": "Carregando dados...",
+  "errorLoadingData": "Erro ao carregar dados",
+  "errorSavingData": "Erro ao salvar dados",
+  "errorDeletingData": "Erro ao deletar dados",
+  "tryAgain": "Tentar novamente"
+}
