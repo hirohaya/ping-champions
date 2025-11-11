@@ -1,6 +1,13 @@
 """Router for internationalization endpoints"""
 
-from fastapi import APIRouter, Header, Optional
+from typing import Optional
+from fastapi import APIRouter, Header
+import sys
+from pathlib import Path
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from i18n import Messages, Locale, get_locale_from_header
 
 router = APIRouter(prefix="/api/i18n", tags=["i18n"])
