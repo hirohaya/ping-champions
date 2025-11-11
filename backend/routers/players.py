@@ -63,11 +63,11 @@ def list_players(event_id: int = Query(..., gt=0), db: Session = Depends(get_db)
         Player.active
     ).all()
 
-# List all players (for system stats)
+# List all active players (for system stats)
 @router.get("/all", response_model=list[PlayerRead])
 def list_all_players(db: Session = Depends(get_db)):
-    """List all players in the system (including inactive)"""
-    return db.query(Player).all()
+    """List all active players in the system"""
+    return db.query(Player).filter(Player.active).all()
 
 # Get a specific player
 @router.get("/{player_id}", response_model=PlayerRead)

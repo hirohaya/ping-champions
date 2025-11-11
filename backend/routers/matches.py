@@ -138,10 +138,10 @@ def list_matches(event_id: int = Query(..., gt=0), db: Session = Depends(get_db)
 @router.get("/all/list")
 def list_all_matches(db: Session = Depends(get_db)):
     """
-    Get all matches across all events.
+    Get all finished matches across all events.
     Used for system statistics and dashboard.
     """
-    return db.query(Match).all()
+    return db.query(Match).filter(Match.finished).all()
 
 
 # Get a specific match
