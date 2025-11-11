@@ -1,0 +1,15 @@
+{
+  "welcome": "Welcome to Ping Champions",
+  "description": "Organize events, add players, record matches, and track your table tennis club's ranking.",
+  "systemPanel": "System Panel",
+  "howToUse": "How to use Ping Champions",
+  "step1": "Create an event",
+  "step1Description": "by clicking 'Events'.",
+  "step2": "Add players",
+  "step2Description": "by accessing the created event and registering participants.",
+  "step3": "Record matches",
+  "step3Description": "within the event, entering results.",
+  "step4": "Track the ranking",
+  "step4Description": "of players for each event.",
+  "devBlog": "Follow the Project Dev Blog"
+}

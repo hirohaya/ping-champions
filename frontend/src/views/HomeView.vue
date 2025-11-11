@@ -6,60 +6,60 @@
         alt="Logo Ping Champions"
         class="home-logo"
       />
-      <h2>Welcome to Ping Champions</h2>
+      <h2>{{ $t('home.welcome') }}</h2>
       <p class="home-desc">
-        Organize events, add players, record matches, and track your table
-        tennis club's ranking.
+        {{ $t('home.description') }}
       </p>
       <div class="home-actions">
-        <router-link to="/events" class="home-btn">Events</router-link>
+        <router-link to="/events" class="home-btn">{{ $t('navigation.events') }}</router-link>
       </div>
     </div>
 
     <div class="home-stats">
-      <h3>System Panel</h3>
+      <h3>{{ $t('home.systemPanel') }}</h3>
       <div class="stats-grid">
         <div class="stat-card">
-          <span class="stat-label">Events</span>
+          <span class="stat-label">{{ $t('navigation.events') }}</span>
           <span class="stat-value">{{ stats.events }}</span>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Players</span>
+          <span class="stat-label">{{ $t('navigation.players') }}</span>
           <span class="stat-value">{{ stats.players }}</span>
         </div>
         <div class="stat-card">
-          <span class="stat-label">Matches</span>
+          <span class="stat-label">{{ $t('navigation.matches') }}</span>
           <span class="stat-value">{{ stats.matches }}</span>
         </div>
       </div>
     </div>
 
     <div class="home-tutorial">
-      <h3>How to use Ping Champions</h3>
+      <h3>{{ $t('home.howToUse') }}</h3>
       <ol>
-        <li><b>Create an event</b> by clicking "Events".</li>
+        <li><b>{{ $t('home.step1') }}</b> {{ $t('home.step1Description') }}</li>
         <li>
-          <b>Add players</b> by accessing the created event and registering
-          participants.
+          <b>{{ $t('home.step2') }}</b> {{ $t('home.step2Description') }}
         </li>
-        <li><b>Record matches</b> within the event, entering results.</li>
-        <li><b>Track the ranking</b> of players for each event.</li>
+        <li><b>{{ $t('home.step3') }}</b> {{ $t('home.step3Description') }}</li>
+        <li><b>{{ $t('home.step4') }}</b> {{ $t('home.step4Description') }}</li>
       </ol>
     </div>
 
     <div class="home-dev-blog-btn">
       <router-link to="/dev-blog" class="dev-blog-btn"
-        >Follow the Project Dev Blog</router-link
+        >{{ $t('home.devBlog') }}</router-link
       >
     </div>
   </div>
 </template>
 <script setup>
 import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 import eventsService from "../services/events";
 import playersService from "../services/players";
 import jogosService from "../services/jogos";
 
+const { t } = useI18n();
 const stats = ref({ events: 0, players: 0, matches: 0 });
 
 const loadStats = async () => {

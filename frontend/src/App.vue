@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <h1>Ping Champions: pinging the ponging</h1>
+      <h1>{{ $t('common.appName') }}: pinging the ponging</h1>
       <LanguageSwitcher />
     </div>
     <Breadcrumbs />

@@ -1,0 +1,15 @@
+{
+  "welcome": "Bem-vindo ao Ping Champions",
+  "description": "Organize eventos, adicione jogadores, registre jogos e acompanhe o ranking do seu clube de tênis de mesa.",
+  "systemPanel": "Painel do Sistema",
+  "howToUse": "Como usar o Ping Champions",
+  "step1": "Criar um evento",
+  "step1Description": "clicando em 'Eventos'.",
+  "step2": "Adicionar jogadores",
+  "step2Description": "acessando o evento criado e registrando participantes.",
+  "step3": "Registrar jogos",
+  "step3Description": "dentro do evento, inserindo os resultados.",
+  "step4": "Acompanhar o ranking",
+  "step4Description": "dos jogadores para cada evento.",
+  "devBlog": "Acompanhe o Dev Blog do Projeto"
+}
