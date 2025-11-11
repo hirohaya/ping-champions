@@ -1,4 +1,4 @@
-# Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions
+# Ping Champions# Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions
 
 
 
@@ -6,225 +6,453 @@ Tournament management system for table tennis events. A professional web applica
 
 
 
-## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
+## Quick StartTournament management system for table tennis events. A professional web application for organizing tournaments, managing players, recording matches, and tracking rankings with Elo rating system.
 
 
 
 ```powershell
 
-# Automated setup (2 minutes)
+python setup.py
 
-python setup.py[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
+## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
 
-
-
-# Terminal 1: Start backend[![License](https://img.shields.io/badge/License-MIT-green)]()
+# Terminal 1: Backend
 
 python run_backend.py
 
-# http://127.0.0.1:8000[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
+# http://127.0.0.1:8000
 
+```powershell
 
+# Terminal 2: Frontend
 
-# Terminal 2: Start frontend[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
+cd frontend# Automated setup (2 minutes)
 
-cd frontend
+npm run dev
 
-npm run dev[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)
-
-# http://localhost:5173
+# http://localhost:5173python setup.py[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
 
 ```
 
 
 
-For complete setup: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)---[![License](https://img.shields.io/badge/License-MIT-green)]()[![License](https://img.shields.io/badge/License-MIT-green)]()
+For complete setup: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)
 
-
+# Terminal 1: Start backend[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 ## Documentation
 
+python run_backend.py
 
+All documentation is organized in the `docs/` folder:
 
-All documentation is organized in the `docs/` folder:## 🚀 Quick Start[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
-
-
+# http://127.0.0.1:8000[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
 
 | Document | Purpose |
 
 |----------|---------|
 
-| [START_HERE.md](./docs/START_HERE.md) | Quick overview (2 min) |```powershell[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
+| [START_HERE.md](./docs/START_HERE.md) | Quick overview (2 min) |
 
-| [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Setup guide |
+| [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Setup guide |# Terminal 2: Start frontend[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
 
-| [README.md](./docs/README.md) | Full documentation |# 1. Automated setup (2 minutes)
+| [README.md](./docs/README.md) | Full documentation |
 
-| [BLOG_DEV.md](./docs/BLOG_DEV.md) | Development journey |
+| [BLOG_DEV.md](./docs/BLOG_DEV.md) | Development journey |cd frontend
 
-| [INDEX.md](./docs/INDEX.md) | Navigation & reference |python setup.py[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![Linting](https://img.shields.io/badge/Linting-Ruff%20+%20ESLint-brightgreen)]()
+| [INDEX.md](./docs/INDEX.md) | Navigation and reference |
 
-| [DOCUMENTATION.md](./docs/DOCUMENTATION.md) | Consolidated guide |
+| [DOCUMENTATION.md](./docs/DOCUMENTATION.md) | Consolidated guide |npm run dev[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)
 
 
 
-## Features
+## Features# http://localhost:5173
 
-# 2. Terminal 1: Backend
 
-- Event Management: Create and organize tournaments
 
-- Player Registration: Register players for eventspython run_backend.py
+- Event Management: Create and organize tournaments```
+
+- Player Registration: Register players for events
 
 - Match Recording: Record results with score tracking
 
-- Ranking System: Leaderboard with Elo rating calculation# http://127.0.0.1:8000------
+- Ranking System: Leaderboard with Elo rating calculation
 
-- Internationalization: Portuguese (BR) and English (US)
+- Internationalization: Portuguese (BR) and English (US)For complete setup: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)---[![License](https://img.shields.io/badge/License-MIT-green)]()[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 - Responsive Design: Mobile-friendly interface
 
 - RESTful API: 15+ endpoints with documentation
 
-- Well Tested: 94.4% code coverage# 3. Terminal 2: Frontend  
+- Well Tested: 94.4% code coverage
+
+## Documentation
+
+## Tech Stack
 
 
 
-## Tech Stackcd frontend
+| Layer | Technology |
 
+|-------|-----------|All documentation is organized in the `docs/` folder:## 🚀 Quick Start[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
 
-
-| Layer | Technology |npm run dev## 🚀 Quick Start## 📋 Quick Links
-
-|-------|-----------|
-
-| Backend | FastAPI, SQLAlchemy, SQLite |# http://localhost:5173
+| Backend | FastAPI, SQLAlchemy, SQLite |
 
 | Frontend | Vue 3, Vite, Vue Router, Axios |
 
-| Database | SQLite with Alembic migrations |```
+| Database | SQLite with Alembic migrations |
 
-| Testing | pytest (94.4% coverage), vitest |
+| Testing | pytest (94.4% coverage), vitest || Document | Purpose |
 
 | Quality | Ruff (Python), ESLint (JavaScript) |
 
-| i18n | vue-i18n (2 languages) |
-
-For complete setup instructions: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)```powershell- **🚀 Get Started**: Read [GETTING_STARTED.md](./GETTING_STARTED.md) or run `python setup.py`
-
-## Project Structure
+| i18n | vue-i18n (2 languages) ||----------|---------|
 
 
 
-```
+## Project Structure| [START_HERE.md](./docs/START_HERE.md) | Quick overview (2 min) |```powershell[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
 
-ping-champions/---# 1. Automated setup (2 minutes)- **📚 Documentation Index**: See [INDEX.md](./INDEX.md) for all resources
 
-├── docs/                      # Documentation
 
-├── backend/                   # FastAPI application
+```| [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Setup guide |
 
-├── frontend/                  # Vue 3 application
+ping-champions/
 
-├── setup.py                   # One-command setup## 📚 Documentationpython setup.py- **🧹 What Changed**: See [CLEANUP_SUMMARY.md](./CLEANUP_SUMMARY.md) for recent cleanup
+├── docs/                    # Documentation| [README.md](./docs/README.md) | Full documentation |# 1. Automated setup (2 minutes)
 
-├── run_backend.py             # Backend launcher
+├── backend/                 # FastAPI application
 
-└── recreate_db.py             # Database reset
+├── frontend/                # Vue 3 application| [BLOG_DEV.md](./docs/BLOG_DEV.md) | Development journey |
 
-```
+├── setup.py                 # One-command setup
 
-All documentation is organized in the `docs/` folder:- **� Development**: See [Development Workflow](#development-workflow)
+├── run_backend.py           # Backend launcher| [INDEX.md](./docs/INDEX.md) | Navigation & reference |python setup.py[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![Linting](https://img.shields.io/badge/Linting-Ruff%20+%20ESLint-brightgreen)]()
+
+└── recreate_db.py           # Database reset
+
+```| [DOCUMENTATION.md](./docs/DOCUMENTATION.md) | Consolidated guide |
+
+
 
 ## Status
 
 
 
-- Backend: 15+ endpoints, 94.4% test coverage
+- Backend: 15+ endpoints, 94.4% test coverage## Features
 
-- Frontend: 6 views + modals, 100% linting| Document | Purpose | Time |# 2. Terminal 1: Start backend- **� AI Context**: See [.github/copilot-instructions.md](./.github/copilot-instructions.md)
+- Frontend: 6 views + modals, 100% linting
 
-- Database: Operational (SQLite)
+- Database: Operational (SQLite)# 2. Terminal 1: Backend
 
-- Production: Ready to deploy|----------|---------|------|
+- Production: Ready to deploy
 
+- Event Management: Create and organize tournaments
 
+## Development Setup
 
-## Development Setup| **[docs/START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min |python run_backend.py
+- Player Registration: Register players for eventspython run_backend.py
 
+### Prerequisites
 
+- Match Recording: Record results with score tracking
 
-### Prerequisites| **[docs/README.md](./docs/README.md)** | Full project documentation | 10 min |
+- Python 3.9+ and pip
 
+- Node.js 20+ and npm- Ranking System: Leaderboard with Elo rating calculation# http://127.0.0.1:8000------
 
+- Git
 
-- Python 3.9+ and pip| **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min |---
+- Internationalization: Portuguese (BR) and English (US)
 
-- Node.js 20+ and npm
+### Automated Setup (Recommended)
 
-- Git| **[docs/BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min |
+- Responsive Design: Mobile-friendly interface
 
+```powershell
 
+python setup.py- RESTful API: 15+ endpoints with documentation
 
-### Automated Setup (Recommended)| **[docs/INDEX.md](./docs/INDEX.md)** | Documentation navigation | 5 min |# 3. Terminal 2: Start frontend
+```
 
-
-
-```powershell| **[docs/DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min |
-
-python setup.py
-
-```cd frontend## ✅ Project Status
-
-
-
-This script:---
-
-1. Creates Python virtual environment
-
-2. Installs backend dependenciesnpm run dev
-
-3. Installs frontend dependencies
-
-4. Creates environment configuration files## ✨ Features
-
-5. Shows next steps
-
-### Implementation Complete
+- Well Tested: 94.4% code coverage# 3. Terminal 2: Frontend  
 
 ### Manual Setup
 
-- 🎉 **Event Management** — Create and organize tournaments
+
 
 Backend:
 
-```powershell- 👥 **Player Registration** — Register players for events# 4. Open http://localhost:5173| Feature | Status | Description |
+```powershell## Tech Stackcd frontend
 
 cd backend
 
-python -m venv venv- 🎮 **Match Recording** — Record match results with automatic Elo calculation
+python -m venv venv
 
 .\venv\Scripts\activate
 
-pip install -r requirements.txt- 🏆 **Ranking System** — Leaderboard with skill-based rankings```|---------|--------|-------------|
+pip install -r requirements.txt| Layer | Technology |npm run dev## 🚀 Quick Start## 📋 Quick Links
 
 ```
 
-- 🌐 **Internationalization** — Portuguese (BR) and English (US)
+|-------|-----------|
 
 Frontend:
 
-```powershell- 📱 **Responsive Design** — Mobile-friendly interface| Event Management | ✅ Complete | Create, edit, delete tournaments |
+```powershell| Backend | FastAPI, SQLAlchemy, SQLite |# http://localhost:5173
 
 cd frontend
 
-npm install- 🔄 **RESTful API** — 15+ endpoints with full documentation
+npm install| Frontend | Vue 3, Vite, Vue Router, Axios |
 
 ```
 
-- ✅ **Well Tested** — 94.4% code coverage**For complete setup instructions**: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)| Player Registration | ✅ Complete | Register players per event |
+| Database | SQLite with Alembic migrations |```
 
 ## Running Servers
+
+| Testing | pytest (94.4% coverage), vitest |
+
+### Backend
+
+```powershell| Quality | Ruff (Python), ESLint (JavaScript) |
+
+python run_backend.py
+
+# Available at: http://127.0.0.1:8000| i18n | vue-i18n (2 languages) |
+
+# API Docs: http://127.0.0.1:8000/docs
+
+```For complete setup instructions: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)```powershell- **🚀 Get Started**: Read [GETTING_STARTED.md](./GETTING_STARTED.md) or run `python setup.py`
+
+
+
+### Frontend## Project Structure
+
+```powershell
+
+cd frontend
+
+npm run dev
+
+# Available at: http://localhost:5173```
+
+```
+
+ping-champions/---# 1. Automated setup (2 minutes)- **📚 Documentation Index**: See [INDEX.md](./INDEX.md) for all resources
+
+## Running Tests
+
+├── docs/                      # Documentation
+
+Backend:
+
+```powershell├── backend/                   # FastAPI application
+
+cd backend
+
+pytest├── frontend/                  # Vue 3 application
+
+pytest --cov
+
+```├── setup.py                   # One-command setup## 📚 Documentationpython setup.py- **🧹 What Changed**: See [CLEANUP_SUMMARY.md](./CLEANUP_SUMMARY.md) for recent cleanup
+
+
+
+Frontend:├── run_backend.py             # Backend launcher
+
+```powershell
+
+cd frontend└── recreate_db.py             # Database reset
+
+npm test
+
+npm run test:ui```
+
+```
+
+All documentation is organized in the `docs/` folder:- **� Development**: See [Development Workflow](#development-workflow)
+
+## Code Quality
+
+## Status
+
+Backend:
+
+```powershell
+
+cd backend
+
+python -m ruff check .- Backend: 15+ endpoints, 94.4% test coverage
+
+python -m ruff check . --fix
+
+```- Frontend: 6 views + modals, 100% linting| Document | Purpose | Time |# 2. Terminal 1: Start backend- **� AI Context**: See [.github/copilot-instructions.md](./.github/copilot-instructions.md)
+
+
+
+Frontend:- Database: Operational (SQLite)
+
+```powershell
+
+cd frontend- Production: Ready to deploy|----------|---------|------|
+
+npm run lint
+
+```
+
+
+
+## Database## Development Setup| **[docs/START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min |python run_backend.py
+
+
+
+### Reset Database
+
+```powershell
+
+python recreate_db.py### Prerequisites| **[docs/README.md](./docs/README.md)** | Full project documentation | 10 min |
+
+```
+
+
+
+### Migrations
+
+```powershell- Python 3.9+ and pip| **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min |---
+
+cd backend
+
+alembic revision --autogenerate -m "description"- Node.js 20+ and npm
+
+alembic upgrade head
+
+```- Git| **[docs/BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min |
+
+
+
+## Internationalization
+
+
+
+Ping Champions supports Portuguese (BR) and English (US).### Automated Setup (Recommended)| **[docs/INDEX.md](./docs/INDEX.md)** | Documentation navigation | 5 min |# 3. Terminal 2: Start frontend
+
+
+
+- Switch languages using the dropdown in the header
+
+- Language preference is saved to browser storage
+
+- App auto-detects browser language on first visit```powershell| **[docs/DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min |
+
+
+
+## Architecturepython setup.py
+
+
+
+### Backend```cd frontend## ✅ Project Status
+
+- FastAPI framework with async support
+
+- SQLAlchemy ORM with SQLite database
+
+- Pydantic validation schemas
+
+- Soft-delete support for eventsThis script:---
+
+- Elo rating calculations
+
+1. Creates Python virtual environment
+
+### Frontend
+
+- Vue 3 with Composition API2. Installs backend dependenciesnpm run dev
+
+- Vue Router for navigation
+
+- Axios for API calls3. Installs frontend dependencies
+
+- vue-i18n for translations
+
+- Responsive CSS Grid layout4. Creates environment configuration files## ✨ Features
+
+
+
+### Database5. Shows next steps
+
+- Events: Tournament events with soft-delete
+
+- Players: Tournament participants with Elo ratings### Implementation Complete
+
+- Matches: Match records with score tracking
+
+### Manual Setup
+
+## Need Help?
+
+- 🎉 **Event Management** — Create and organize tournaments
+
+| Question | Document |
+
+|----------|----------|Backend:
+
+| How do I start? | [GETTING_STARTED.md](./docs/GETTING_STARTED.md) |
+
+| What's the architecture? | [README.md](./docs/README.md) |```powershell- 👥 **Player Registration** — Register players for events# 4. Open http://localhost:5173| Feature | Status | Description |
+
+| Where are all the docs? | [INDEX.md](./docs/INDEX.md) |
+
+| How was it built? | [BLOG_DEV.md](./docs/BLOG_DEV.md) |cd backend
+
+
+
+## Linkspython -m venv venv- 🎮 **Match Recording** — Record match results with automatic Elo calculation
+
+
+
+- Repository: https://github.com/hirohaya/ping-champions.\venv\Scripts\activate
+
+- Backend API: http://127.0.0.1:8000 (when running)
+
+- Frontend App: http://localhost:5173 (when running)pip install -r requirements.txt- 🏆 **Ranking System** — Leaderboard with skill-based rankings```|---------|--------|-------------|
+
+- API Documentation: http://127.0.0.1:8000/docs
+
+```
+
+## License
+
+- 🌐 **Internationalization** — Portuguese (BR) and English (US)
+
+MIT - See LICENSE file for details
+
+Frontend:
+
+## Built With
+
+```powershell- 📱 **Responsive Design** — Mobile-friendly interface| Event Management | ✅ Complete | Create, edit, delete tournaments |
+
+- FastAPI and SQLAlchemy (Backend)
+
+- Vue 3 and Vite (Frontend)cd frontend
+
+- SQLite (Database)
+
+- pytest and vitest (Testing)npm install- 🔄 **RESTful API** — 15+ endpoints with full documentation
+
+- vue-i18n (Internationalization)
+
+```
+
+---
+
+- ✅ **Well Tested** — 94.4% code coverage**For complete setup instructions**: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)| Player Registration | ✅ Complete | Register players per event |
+
+Ping Champions v1.0.0 - Built with Python and Vue.js
+
+## Running Servers
+
+Ready for Production
 
 
 
