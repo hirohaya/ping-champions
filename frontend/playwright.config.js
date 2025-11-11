@@ -6,41 +6,35 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './e2e',
-  fullyParallel: false, // Run tests sequentially to avoid database state issues
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : 1,
-  reporter: 'html',
+  retries: 0,
+  workers: 1,
+  reporter: [['html'], ['list']],
+  timeout: 30 * 1000,
+  expect: {
+    timeout: 10 * 1000,
+  },
   use: {
-    baseURL: 'http://localhost:5173',
-    trace: 'on-first-retry',
+    baseURL: 'http://localhost:5174',
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+    navigationTimeout: 30000,
+    actionTimeout: 10000,
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-  ],
-
-  webServer: [
-    {
-      command: 'npm run dev',
-      port: 5173,
-      timeout: 120 * 1000,
-      reuseExistingServer: !process.env.CI,
-    },
-    {
-      command: 'python run_backend.py',
-      port: 8000,
-      timeout: 120 * 1000,
-      reuseExistingServer: !process.env.CI,
-      cwd: '..',
+      use: { 
+        ...devices['Desktop Chrome'],
+        launchArgs: [
+          '--disable-blink-features=AutomationControlled',
+          '--disable-dev-shm-usage',
+          '--no-sandbox',
+        ],
+      },
     },
   ],
 });

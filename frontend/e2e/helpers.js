@@ -4,85 +4,117 @@
  */
 
 const API_URL = 'http://127.0.0.1:8000';
+const API_TIMEOUT = 10000; // 10 second timeout
+
+/**
+ * Helper to make API calls with timeout
+ */
+async function apiCall(endpoint, options = {}) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), API_TIMEOUT);
+  
+  try {
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      ...options,
+      signal: controller.signal,
+      headers: { 'Content-Type': 'application/json', ...options.headers },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API Error [${response.status}]: ${response.statusText}`);
+    }
+    
+    return await response.json();
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
 
 /**
  * Create a test event
  */
 export async function createTestEvent(name = 'Test Tournament', date = getTodayDate(), time = '14:00') {
-  const response = await fetch(`${API_URL}/events`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, date, time }),
-  });
-  if (!response.ok) throw new Error(`Failed to create event: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall('/events', {
+      method: 'POST',
+      body: JSON.stringify({ name, date, time }),
+    });
+  } catch (err) {
+    console.error('createTestEvent failed:', err.message);
+    throw err;
+  }
 }
 
 /**
  * Get all events
  */
 export async function getAllEvents() {
-  const response = await fetch(`${API_URL}/events`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (!response.ok) throw new Error(`Failed to get events: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall('/events', { method: 'GET' });
+  } catch (err) {
+    console.error('getAllEvents failed:', err.message);
+    return [];
+  }
 }
 
 /**
  * Delete an event (soft delete via API)
  */
 export async function deleteTestEvent(eventId) {
-  const response = await fetch(`${API_URL}/events/${eventId}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) throw new Error(`Failed to delete event: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall(`/events/${eventId}`, { method: 'DELETE' });
+  } catch (err) {
+    console.error(`deleteTestEvent(${eventId}) failed:`, err.message);
+    throw err;
+  }
 }
 
 /**
  * Register a player for an event
  */
 export async function registerPlayer(eventId, name = 'Test Player') {
-  const response = await fetch(`${API_URL}/players`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ event_id: eventId, name }),
-  });
-  if (!response.ok) throw new Error(`Failed to register player: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall('/players', {
+      method: 'POST',
+      body: JSON.stringify({ event_id: eventId, name }),
+    });
+  } catch (err) {
+    console.error('registerPlayer failed:', err.message);
+    throw err;
+  }
 }
 
 /**
  * Record a match result
  */
 export async function recordMatch(eventId, player1Id, player2Id, winnerId) {
-  const response = await fetch(`${API_URL}/matches`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      event_id: eventId,
-      player1_id: player1Id,
-      player2_id: player2Id,
-      winner_id: winnerId,
-      best_of: 5,
-    }),
-  });
-  if (!response.ok) throw new Error(`Failed to record match: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall('/matches', {
+      method: 'POST',
+      body: JSON.stringify({
+        event_id: eventId,
+        player1_id: player1Id,
+        player2_id: player2Id,
+        winner_id: winnerId,
+        best_of: 5,
+      }),
+    });
+  } catch (err) {
+    console.error('recordMatch failed:', err.message);
+    throw err;
+  }
 }
 
 /**
  * Get event ranking
  */
 export async function getEventRanking(eventId) {
-  const response = await fetch(`${API_URL}/ranking/event/${eventId}`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (!response.ok) throw new Error(`Failed to get ranking: ${response.statusText}`);
-  return response.json();
+  try {
+    return await apiCall(`/ranking/event/${eventId}`, { method: 'GET' });
+  } catch (err) {
+    console.error('getEventRanking failed:', err.message);
+    throw err;
+  }
 }
 
 /**
@@ -121,8 +153,17 @@ export async function fillFieldByLabel(page, label, value) {
 export async function clearTestDatabase() {
   try {
     const events = await getAllEvents();
+    if (!Array.isArray(events) || events.length === 0) {
+      return;
+    }
+    
+    // Delete events sequentially to avoid race conditions
     for (const event of events) {
-      await deleteTestEvent(event.id);
+      try {
+        await deleteTestEvent(event.id);
+      } catch (err) {
+        console.warn(`Failed to delete event ${event.id}:`, err.message);
+      }
     }
   } catch (err) {
     console.warn('Failed to clear database:', err.message);

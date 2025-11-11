@@ -2,21 +2,47 @@ import { createI18n } from 'vue-i18n'
 import ptBR from './locales/pt-BR.json'
 import enUS from './locales/en-US.json'
 
+// Safe localStorage access
+const safeGetLocaleStorage = () => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('locale')
+    }
+  } catch (err) {
+    console.warn('localStorage not available:', err.message)
+  }
+  return null
+}
+
+const safeSetLocaleStorage = (locale) => {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('locale', locale)
+    }
+  } catch (err) {
+    console.warn('localStorage not available:', err.message)
+  }
+}
+
 // Detect user's language preference
 const getLocale = () => {
   // Check localStorage first
-  const saved = localStorage.getItem('locale')
+  const saved = safeGetLocaleStorage()
   if (saved) return saved
 
   // Check browser language
-  const browserLang = navigator.language || navigator.userLanguage
-  
-  // Map browser language to supported locales
-  if (browserLang.startsWith('pt')) {
-    return 'pt-BR'
-  }
-  if (browserLang.startsWith('en')) {
-    return 'en-US'
+  try {
+    const browserLang = navigator.language || navigator.userLanguage
+    
+    // Map browser language to supported locales
+    if (browserLang.startsWith('pt')) {
+      return 'pt-BR'
+    }
+    if (browserLang.startsWith('en')) {
+      return 'en-US'
+    }
+  } catch (err) {
+    console.warn('Browser language detection failed:', err.message)
   }
 
   // Default to English
@@ -39,7 +65,7 @@ const i18n = createI18n({
 // Export function to change locale
 export const setLocale = (locale) => {
   i18n.global.locale.value = locale
-  localStorage.setItem('locale', locale)
+  safeSetLocaleStorage(locale)
 }
 
 // Export function to get available locales
