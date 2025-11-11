@@ -47,6 +47,51 @@ class PlayerCreate(BaseModel):
     name: str = Field(..., min_length=1, max_length=100, description="Player name")
     event_id: int = Field(..., gt=0, description="Event ID the player is registering for")
 
+class TranslationMessageCreate(BaseModel):
+    """Schema for creating a translation message"""
+    locale: str = Field(..., min_length=2, max_length=10, description="Locale code (e.g., 'pt-BR')")
+    namespace: str = Field(..., min_length=1, max_length=50, description="Namespace (e.g., 'events')")
+    key: str = Field(..., min_length=1, max_length=100, description="Translation key")
+    value: str = Field(..., min_length=1, description="Translation value")
+    note: Optional[str] = Field(None, max_length=500, description="Translator notes")
+
+
+class TranslationMessageRead(BaseModel):
+    """Schema for reading translation data"""
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    locale: str
+    namespace: str
+    key: str
+    value: str
+    version: int
+    created_at: datetime
+    updated_at: datetime
+    note: Optional[str] = None
+
+
+class LocaleConfigCreate(BaseModel):
+    """Schema for creating locale configuration"""
+    locale: str = Field(..., min_length=2, max_length=10, description="Locale code")
+    name: str = Field(..., min_length=1, max_length=50, description="Display name")
+    active: bool = Field(True, description="Whether locale is active")
+    default_locale: bool = Field(False, description="Whether this is the default locale")
+
+
+class LocaleConfigRead(BaseModel):
+    """Schema for reading locale configuration"""
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    locale: str
+    name: str
+    active: bool
+    default_locale: bool
+    message_count: int
+    created_at: datetime
+
+
 class PlayerRead(BaseModel):
     """Schema for reading player data"""
     model_config = ConfigDict(from_attributes=True)
