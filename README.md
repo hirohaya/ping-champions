@@ -1,4 +1,4 @@
-# Ping Champions# Ping Champions# Ping Champions# Ping Champions # Ping Champions
+# Ping Champions# Ping Champions# Ping Champions# Ping Champions# Ping Champions # Ping Champions
 
 
 
@@ -6,71 +6,144 @@ Tournament management system for table tennis events.
 
 
 
-## FeaturesTournament management system for table tennis events.
+## Quick StartTournament management system for table tennis events.
 
 
 
-- Event Management
+Run setup:
 
-- Player Registration
 
-- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events.
 
-- Ranking System with leaderboard
+    python setup.py## FeaturesTournament management system for table tennis events.
 
-- Multiple Language Support (Portuguese, English)
 
-- Responsive Design
 
-- 15+ API Endpoints- Event Management
+Start backend:
 
-- 94.4% Test Coverage
 
-- Player Registration
 
-## Quick Start
+    python run_backend.py- Event Management
 
-- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
 
-Run setup script:
 
-- Ranking System with leaderboard
+Start frontend:- Player Registration
+
+
+
+    cd frontend && npm run dev- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events.
+
+
+
+## Setup- Ranking System with leaderboard
+
+
+
+### Prerequisites- Multiple Language Support (Portuguese, English)
+
+
+
+- Python 3.9+- Responsive Design
+
+- Node.js 20+
+
+- Git- 15+ API Endpoints- Event Management
+
+
+
+### Installation- 94.4% Test Coverage
+
+
+
+Automated setup:- Player Registration
+
+
+
+    python setup.py## Quick Start
+
+
+
+Manual setup backend:- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
+
+
+
+    cd backendRun setup script:
+
+    python -m venv venv
+
+    .\venv\Scripts\activate- Ranking System with leaderboard
+
+    pip install -r requirements.txt
 
     python setup.py
 
+Manual setup frontend:
+
 - Multiple Language Support (Portuguese, English)
 
-Run backend in one terminal:
+    cd frontend
 
-- Responsive Design
+    npm installRun backend in one terminal:
 
-    python run_backend.py
 
-- 15+ API Endpoints- Event Management
 
-Run frontend in another terminal:
+## Tech Stack- Responsive Design
+
+
+
+- Backend: FastAPI, SQLAlchemy, SQLite    python run_backend.py
+
+- Frontend: Vue 3, Vite, Vue Router
+
+- Database: SQLite- 15+ API Endpoints- Event Management
+
+- Testing: pytest, vitest
+
+- Quality: Ruff, ESLintRun frontend in another terminal:
+
+- i18n: vue-i18n
 
 - 94.4% Test Coverage
 
+## Project Structure
+
     cd frontend && npm run dev
 
-- Player Registration
+    ping-champions/
 
-## Setup
+    ├── docs/            Documentation files- Player Registration
 
-## Quick Start
+    ├── backend/         FastAPI application
 
-### Prerequisites
+    ├── frontend/        Vue 3 application## Setup
 
-- Match Recording with automatic Elo calculations## Quick Start
+    ├── setup.py         Setup script
 
-- Python 3.9+
+    └── recreate_db.py   Database reset utility## Quick Start
 
-- Node.js 20+```powershell
 
-- Git
 
-python setup.py- Ranking System with leaderboard
+## License### Prerequisites
+
+
+
+MIT - See LICENSE file- Match Recording with automatic Elo calculations## Quick Start
+
+
+
+## Repository- Python 3.9+
+
+
+
+https://github.com/hirohaya/ping-champions- Node.js 20+```powershell
+
+
+
+---- Git
+
+
+
+Ready for production.python setup.py- Ranking System with leaderboard
+
 
 ### Automated Setup
 
