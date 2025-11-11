@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import Base, engine
-from routers import events, matches, players, ranking
+from routers import events, matches, players, ranking, i18n
 
 # Cria as tabelas no banco de dados
 Base.metadata.create_all(bind=engine)
@@ -23,6 +23,7 @@ app.include_router(events.router)
 app.include_router(players.router)
 app.include_router(matches.router)
 app.include_router(ranking.router)
+app.include_router(i18n.router)
 
 @app.get("/")
 def root():

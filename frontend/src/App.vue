@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h1>Ping Champions: pinging the ponging</h1>
+    <div class="header">
+      <h1>Ping Champions: pinging the ponging</h1>
+      <LanguageSwitcher />
+    </div>
     <Breadcrumbs />
     <!-- Feedback Snackbar/Alert -->
     <div v-if="feedback.message" :class="['feedback', feedback.type]">
@@ -13,10 +16,11 @@
 <script>
 // Main App component: handles global feedback and renders breadcrumbs and router views
 import Breadcrumbs from "./components/Breadcrumbs.vue";
+import LanguageSwitcher from "./components/LanguageSwitcher.vue";
 
 export default {
   name: "App",
-  components: { Breadcrumbs },
+  components: { Breadcrumbs, LanguageSwitcher },
   data() {
     return {
       // feedback: stores the current feedback message and type
@@ -42,10 +46,19 @@ export default {
 </script>
 
 <style scoped>
-/* h1 style mantido */
-h1 {
+/* Header layout with title and language switcher */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
+
+h1 {
+  margin: 0;
+  flex: 1;
+}
+
 /* Feedback styles */
 .feedback {
   position: fixed;
