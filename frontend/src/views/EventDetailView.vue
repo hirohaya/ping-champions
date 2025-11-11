@@ -20,9 +20,6 @@
     <router-link to="/events" class="back-link">
       ← {{ $t('common.back') }}
     </router-link>
-
-    <!-- Nested Routes -->
-    <router-view />
   </div>
 </template>
 

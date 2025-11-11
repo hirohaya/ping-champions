@@ -11,23 +11,21 @@ const routes = [
     path: "/events/:id",
     name: "event-detail",
     component: () => import("../views/EventDetailView.vue"),
-    children: [
-      {
-        path: "players",
-        name: "event-players",
-        component: () => import("../views/PlayersView.vue"),
-      },
-      {
-        path: "matches",
-        name: "event-matches",
-        component: () => import("../views/MatchesView.vue"),
-      },
-      {
-        path: "history",
-        name: "event-history",
-        component: () => import("../views/MatchHistoryView.vue"),
-      },
-    ],
+  },
+  {
+    path: "/events/:id/players",
+    name: "event-players",
+    component: () => import("../views/PlayersView.vue"),
+  },
+  {
+    path: "/events/:id/matches",
+    name: "event-matches",
+    component: () => import("../views/MatchesView.vue"),
+  },
+  {
+    path: "/events/:id/history",
+    name: "event-history",
+    component: () => import("../views/MatchHistoryView.vue"),
   },
   // Rotas de jogadores e jogos agora são acessadas via detalhes do evento
   { path: "/ranking", name: "ranking", component: () => import("../views/RankingView.vue") },
