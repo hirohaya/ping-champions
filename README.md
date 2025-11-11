@@ -1,4 +1,4 @@
-# Ping Champions# Ping Champions# Ping Champions # Ping Champions
+# Ping Champions# Ping Champions# Ping Champions# Ping Champions # Ping Champions
 
 
 
@@ -14,7 +14,7 @@ Tournament management system for table tennis events.
 
 - Player Registration
 
-- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
+- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events.
 
 - Ranking System with leaderboard
 
@@ -30,119 +30,264 @@ Tournament management system for table tennis events.
 
 ## Quick Start
 
-- Match Recording with automatic Elo calculations## Quick Start
+- Match Recording with automatic Elo calculations## FeaturesTournament management system for table tennis events. Create tournaments, manage players, record matches, and track rankings with Elo rating system.
 
-```powershell
+Run setup script:
 
-python setup.py- Ranking System with leaderboard
+- Ranking System with leaderboard
 
-python run_backend.py
+    python setup.py
 
-cd frontend && npm run dev- Multiple Language Support (Portuguese, English)
+- Multiple Language Support (Portuguese, English)
 
-```
+Run backend in one terminal:
 
 - Responsive Design
 
-## Setup
+    python run_backend.py
 
-- 15+ API Endpoints```powershell
+- 15+ API Endpoints- Event Management
 
-### Prerequisites
+Run frontend in another terminal:
 
 - 94.4% Test Coverage
 
-- Python 3.9+
+    cd frontend && npm run dev
 
-- Node.js 20+python setup.py
+- Player Registration
 
-- Git
+## Setup
 
 ## Quick Start
 
+### Prerequisites
+
+- Match Recording with automatic Elo calculations## Quick Start
+
+- Python 3.9+
+
+- Node.js 20+```powershell
+
+- Git
+
+python setup.py- Ranking System with leaderboard
+
 ### Automated Setup
 
-python run_backend.py        
+python run_backend.py
 
-```powershell# Terminal 1:
+Run the setup script:
 
-python setup.py
+cd frontend && npm run dev- Multiple Language Support (Portuguese, English)
 
-``````powershell
+    python setup.py
 
-python setup.py
+```
 
-This will:cd frontend && npm run dev
+This will:
 
-- Create Python virtual environment```
+- Create Python virtual environment- Responsive Design
 
 - Install backend dependencies
 
-- Install frontend dependencies# Terminal 2: 
+- Install frontend dependencies## Setup
 
 - Configure environment files
 
+- 15+ API Endpoints```powershell
 
+### Manual Setup
 
-### Manual Setup```
+### Prerequisites
 
-python run_backend.py
+Backend:
 
-Backend:```
+- 94.4% Test Coverage
 
-```powershell
+    cd backend
 
-cd backend
+    python -m venv venv- Python 3.9+
 
-python -m venv venv
+    .\venv\Scripts\activate
 
-.\venv\Scripts\activate## Setup
-
-pip install -r requirements.txt## Features
-
-```
+    pip install -r requirements.txt- Node.js 20+python setup.py
 
 
 
-Frontend:
+Frontend:- Git
 
-```powershell### Prerequisites
 
-cd frontend
 
-npm install
+    cd frontend## Quick Start
 
-```
+    npm install
 
-- Python 3.9+- Event Management: Create and organize tournamentspython setup.py
+### Automated Setup
 
 ## Development
 
-- Node.js 20+
+python run_backend.py        
 
 ### Running Servers
 
-- Git- Player Registration: Register players for events
+```powershell# Terminal 1:
 
-```powershell
+Start backend:
 
-python run_backend.py
+python setup.py
+
+    python run_backend.py
+
+``````powershell
+
+Start frontend in another terminal:
+
+python setup.py
+
+    cd frontend
+
+    npm run devThis will:cd frontend && npm run dev
+
+
+
+### Running Tests- Create Python virtual environment```
+
+
+
+Backend tests:- Install backend dependencies
+
+
+
+    cd backend- Install frontend dependencies# Terminal 2: 
+
+    pytest
+
+    pytest --cov- Configure environment files
+
+
+
+### Code Quality
+
+
+
+Backend linting:### Manual Setup```
+
+
+
+    cd backendpython run_backend.py
+
+    python -m ruff check .
+
+    python -m ruff check . --fixBackend:```
+
+
+
+Frontend linting:```powershell
+
+
+
+    cd frontendcd backend
+
+    npm run lint
+
+python -m venv venv
+
+## Database
+
+.\venv\Scripts\activate## Setup
+
+Reset database:
+
+pip install -r requirements.txt## Features
+
+    python recreate_db.py
 
 ```
 
-### Automated Setup- Match Recording: Record results with automatic Elo calculations## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
+Run migrations:
 
-In another terminal:
 
-```powershell
+
+    cd backend
+
+    alembic revision --autogenerate -m "description"Frontend:
+
+    alembic upgrade head
+
+```powershell### Prerequisites
+
+## Project Structure
 
 cd frontend
 
-npm run dev```powershell- Ranking System: Leaderboard with skill-based rankings
+    ping-champions/
 
-```
+    ├── docs/            Documentation filesnpm install
 
-python setup.py
+    ├── backend/         FastAPI application
+
+    ├── frontend/        Vue 3 application```
+
+    ├── setup.py         Setup script
+
+    └── recreate_db.py   Database reset utility- Python 3.9+- Event Management: Create and organize tournamentspython setup.py
+
+
+
+## Documentation## Development
+
+
+
+- docs/START_HERE.md - Quick overview- Node.js 20+
+
+- docs/GETTING_STARTED.md - Setup guide
+
+- docs/README.md - Full documentation### Running Servers
+
+- docs/BLOG_DEV.md - Development journey
+
+- docs/INDEX.md - Navigation guide- Git- Player Registration: Register players for events
+
+
+
+## Built With```powershell
+
+
+
+- FastAPI and SQLAlchemypython run_backend.py
+
+- Vue 3 and Vite
+
+- SQLite```
+
+- pytest and vitest
+
+- vue-i18n for translations### Automated Setup- Match Recording: Record results with automatic Elo calculations## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
+
+
+
+## LicenseIn another terminal:
+
+
+
+MIT - See LICENSE file```powershell
+
+
+
+## Repositorycd frontend
+
+
+
+https://github.com/hirohaya/ping-championsnpm run dev```powershell- Ranking System: Leaderboard with skill-based rankings
+
+
+
+---```
+
+
+
+Ready for production.python setup.py
+
 
 ### Running Tests
 
