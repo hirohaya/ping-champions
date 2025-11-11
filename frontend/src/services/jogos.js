@@ -11,7 +11,7 @@ export default {
     return api.get("/matches", { params: { event_id } });
   },
   listarTodos() {
-    return api.get("/matches");
+    return api.get("/matches/all/list");
   },
   get(id) {
     return api.get(`/matches/${id}`);
