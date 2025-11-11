@@ -25,14 +25,6 @@ Frontend:
 - Quality: Ruff, ESLint
 - i18n: vue-i18n
 
-## Documentation Structure
-
-- [docs/START_HERE.md](docs/START_HERE.md) - Overview
-- [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) - Setup guide
-- [docs/README.md](docs/README.md) - Full documentation
-- [docs/BLOG_DEV.md](docs/BLOG_DEV.md) - Development journey
-- [docs/INDEX.md](docs/INDEX.md) - Navigation
-
 ## Repository
 
 https://github.com/hirohaya/ping-champions
