@@ -57,7 +57,7 @@ import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import eventsService from "../services/events";
 import playersService from "../services/players";
-import jogosService from "../services/jogos";
+import partidasService from "../services/partidas";
 
 const { t } = useI18n();
 const stats = ref({ events: 0, players: 0, matches: 0 });
@@ -79,8 +79,8 @@ const loadStats = async () => {
       stats.value.players = activePlayers.length;
 
       // Get matches from active events
-      const resAllMatches = await (jogosService && jogosService.listarTodos
-        ? jogosService.listarTodos()
+      const resAllMatches = await (partidasService && partidasService.listarTodos
+        ? partidasService.listarTodos()
         : Promise.resolve({ data: [] }));
       const activeMatches = resAllMatches.data.filter(m => 
         activeEventIds.includes(m.event_id)

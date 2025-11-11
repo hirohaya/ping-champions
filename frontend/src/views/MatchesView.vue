@@ -149,7 +149,7 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { i18nKeys } from "@/i18n.keys";
-import jogosService from "../services/jogos";
+import partidasService from "../services/partidas";
 import playersService from "../services/players";
 
 const route = useRoute();
@@ -190,7 +190,7 @@ const createMatch = async () => {
   }
 
   try {
-    const res = await jogosService.create({
+    const res = await partidasService.create({
       event_id: parseInt(eventId),
       player1_id: parseInt(newMatch.value.player1_id),
       player2_id: parseInt(newMatch.value.player2_id),
@@ -240,7 +240,7 @@ const finishMatch = async () => {
       finished: true,
     };
 
-    const res = await jogosService.update(editingMatchId.value, updateData);
+    const res = await partidasService.update(editingMatchId.value, updateData);
     
     // Update the match in the list
     const index = matches.value.findIndex(m => m.id === editingMatchId.value);
@@ -262,7 +262,7 @@ const finishMatch = async () => {
 const deleteMatch = async (matchId) => {
   if (!confirm(t(i18nKeys.messages.confirmDelete))) return;
   try {
-    await jogosService.delete(matchId);
+    await partidasService.delete(matchId);
     matches.value = matches.value.filter((m) => m.id !== matchId);
   } catch (err) {
     console.error("Failed to delete match:", err);
@@ -293,7 +293,7 @@ const saveDetailedScores = async () => {
       games_score: match.games_score || null,
     };
 
-    const res = await jogosService.update(match.id, updateData);
+    const res = await partidasService.update(match.id, updateData);
     
     // Update the match in the list
     const index = matches.value.findIndex(m => m.id === match.id);
@@ -313,7 +313,7 @@ const fetchData = async () => {
   loading.value = true;
   try {
     const [matchRes, playerRes] = await Promise.all([
-      jogosService.getEventMatches(eventId),
+      partidasService.getEventMatches(eventId),
       playersService.list(eventId),
     ]);
     matches.value = matchRes.data || [];

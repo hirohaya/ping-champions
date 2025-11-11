@@ -47,7 +47,7 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
-import jogosService from "../services/jogos";
+import partidasService from "../services/partidas";
 import playersService from "../services/players";
 
 const route = useRoute();
@@ -68,7 +68,7 @@ const fetchData = async () => {
   loading.value = true;
   try {
     const [matchRes, playerRes] = await Promise.all([
-      jogosService.getEventMatches(eventId),
+      partidasService.getEventMatches(eventId),
       playersService.list(eventId)
     ]);
     

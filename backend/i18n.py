@@ -40,11 +40,11 @@ class Messages:
             "player_already_in_event": "Jogador já está registrado neste evento",
             
             # Matches
-            "match_created": "Jogo criado com sucesso!",
-            "match_updated": "Jogo atualizado com sucesso!",
-            "match_deleted": "Jogo deletado com sucesso!",
-            "match_not_found": "Jogo não encontrado",
-            "match_not_finished": "Jogo ainda não foi finalizado",
+            "match_created": "Partida criada com sucesso!",
+            "match_updated": "Partida atualizada com sucesso!",
+            "match_deleted": "Partida deletada com sucesso!",
+            "match_not_found": "Partida não encontrada",
+            "match_not_finished": "Partida ainda não foi finalizada",
             "same_player_error": "Selecione jogadores diferentes",
             "invalid_best_of": "Best Of deve ser um número ímpar (1, 3, 5, etc)",
             "invalid_winner": "Vencedor inválido",

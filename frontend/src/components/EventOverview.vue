@@ -107,7 +107,7 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import eventsService from '../services/events';
 import playersService from '../services/players';
-import jogosService from '../services/jogos';
+import partidasService from '../services/partidas';
 
 const { t } = useI18n();
 const route = useRoute();
@@ -145,7 +145,7 @@ const loadEventDetails = async () => {
       .slice(0, 5);
 
     // Load matches for this event
-    const matchesRes = await jogosService.listarPorEvento(eventId);
+    const matchesRes = await partidasService.listarPorEvento(eventId);
     stats.value.matches = matchesRes.data.length;
   } catch (err) {
     error.value = err.message || 'Failed to load event details';
