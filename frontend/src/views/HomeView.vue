@@ -64,16 +64,29 @@ const stats = ref({ events: 0, players: 0, matches: 0 });
 
 const loadStats = async () => {
   try {
-    const [resEvents, resPlayers, resMatches] = await Promise.all([
-      eventsService.list(),
-      playersService.listAll(),
-      jogosService && jogosService.listarTodos
+    // Get active events
+    const resEvents = await eventsService.list();
+    const activeEvents = resEvents.data.filter(e => e.active);
+    stats.value.events = activeEvents.length;
+
+    // Get players from active events
+    if (activeEvents.length > 0) {
+      const activeEventIds = activeEvents.map(e => e.id);
+      const resAllPlayers = await playersService.listAll();
+      const activePlayers = resAllPlayers.data.filter(p => 
+        activeEventIds.includes(p.event_id)
+      );
+      stats.value.players = activePlayers.length;
+
+      // Get matches from active events
+      const resAllMatches = await (jogosService && jogosService.listarTodos
         ? jogosService.listarTodos()
-        : Promise.resolve({ data: [] }),
-    ]);
-    stats.value.events = resEvents.data.length;
-    stats.value.players = resPlayers.data.length;
-    stats.value.matches = resMatches.data.length;
+        : Promise.resolve({ data: [] }));
+      const activeMatches = resAllMatches.data.filter(m => 
+        activeEventIds.includes(m.event_id)
+      );
+      stats.value.matches = activeMatches.length;
+    }
     // eslint-disable-next-line no-unused-vars
   } catch (_) {
     // fallback: show zero
