@@ -1,52 +1,36 @@
-# 🏓 Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions
+# Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions
 
 
 
-**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
+Tournament management system for table tennis events. A professional web application for organizing tournaments, managing players, recording matches, and tracking rankings with Elo rating system.
 
 
 
-[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
-
-[![License](https://img.shields.io/badge/License-MIT-green)]()
-
-[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
-
-[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
-
-[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)
+## Quick Start**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.
 
 
 
----[![License](https://img.shields.io/badge/License-MIT-green)]()[![License](https://img.shields.io/badge/License-MIT-green)]()
+```powershell
+
+# Automated setup (2 minutes)
+
+python setup.py[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)**Tournament Management System for Table Tennis** — A professional web application for organizing ping pong events, managing players, recording matches, and tracking rankings with Elo rating system.**Table Tennis Tournament Management System** — A modern web application for organizing ping pong events, managing players, recording matches, and tracking rankings.
 
 
 
-## 🚀 Quick Start[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
-
-
-
-```powershell[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
-
-# 1. Automated setup (2 minutes)
-
-python setup.py[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![Linting](https://img.shields.io/badge/Linting-Ruff%20+%20ESLint-brightgreen)]()
-
-
-
-# 2. Terminal 1: Backend
+# Terminal 1: Start backend[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 python run_backend.py
 
-# http://127.0.0.1:8000------
+# http://127.0.0.1:8000[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
 
 
 
-# 3. Terminal 2: Frontend  
+# Terminal 2: Start frontend[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
 
 cd frontend
 
-npm run dev## 🚀 Quick Start## 📋 Quick Links
+npm run dev[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)[![GitHub](https://img.shields.io/badge/GitHub-hirohaya%2Fping--champions-blue?logo=github)](https://github.com/hirohaya/ping-champions)
 
 # http://localhost:5173
 
@@ -54,189 +38,444 @@ npm run dev## 🚀 Quick Start## 📋 Quick Links
 
 
 
-For complete setup instructions: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)```powershell- **🚀 Get Started**: Read [GETTING_STARTED.md](./GETTING_STARTED.md) or run `python setup.py`
+For complete setup: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)---[![License](https://img.shields.io/badge/License-MIT-green)]()[![License](https://img.shields.io/badge/License-MIT-green)]()
 
 
 
----# 1. Automated setup (2 minutes)- **📚 Documentation Index**: See [INDEX.md](./INDEX.md) for all resources
+## Documentation
 
 
 
-## 📚 Documentationpython setup.py- **🧹 What Changed**: See [CLEANUP_SUMMARY.md](./CLEANUP_SUMMARY.md) for recent cleanup
+All documentation is organized in the `docs/` folder:## 🚀 Quick Start[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()[![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)]()
 
 
 
-All documentation is organized in the `docs/` folder:- **� Development**: See [Development Workflow](#development-workflow)
+| Document | Purpose |
+
+|----------|---------|
+
+| [START_HERE.md](./docs/START_HERE.md) | Quick overview (2 min) |```powershell[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()[![Node.js](https://img.shields.io/badge/Node.js-20+-green?logo=node.js)]()
+
+| [GETTING_STARTED.md](./docs/GETTING_STARTED.md) | Setup guide |
+
+| [README.md](./docs/README.md) | Full documentation |# 1. Automated setup (2 minutes)
+
+| [BLOG_DEV.md](./docs/BLOG_DEV.md) | Development journey |
+
+| [INDEX.md](./docs/INDEX.md) | Navigation & reference |python setup.py[![Status](https://img.shields.io/badge/Status-Production%20Ready-green)]()[![Linting](https://img.shields.io/badge/Linting-Ruff%20+%20ESLint-brightgreen)]()
+
+| [DOCUMENTATION.md](./docs/DOCUMENTATION.md) | Consolidated guide |
 
 
 
-| Document | Purpose | Time |# 2. Terminal 1: Start backend- **� AI Context**: See [.github/copilot-instructions.md](./.github/copilot-instructions.md)
+## Features
 
-|----------|---------|------|
+# 2. Terminal 1: Backend
 
-| **[docs/START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min |python run_backend.py
+- Event Management: Create and organize tournaments
 
-| **[docs/README.md](./docs/README.md)** | Full project documentation | 10 min |
+- Player Registration: Register players for eventspython run_backend.py
 
-| **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min |---
+- Match Recording: Record results with score tracking
 
-| **[docs/BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min |
+- Ranking System: Leaderboard with Elo rating calculation# http://127.0.0.1:8000------
 
-| **[docs/INDEX.md](./docs/INDEX.md)** | Documentation navigation | 5 min |# 3. Terminal 2: Start frontend
+- Internationalization: Portuguese (BR) and English (US)
 
-| **[docs/DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min |
+- Responsive Design: Mobile-friendly interface
 
-cd frontend## ✅ Project Status
+- RESTful API: 15+ endpoints with documentation
 
----
-
-npm run dev
-
-## ✨ Features
-
-### Implementation Complete
-
-- 🎉 **Event Management** — Create and organize tournaments
-
-- 👥 **Player Registration** — Register players for events# 4. Open http://localhost:5173| Feature | Status | Description |
-
-- 🎮 **Match Recording** — Record match results with automatic Elo calculation
-
-- 🏆 **Ranking System** — Leaderboard with skill-based rankings```|---------|--------|-------------|
-
-- 🌐 **Internationalization** — Portuguese (BR) and English (US)
-
-- 📱 **Responsive Design** — Mobile-friendly interface| Event Management | ✅ Complete | Create, edit, delete tournaments |
-
-- 🔄 **RESTful API** — 15+ endpoints with full documentation
-
-- ✅ **Well Tested** — 94.4% code coverage**For complete setup instructions**: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)| Player Registration | ✅ Complete | Register players per event |
+- Well Tested: 94.4% code coverage# 3. Terminal 2: Frontend  
 
 
 
----| Match Recording | ✅ Complete | Record results with modals |
+## Tech Stackcd frontend
 
 
 
-## 🛠️ Tech Stack---| Elo Rating System | ✅ Complete | Automatic ranking calculations |
-
-
-
-| Layer | Technology || Modal UI Pattern | ✅ Complete | Consistent create dialogs |
+| Layer | Technology |npm run dev## 🚀 Quick Start## 📋 Quick Links
 
 |-------|-----------|
 
+| Backend | FastAPI, SQLAlchemy, SQLite |# http://localhost:5173
+
+| Frontend | Vue 3, Vite, Vue Router, Axios |
+
+| Database | SQLite with Alembic migrations |```
+
+| Testing | pytest (94.4% coverage), vitest |
+
+| Quality | Ruff (Python), ESLint (JavaScript) |
+
+| i18n | vue-i18n (2 languages) |
+
+For complete setup instructions: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)```powershell- **🚀 Get Started**: Read [GETTING_STARTED.md](./GETTING_STARTED.md) or run `python setup.py`
+
+## Project Structure
+
+
+
+```
+
+ping-champions/---# 1. Automated setup (2 minutes)- **📚 Documentation Index**: See [INDEX.md](./INDEX.md) for all resources
+
+├── docs/                      # Documentation
+
+├── backend/                   # FastAPI application
+
+├── frontend/                  # Vue 3 application
+
+├── setup.py                   # One-command setup## 📚 Documentationpython setup.py- **🧹 What Changed**: See [CLEANUP_SUMMARY.md](./CLEANUP_SUMMARY.md) for recent cleanup
+
+├── run_backend.py             # Backend launcher
+
+└── recreate_db.py             # Database reset
+
+```
+
+All documentation is organized in the `docs/` folder:- **� Development**: See [Development Workflow](#development-workflow)
+
+## Status
+
+
+
+- Backend: 15+ endpoints, 94.4% test coverage
+
+- Frontend: 6 views + modals, 100% linting| Document | Purpose | Time |# 2. Terminal 1: Start backend- **� AI Context**: See [.github/copilot-instructions.md](./.github/copilot-instructions.md)
+
+- Database: Operational (SQLite)
+
+- Production: Ready to deploy|----------|---------|------|
+
+
+
+## Development Setup| **[docs/START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min |python run_backend.py
+
+
+
+### Prerequisites| **[docs/README.md](./docs/README.md)** | Full project documentation | 10 min |
+
+
+
+- Python 3.9+ and pip| **[docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min |---
+
+- Node.js 20+ and npm
+
+- Git| **[docs/BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min |
+
+
+
+### Automated Setup (Recommended)| **[docs/INDEX.md](./docs/INDEX.md)** | Documentation navigation | 5 min |# 3. Terminal 2: Start frontend
+
+
+
+```powershell| **[docs/DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min |
+
+python setup.py
+
+```cd frontend## ✅ Project Status
+
+
+
+This script:---
+
+1. Creates Python virtual environment
+
+2. Installs backend dependenciesnpm run dev
+
+3. Installs frontend dependencies
+
+4. Creates environment configuration files## ✨ Features
+
+5. Shows next steps
+
+### Implementation Complete
+
+### Manual Setup
+
+- 🎉 **Event Management** — Create and organize tournaments
+
+Backend:
+
+```powershell- 👥 **Player Registration** — Register players for events# 4. Open http://localhost:5173| Feature | Status | Description |
+
+cd backend
+
+python -m venv venv- 🎮 **Match Recording** — Record match results with automatic Elo calculation
+
+.\venv\Scripts\activate
+
+pip install -r requirements.txt- 🏆 **Ranking System** — Leaderboard with skill-based rankings```|---------|--------|-------------|
+
+```
+
+- 🌐 **Internationalization** — Portuguese (BR) and English (US)
+
+Frontend:
+
+```powershell- 📱 **Responsive Design** — Mobile-friendly interface| Event Management | ✅ Complete | Create, edit, delete tournaments |
+
+cd frontend
+
+npm install- 🔄 **RESTful API** — 15+ endpoints with full documentation
+
+```
+
+- ✅ **Well Tested** — 94.4% code coverage**For complete setup instructions**: See [docs/GETTING_STARTED.md](./docs/GETTING_STARTED.md)| Player Registration | ✅ Complete | Register players per event |
+
+## Running Servers
+
+
+
+### Backend
+
+```powershell---| Match Recording | ✅ Complete | Record results with modals |
+
+python run_backend.py
+
+# Available at: http://127.0.0.1:8000
+
+# API Docs: http://127.0.0.1:8000/docs
+
+```## 🛠️ Tech Stack---| Elo Rating System | ✅ Complete | Automatic ranking calculations |
+
+
+
+### Frontend
+
+```powershell
+
+cd frontend| Layer | Technology || Modal UI Pattern | ✅ Complete | Consistent create dialogs |
+
+npm run dev
+
+# Available at: http://localhost:5173|-------|-----------|
+
+```
+
 | **Backend** | FastAPI 0.1.0+, SQLAlchemy, Pydantic |## 📚 Documentation| Internationalization | ✅ Complete | PT-BR and English (US) |
+
+## Running Tests
 
 | **Frontend** | Vue 3, Vite 7.1.7, Vue Router, Axios |
 
-| **Database** | SQLite with Alembic migrations || Responsive Design | ✅ Complete | Mobile-friendly interface |
+Backend:
 
-| **Testing** | pytest (94.4% coverage), vitest |
+```powershell| **Database** | SQLite with Alembic migrations || Responsive Design | ✅ Complete | Mobile-friendly interface |
 
-| **i18n** | vue-i18n (2 languages) |All documentation is in the `docs/` folder:| RESTful API | ✅ Complete | 15+ endpoints |
+cd backend
 
-| **Quality** | Ruff, ESLint (100% passing) |
+pytest              # Run all tests| **Testing** | pytest (94.4% coverage), vitest |
 
-| Database Schema | ✅ Complete | 3 core entities |
+pytest --cov        # With coverage
 
----
+```| **i18n** | vue-i18n (2 languages) |All documentation is in the `docs/` folder:| RESTful API | ✅ Complete | 15+ endpoints |
+
+
+
+Frontend:| **Quality** | Ruff, ESLint (100% passing) |
+
+```powershell
+
+cd frontend| Database Schema | ✅ Complete | 3 core entities |
+
+npm test            # Run tests
+
+npm run test:ui     # Interactive UI---
+
+```
 
 | Document | Purpose | Time |
 
+## Code Quality
+
 ## 📦 Project Structure
 
-|----------|---------|------|### Testing & Quality
+Backend:
+
+```powershell|----------|---------|------|### Testing & Quality
+
+cd backend
+
+python -m ruff check .      # Check linting```
+
+python -m ruff check . --fix # Auto-fix
+
+```ping-champions/| **[START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min || Category | Result | Notes |
+
+
+
+Frontend:├── docs/                      ← 📚 All documentation
+
+```powershell
+
+cd frontend│   ├── README.md              ← Full documentation| **[README.md](./docs/README.md)** | Full project documentation | 10 min ||----------|--------|-------|
+
+npm run lint        # Check and fix
+
+```│   ├── GETTING_STARTED.md     ← Quick setup
+
+
+
+## Database│   ├── START_HERE.md          ← Entry point| **[GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min || Backend Tests | ✅ **94.4% PASSED** | 51/54 tests passing |
+
+
+
+### Reset Database│   ├── BLOG_DEV.md            ← Dev journey
+
+```powershell
+
+python recreate_db.py│   ├── INDEX.md               ← Navigation| **[BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min || Code Linting | ✅ **ALL PASSING** | Ruff + ESLint |
 
 ```
-
-ping-champions/| **[START_HERE.md](./docs/START_HERE.md)** | Entry point & quick overview | 2 min || Category | Result | Notes |
-
-├── docs/                      ← 📚 All documentation
-
-│   ├── README.md              ← Full documentation| **[README.md](./docs/README.md)** | Full project documentation | 10 min ||----------|--------|-------|
-
-│   ├── GETTING_STARTED.md     ← Quick setup
-
-│   ├── START_HERE.md          ← Entry point| **[GETTING_STARTED.md](./docs/GETTING_STARTED.md)** | Setup guide | 2 min || Backend Tests | ✅ **94.4% PASSED** | 51/54 tests passing |
-
-│   ├── BLOG_DEV.md            ← Dev journey
-
-│   ├── INDEX.md               ← Navigation| **[BLOG_DEV.md](./docs/BLOG_DEV.md)** | Development journey (15 days) | 30 min || Code Linting | ✅ **ALL PASSING** | Ruff + ESLint |
 
 │   └── DOCUMENTATION.md       ← Consolidated guide
 
+**Warning**: This deletes all data and recreates the schema.
+
 │| **[INDEX.md](./docs/INDEX.md)** | Documentation navigation | 5 min || Console Errors | ✅ **ZERO** | Clean browser output |
+
+### Migrations
 
 ├── backend/                   ← 🏗️ FastAPI application
 
-│   ├── main.py                ← App entry point| **[DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min || Documentation | ✅ **COMPLETE** | README, GETTING_STARTED, INDEX |
+```powershell
 
-│   ├── database.py            ← SQLAlchemy config
+cd backend│   ├── main.py                ← App entry point| **[DOCUMENTATION.md](./docs/DOCUMENTATION.md)** | Consolidated guide | 10 min || Documentation | ✅ **COMPLETE** | README, GETTING_STARTED, INDEX |
+
+alembic revision --autogenerate -m "description"
+
+alembic upgrade head│   ├── database.py            ← SQLAlchemy config
+
+```
 
 │   ├── models/                ← ORM models| Repository | ✅ **CLEAN** | 78 files removed, streamlined |
 
+## Internationalization
+
 │   ├── routers/               ← API endpoints
+
+Ping Champions supports Portuguese (BR) and English (US).
 
 │   └── requirements.txt        ← Dependencies---
 
-│
+- Switch languages using the dropdown in the header
+
+- Language preference is saved to browser storage│
+
+- App auto-detects browser language on first visit
 
 ├── frontend/                  ← 🎨 Vue 3 application**Latest Session**: November 11, 2025 (Session 15) — Project completion with modal implementation and repository cleanup.
 
+## Architecture
+
 │   ├── src/
 
-│   │   ├── views/             ← Page components## ✨ Features- ✅ **Modal Pattern**: Implemented for Events and Matches (EventsView.vue, MatchesView.vue)
+### Backend
 
-│   │   ├── components/        ← Shared components
+- FastAPI framework with async support│   │   ├── views/             ← Page components## ✨ Features- ✅ **Modal Pattern**: Implemented for Events and Matches (EventsView.vue, MatchesView.vue)
 
-│   │   ├── services/          ← API calls- ✅ **Backend Refactoring**: PUT endpoints with optional field updates
+- SQLAlchemy ORM with SQLite database
 
-│   │   ├── locales/           ← Translations
+- Pydantic validation schemas│   │   ├── components/        ← Shared components
 
-│   │   └── router/            ← Routing- 🎉 **Event Management** — Create and organize tournaments- ✅ **i18n Keys**: Added missing translation keys (date, time)
+- Soft-delete support for events
 
-│   ├── package.json           ← Dependencies
+- Elo rating calculations│   │   ├── services/          ← API calls- ✅ **Backend Refactoring**: PUT endpoints with optional field updates
+
+
+
+### Frontend│   │   ├── locales/           ← Translations
+
+- Vue 3 with Composition API
+
+- Vue Router for navigation│   │   └── router/            ← Routing- 🎉 **Event Management** — Create and organize tournaments- ✅ **i18n Keys**: Added missing translation keys (date, time)
+
+- Axios for API calls
+
+- vue-i18n for translations│   ├── package.json           ← Dependencies
+
+- Responsive CSS Grid layout
 
 │   └── vite.config.js         ← Build config- 👥 **Player Registration** — Register players for events- ✅ **Repository Cleanup**: Removed 73 documentation files + 5 cache directories (96% size reduction)
 
-│
+### Database
 
-├── setup.py                   ← 🔧 One-command setup- 🎮 **Match Recording** — Record match results with automatic Elo calculation- ✅ **Documentation**: Created GETTING_STARTED.md, INDEX.md, CLEANUP_SUMMARY.md
+- Events: Tournament events with soft-delete│
 
-├── run_backend.py             ← 🚀 Backend launcher
+- Players: Tournament participants with Elo ratings
 
-├── recreate_db.py             ← 🔄 DB reset utility- 🏆 **Ranking System** — Leaderboard with skill-based rankings- � **Full details**: See [GETTING_STARTED.md](./GETTING_STARTED.md)
+- Matches: Match records with score tracking├── setup.py                   ← 🔧 One-command setup- 🎮 **Match Recording** — Record match results with automatic Elo calculation- ✅ **Documentation**: Created GETTING_STARTED.md, INDEX.md, CLEANUP_SUMMARY.md
 
-├── test_complete.py           ← ✅ Backend tests
 
-├── test_e2e.py                ← 🧪 E2E tests- 🌐 **Internationalization** — Portuguese (BR) and English (US)
+
+## Need Help?├── run_backend.py             ← 🚀 Backend launcher
+
+
+
+| Question | Document |├── recreate_db.py             ← 🔄 DB reset utility- 🏆 **Ranking System** — Leaderboard with skill-based rankings- � **Full details**: See [GETTING_STARTED.md](./GETTING_STARTED.md)
+
+|----------|----------|
+
+| "How do I start?" | [GETTING_STARTED.md](./docs/GETTING_STARTED.md) |├── test_complete.py           ← ✅ Backend tests
+
+| "What's the architecture?" | [README.md](./docs/README.md) |
+
+| "Where are all the docs?" | [INDEX.md](./docs/INDEX.md) |├── test_e2e.py                ← 🧪 E2E tests- 🌐 **Internationalization** — Portuguese (BR) and English (US)
+
+| "How was it built?" | [BLOG_DEV.md](./docs/BLOG_DEV.md) |
 
 ├── venv/                      ← 🐍 Python env
 
+## Links
+
 └── .github/                   ← 🤖 GitHub config- 📱 **Responsive Design** — Mobile-friendly interface---
 
-```
+- Repository: https://github.com/hirohaya/ping-champions
 
-- 🔄 **RESTful API** — 15+ endpoints with full documentation
+- Backend API: http://127.0.0.1:8000 (when running)```
 
----
+- Frontend App: http://localhost:5173 (when running)
 
-- ✅ **Well Tested** — 94.4% code coverage## 📚 Complete Development Story
-
-## 📊 Status
+- API Documentation: http://127.0.0.1:8000/docs- 🔄 **RESTful API** — 15+ endpoints with full documentation
 
 
 
-```
+## License---
 
-✅ Backend       Complete (15+ endpoints)---**Read the full development journey**: See **[BLOG_DEV.md](./BLOG_DEV.md)** for:
 
-✅ Frontend      Complete (6 views + modals)
 
-✅ Database      Operational (SQLite)- 🏗️ Architectural decisions and patterns
+MIT — See LICENSE file for details- ✅ **Well Tested** — 94.4% code coverage## 📚 Complete Development Story
 
-✅ Tests         94.4% coverage (51/54)
+
+
+## Built With## 📊 Status
+
+
+
+- FastAPI & SQLAlchemy (Backend)
+
+- Vue 3 & Vite (Frontend)
+
+- SQLite (Database)```
+
+- pytest & vitest (Testing)
+
+- vue-i18n (Internationalization)✅ Backend       Complete (15+ endpoints)---**Read the full development journey**: See **[BLOG_DEV.md](./BLOG_DEV.md)** for:
+
+
+
+---✅ Frontend      Complete (6 views + modals)
+
+
+
+Ping Champions v1.0.0 — Built with Python and Vue.js✅ Database      Operational (SQLite)- 🏗️ Architectural decisions and patterns
+
+
+
+Ready for Production✅ Tests         94.4% coverage (51/54)
+
 
 ✅ Linting       100% passing## 🛠️ Tech Stack- 🔧 Technical challenges and solutions
 
