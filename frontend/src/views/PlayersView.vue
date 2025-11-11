@@ -1,9 +1,13 @@
 <template>
   <div class="players-view">
-    <h2>Players</h2>
+    <h2>{{ $t(i18nKeys.players.title) }}</h2>
     <form class="player-form" @submit.prevent="createPlayer">
-      <input v-model="name" placeholder="Player name" required />
-      <button type="submit">Add</button>
+      <input
+        v-model="name"
+        :placeholder="$t(i18nKeys.players.playerName)"
+        required
+      />
+      <button type="submit">{{ $t(i18nKeys.common.create) }}</button>
     </form>
     <div class="players-list">
       <div v-for="player in players" :key="player.id" class="player-card">
@@ -20,11 +24,11 @@
           />
           <div class="player-stats">
             <div class="stat-item">
-              <span class="stat-label">Elo:</span>
+              <span class="stat-label">{{ $t(i18nKeys.players.eloRating) }}:</span>
               <span class="stat-value elo-rating">{{ formatElo(player.elo_rating) }}</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">Wins:</span>
+              <span class="stat-label">{{ $t(i18nKeys.players.wins) }}:</span>
               <span class="stat-value wins">{{ player.score }}</span>
             </div>
           </div>
@@ -32,7 +36,7 @@
         <div class="player-actions">
           <button
             v-if="editId !== player.id"
-            title="Edit"
+            :title="$t(i18nKeys.common.edit)"
             class="icon-btn"
             @click="startEdit(player)"
           >
@@ -40,7 +44,7 @@
           </button>
           <button
             v-if="editId === player.id"
-            title="Save"
+            :title="$t(i18nKeys.common.save)"
             class="icon-btn"
             @click="saveEdit(player)"
           >
@@ -48,14 +52,14 @@
           </button>
           <button
             v-if="editId === player.id"
-            title="Cancel"
+            :title="$t(i18nKeys.common.cancel)"
             class="icon-btn"
             @click="cancelEdit"
           >
             ❌
           </button>
           <button
-            title="Delete"
+            :title="$t(i18nKeys.common.delete)"
             class="icon-btn delete"
             @click="deletePlayer(player)"
           >
@@ -70,9 +74,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { i18nKeys } from "@/i18n.keys";
 import playersService from "../services/players";
 
 const route = useRoute();
+const { t } = useI18n();
 const eventId = route.params.id;
 const players = ref([]);
 const name = ref("");
@@ -115,7 +122,7 @@ const formatElo = (elo) => {
 };
 
 const deletePlayer = async (player) => {
-  if (confirm("Are you sure you want to delete this player?")) {
+  if (confirm(t(i18nKeys.messages.confirmDelete))) {
     await playersService.delete(player.id);
     listPlayers();
   }

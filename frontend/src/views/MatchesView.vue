@@ -1,17 +1,17 @@
 <template>
   <div class="matches-view">
-    <h2>Event Matches</h2>
+    <h2>{{ $t(i18nKeys.matches.title) }}</h2>
 
-    <div v-if="loading" class="loading">Loading matches...</div>
+    <div v-if="loading" class="loading">{{ $t(i18nKeys.common.loading) }}</div>
 
     <div v-else class="match-controls">
       <!-- STEP 1: Create Match -->
       <div class="create-match">
-        <h3>Step 1: Create Match</h3>
+        <h3>{{ $t(i18nKeys.matches.step1) }}</h3>
         <div class="form-group">
-          <label>Player 1:</label>
+          <label>{{ $t(i18nKeys.matches.player1) }}:</label>
           <select v-model="newMatch.player1_id" class="select-input">
-            <option value="">Select player</option>
+            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
             <option v-for="player in players" :key="player.id" :value="player.id">
               {{ player.name }}
             </option>
@@ -19,40 +19,40 @@
         </div>
 
         <div class="form-group">
-          <label>Player 2:</label>
+          <label>{{ $t(i18nKeys.matches.player2) }}:</label>
           <select v-model="newMatch.player2_id" class="select-input">
-            <option value="">Select player</option>
+            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
             <option v-for="player in players" :key="player.id" :value="player.id">
               {{ player.name }}
             </option>
           </select>
         </div>
 
-        <button @click="createMatch" class="btn-primary">Create Match</button>
+        <button @click="createMatch" class="btn-primary">{{ $t(i18nKeys.matches.createMatch) }}</button>
       </div>
 
       <!-- STEP 2: Add Scores -->
       <div class="add-scores" v-if="editingMatchId">
-        <h3>Step 2: Add Scores & Finish Match</h3>
+        <h3>{{ $t(i18nKeys.matches.step2) }}</h3>
         <div class="match-info">
           <strong>{{ getPlayerName(editingMatchData?.player1_id) }}</strong> vs 
           <strong>{{ getPlayerName(editingMatchData?.player2_id) }}</strong>
         </div>
 
         <div class="form-group">
-          <label>{{ getPlayerName(editingMatchData?.player1_id) }} Games Won:</label>
+          <label>{{ getPlayerName(editingMatchData?.player1_id) }} {{ $t(i18nKeys.matches.player1Games) }}:</label>
           <input v-model.number="editingMatchData.player1_games" type="number" min="0" class="input-field">
         </div>
 
         <div class="form-group">
-          <label>{{ getPlayerName(editingMatchData?.player2_id) }} Games Won:</label>
+          <label>{{ getPlayerName(editingMatchData?.player2_id) }} {{ $t(i18nKeys.matches.player2Games) }}:</label>
           <input v-model.number="editingMatchData.player2_games" type="number" min="0" class="input-field">
         </div>
 
         <div class="form-group">
-          <label>Winner:</label>
+          <label>{{ $t(i18nKeys.matches.winner) }}:</label>
           <select v-model.number="editingMatchData.winner_id" class="select-input">
-            <option value="">Select winner</option>
+            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
             <option :value="editingMatchData.player1_id">
               {{ getPlayerName(editingMatchData?.player1_id) }}
             </option>
@@ -63,18 +63,18 @@
         </div>
 
         <div class="buttons">
-          <button @click="finishMatch" class="btn-success">Finish Match</button>
-          <button @click="cancelEdit" class="btn-secondary">Cancel</button>
+          <button @click="finishMatch" class="btn-success">{{ $t(i18nKeys.matches.finishMatch) }}</button>
+          <button @click="cancelEdit" class="btn-secondary">{{ $t(i18nKeys.common.cancel) }}</button>
         </div>
       </div>
 
       <!-- Match Results List -->
       <div v-if="matches.length === 0 && !editingMatchId" class="empty-state">
-        <p>No matches recorded yet</p>
+        <p>{{ $t(i18nKeys.matches.noMatches) }}</p>
       </div>
 
       <div v-else-if="!editingMatchId" class="matches-list">
-        <h3>Match Results</h3>
+        <h3>{{ $t(i18nKeys.matches.matchDetails) }}</h3>
         <div v-for="match in matches" :key="match.id" class="match-item">
           <div class="match-header">
             <span class="player-name">{{ getPlayerName(match.player1_id) }}</span>
@@ -95,15 +95,15 @@
 
           <div class="match-result">
             <span v-if="match.winner_id" class="winner">
-              Winner: <strong>{{ getPlayerName(match.winner_id) }}</strong>
+              {{ $t(i18nKeys.matches.winner) }}: <strong>{{ getPlayerName(match.winner_id) }}</strong>
             </span>
-            <span v-else class="pending">Pending Result</span>
+            <span v-else class="pending">{{ $t(i18nKeys.messages.loadingData) }}</span>
           </div>
 
           <div class="match-actions">
-            <button @click="editMatch(match)" class="btn-edit">Edit</button>
-            <button @click="deleteMatch(match.id)" class="btn-delete">Delete</button>
-            <button @click="openScoresModal(match)" class="btn-scores">Detailed Scores</button>
+            <button @click="editMatch(match)" class="btn-edit">{{ $t(i18nKeys.common.edit) }}</button>
+            <button @click="deleteMatch(match.id)" class="btn-delete">{{ $t(i18nKeys.common.delete) }}</button>
+            <button @click="openScoresModal(match)" class="btn-scores">{{ $t(i18nKeys.matches.detailedScores) }}</button>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
     <div v-if="showScoresModal && getEditingMatch()" class="modal-overlay" @click="closeScoresModal">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
-          <h3>Add Detailed Scores</h3>
+          <h3>{{ $t(i18nKeys.matches.gamesScore) }}</h3>
           <button class="close-btn" @click="closeScoresModal">✕</button>
         </div>
 
@@ -124,19 +124,19 @@
           </div>
 
           <div class="form-group">
-            <label>Game Scores (e.g., "11-9,10-12,11-8"):</label>
-            <p class="help-text">Enter the score of each set separated by commas</p>
+            <label>{{ $t(i18nKeys.matches.gamesScore) }} (e.g., "11-9,10-12,11-8"):</label>
+            <p class="help-text">{{ $t(i18nKeys.matches.gamesScoreHelp) }}</p>
             <textarea 
               v-model="getEditingMatch().games_score" 
-              placeholder="11-9,10-12,11-8,11-6"
+              :placeholder="$t(i18nKeys.matches.gamesScoreHelp)"
               class="textarea-input"
               rows="3"
             ></textarea>
           </div>
 
           <div class="modal-actions">
-            <button @click="saveDetailedScores" class="btn-success">Save Scores</button>
-            <button @click="closeScoresModal" class="btn-secondary">Cancel</button>
+            <button @click="saveDetailedScores" class="btn-success">{{ $t(i18nKeys.common.save) }}</button>
+            <button @click="closeScoresModal" class="btn-secondary">{{ $t(i18nKeys.common.cancel) }}</button>
           </div>
         </div>
       </div>
@@ -147,10 +147,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
+import { i18nKeys } from "@/i18n.keys";
 import jogosService from "../services/jogos";
 import playersService from "../services/players";
 
 const route = useRoute();
+const { t } = useI18n();
 const eventId = route.params.id;
 const matches = ref([]);
 const players = ref([]);
@@ -177,12 +180,12 @@ const getPlayerName = (playerId) => {
 
 const createMatch = async () => {
   if (!newMatch.value.player1_id || !newMatch.value.player2_id) {
-    alert("Please select both players");
+    alert(t(i18nKeys.matches.selectPlayers));
     return;
   }
 
   if (newMatch.value.player1_id === newMatch.value.player2_id) {
-    alert("Players must be different");
+    alert(t(i18nKeys.validation.differentPlayers));
     return;
   }
 
@@ -208,7 +211,7 @@ const createMatch = async () => {
     };
   } catch (err) {
     console.error("Failed to create match:", err);
-    alert("Error creating match");
+    alert(t(i18nKeys.messages.errorSavingData));
   }
 };
 
@@ -224,7 +227,7 @@ const cancelEdit = () => {
 
 const finishMatch = async () => {
   if (!editingMatchData.value.winner_id) {
-    alert("Please select a winner");
+    alert(t(i18nKeys.validation.selectWinner));
     return;
   }
 
@@ -249,21 +252,21 @@ const finishMatch = async () => {
     
     editingMatchId.value = null;
     editingMatchData.value = {};
-    alert("Match updated successfully!");
+    alert(t(i18nKeys.matches.matchUpdatedSuccess));
   } catch (err) {
     console.error("Failed to finish match:", err);
-    alert("Error finishing match");
+    alert(t(i18nKeys.messages.errorSavingData));
   }
 };
 
 const deleteMatch = async (matchId) => {
-  if (!confirm("Delete this match?")) return;
+  if (!confirm(t(i18nKeys.messages.confirmDelete))) return;
   try {
     await jogosService.delete(matchId);
     matches.value = matches.value.filter((m) => m.id !== matchId);
   } catch (err) {
     console.error("Failed to delete match:", err);
-    alert("Error deleting match");
+    alert(t(i18nKeys.messages.errorDeletingData));
   }
 };
 
@@ -299,10 +302,10 @@ const saveDetailedScores = async () => {
     }
     
     closeScoresModal();
-    alert("Detailed scores saved!");
+    alert(t(i18nKeys.common.success));
   } catch (err) {
     console.error("Failed to save scores:", err);
-    alert("Error saving scores");
+    alert(t(i18nKeys.messages.errorSavingData));
   }
 };
 

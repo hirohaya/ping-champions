@@ -1,18 +1,18 @@
 <template>
   <div class="ranking-view">
-    <h2>Tournament Ranking</h2>
+    <h2>{{ $t(i18nKeys.ranking.title) }}</h2>
     
-    <div v-if="loading" class="loading">Loading ranking...</div>
+    <div v-if="loading" class="loading">{{ $t(i18nKeys.common.loading) }}</div>
     
     <div v-else-if="players.length === 0" class="empty-state">
-      <p>No players registered yet</p>
+      <p>{{ $t(i18nKeys.ranking.noMatches) }}</p>
     </div>
     
     <div v-else class="ranking-container">
       <div class="controls">
         <label>
           <input type="checkbox" v-model="sortByElo" />
-          Sort by Elo Rating
+          {{ $t(i18nKeys.ranking.elo) }}
         </label>
       </div>
       
@@ -20,11 +20,11 @@
         <thead>
           <tr>
             <th class="rank">#</th>
-            <th class="name">Player</th>
-            <th class="elo">Elo Rating</th>
-            <th class="wins">Wins</th>
-            <th class="losses">Losses</th>
-            <th class="winrate">Win Rate</th>
+            <th class="name">{{ $t(i18nKeys.ranking.player) }}</th>
+            <th class="elo">{{ $t(i18nKeys.ranking.elo) }}</th>
+            <th class="wins">{{ $t(i18nKeys.players.wins) }}</th>
+            <th class="losses">{{ $t(i18nKeys.players.losses) }}</th>
+            <th class="winrate">{{ $t(i18nKeys.players.winRate) }}</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +51,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import { i18nKeys } from "@/i18n.keys";
 import rankingService from "../services/ranking";
 
 const route = useRoute();

@@ -1,0 +1,142 @@
+/**
+ * Type-Safe i18n Keys
+ * 
+ * Auto-generated type definitions for i18n keys.
+ * Use this for IDE autocomplete and type checking.
+ * 
+ * Example:
+ *   $t(i18nKeys.events.title)
+ *   $t(i18nKeys.validation.required)
+ */
+
+export const i18nKeys = {
+  common: {
+    appName: 'common.appName',
+    language: 'common.language',
+    save: 'common.save',
+    cancel: 'common.cancel',
+    delete: 'common.delete',
+    edit: 'common.edit',
+    create: 'common.create',
+    back: 'common.back',
+    close: 'common.close',
+    loading: 'common.loading',
+    error: 'common.error',
+    success: 'common.success',
+    warning: 'common.warning',
+    noData: 'common.noData',
+    search: 'common.search',
+    filter: 'common.filter',
+    sort: 'common.sort',
+  },
+  navigation: {
+    home: 'navigation.home',
+    events: 'navigation.events',
+    players: 'navigation.players',
+    matches: 'navigation.matches',
+    ranking: 'navigation.ranking',
+    status: 'navigation.status',
+    settings: 'navigation.settings',
+  },
+  events: {
+    title: 'events.title',
+    createEvent: 'events.createEvent',
+    eventName: 'events.eventName',
+    eventDate: 'events.eventDate',
+    eventTime: 'events.eventTime',
+    newEvent: 'events.newEvent',
+    deleteEvent: 'events.deleteEvent',
+    editEvent: 'events.editEvent',
+    eventCreatedSuccess: 'events.eventCreatedSuccess',
+    eventDeletedSuccess: 'events.eventDeletedSuccess',
+    eventUpdatedSuccess: 'events.eventUpdatedSuccess',
+    selectEvent: 'events.selectEvent',
+    noEvents: 'events.noEvents',
+    eventDetails: 'events.eventDetails',
+    date: 'events.date',
+    time: 'events.time',
+    status: 'events.status',
+    actions: 'events.actions',
+  },
+  players: {
+    title: 'players.title',
+    playerName: 'players.playerName',
+    initialElo: 'players.initialElo',
+    currentElo: 'players.currentElo',
+    registerPlayer: 'players.registerPlayer',
+    playerRegisteredSuccess: 'players.playerRegisteredSuccess',
+    playerDeletedSuccess: 'players.playerDeletedSuccess',
+    playerUpdatedSuccess: 'players.playerUpdatedSuccess',
+    selectPlayer: 'players.selectPlayer',
+    noPlayers: 'players.noPlayers',
+    wins: 'players.wins',
+    losses: 'players.losses',
+    winRate: 'players.winRate',
+    eloRating: 'players.eloRating',
+  },
+  matches: {
+    title: 'matches.title',
+    createMatch: 'matches.createMatch',
+    player1: 'matches.player1',
+    player2: 'matches.player2',
+    winner: 'matches.winner',
+    player1Games: 'matches.player1Games',
+    player2Games: 'matches.player2Games',
+    gamesScore: 'matches.gamesScore',
+    gamesScoreHelp: 'matches.gamesScoreHelp',
+    bestOf: 'matches.bestOf',
+    matchCreatedSuccess: 'matches.matchCreatedSuccess',
+    matchDeletedSuccess: 'matches.matchDeletedSuccess',
+    matchUpdatedSuccess: 'matches.matchUpdatedSuccess',
+    noMatches: 'matches.noMatches',
+    matchDetails: 'matches.matchDetails',
+    finishMatch: 'matches.finishMatch',
+    step1: 'matches.step1',
+    step2: 'matches.step2',
+    selectPlayers: 'matches.selectPlayers',
+    enterScore: 'matches.enterScore',
+    detailedScores: 'matches.detailedScores',
+    addScores: 'matches.addScores',
+  },
+  ranking: {
+    title: 'ranking.title',
+    noMatches: 'ranking.noMatches',
+    position: 'ranking.position',
+    player: 'ranking.player',
+    elo: 'ranking.elo',
+    matches: 'ranking.matches',
+    events: 'ranking.events',
+  },
+  validation: {
+    required: 'validation.required',
+    invalidDate: 'validation.invalidDate',
+    invalidTime: 'validation.invalidTime',
+    invalidEmail: 'validation.invalidEmail',
+    playerNameRequired: 'validation.playerNameRequired',
+    selectWinner: 'validation.selectWinner',
+    differentPlayers: 'validation.differentPlayers',
+    invalidBestOf: 'validation.invalidBestOf',
+    setsRequired: 'validation.setsRequired',
+  },
+  messages: {
+    confirmDelete: 'messages.confirmDelete',
+    noDataToDisplay: 'messages.noDataToDisplay',
+    loadingData: 'messages.loadingData',
+    errorLoadingData: 'messages.errorLoadingData',
+    errorSavingData: 'messages.errorSavingData',
+    errorDeletingData: 'messages.errorDeletingData',
+    tryAgain: 'messages.tryAgain',
+  },
+  settings: {
+    title: 'settings.title',
+    language: 'settings.language',
+    theme: 'settings.theme',
+    notifications: 'settings.notifications',
+  },
+} as const
+
+/**
+ * Type for i18n keys (inferred from the constant above)
+ * Use this for type-safe key usage
+ */
+export type I18nKey = typeof i18nKeys[keyof typeof i18nKeys][keyof typeof i18nKeys[keyof typeof i18nKeys]]

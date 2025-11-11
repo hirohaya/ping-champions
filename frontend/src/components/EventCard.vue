@@ -2,14 +2,23 @@
   <div class="evento-card" @click="goToEvent">
     <div class="card-content">
       <h3>{{ event.name }}</h3>
-      <p>Data: {{ event.date?.substring(0, 10) }}</p>
-      <p>Start-time: {{ event.time }}</p>
+      <p>{{ $t(i18nKeys.events.date) }}: {{ event.date?.substring(0, 10) }}</p>
+      <p>{{ $t(i18nKeys.events.time) }}: {{ event.time }}</p>
     </div>
-    <button class="excluir-btn" @click.stop="emitDeleteEvent">🗑️</button>
+    <button
+      class="excluir-btn"
+      @click.stop="emitDeleteEvent"
+      :title="$t(i18nKeys.events.deleteEvent)"
+    >
+      🗑️
+    </button>
   </div>
 </template>
+
 <script setup>
 import { useRouter } from "vue-router";
+import { i18nKeys } from "@/i18n.keys";
+
 // Receives the event object as a prop
 const props = defineProps({ event: Object });
 const emit = defineEmits(["delete-event"]);

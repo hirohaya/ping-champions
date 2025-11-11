@@ -1,13 +1,17 @@
 <template>
   <div>
-    <h2>Events</h2>
+    <h2>{{ $t(i18nKeys.events.title) }}</h2>
     <!-- Form to create a new event -->
     <form class="event-create-form" @submit.prevent="createEvent">
       <div class="form-row">
-        <input v-model="name" placeholder="Event name" required />
+        <input
+          v-model="name"
+          :placeholder="$t(i18nKeys.events.eventName)"
+          required
+        />
         <input v-model="date" type="date" required />
         <input v-model="time" type="time" required />
-        <button type="submit">Create Event</button>
+        <button type="submit">{{ $t(i18nKeys.common.create) }}</button>
       </div>
     </form>
     <!-- Feedback message -->
@@ -31,8 +35,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+import { i18nKeys } from "@/i18n.keys";
 import eventsService from "../services/events";
 import EventCard from "../components/EventCard.vue";
+
+const { t } = useI18n();
 
 // Reactive state for events and form fields
 const events = ref([]);
@@ -54,7 +62,7 @@ const createEvent = async () => {
   error.value = false;
   try {
     await eventsService.create(name.value, date.value, time.value);
-    message.value = "Event created successfully!";
+    message.value = t(i18nKeys.events.eventCreatedSuccess);
     error.value = false;
     name.value = "";
     date.value = "";
@@ -62,7 +70,7 @@ const createEvent = async () => {
     listEvents();
     // eslint-disable-next-line no-unused-vars
   } catch (_) {
-    message.value = "Error creating event.";
+    message.value = t(i18nKeys.messages.errorSavingData);
     error.value = true;
   }
 };
@@ -73,12 +81,12 @@ const deleteEvent = async (id) => {
   error.value = false;
   try {
     await eventsService.delete(id);
-    message.value = "Event removed successfully!";
+    message.value = t(i18nKeys.events.eventDeletedSuccess);
     error.value = false;
     listEvents();
     // eslint-disable-next-line no-unused-vars
   } catch (_) {
-    message.value = "Error removing event.";
+    message.value = t(i18nKeys.messages.errorDeletingData);
     error.value = true;
   }
 };
