@@ -1,10 +1,7 @@
 <template>
   <div class="event-detail-container">
-    <!-- Event Overview Section -->
-    <EventOverview />
-
-    <!-- Navigation Links -->
-    <div class="navigation-links" style="margin: 2rem 0; padding: 1rem; background: var(--color-background-soft); border-radius: 0.8rem;">
+    <!-- Navigation Links (Top Priority) -->
+    <div class="navigation-links" style="margin-bottom: 2rem; padding: 1rem; background: var(--color-background-soft); border-radius: 0.8rem;">
       <p style="margin: 0 0 1rem 0; color: var(--color-text);">{{ $t('events.manageEvent') }}</p>
       <div class="link-group">
         <router-link :to="`/events/${$route.params.id}/players`" class="nav-link">
@@ -15,6 +12,9 @@
         </router-link>
       </div>
     </div>
+
+    <!-- Event Overview Section -->
+    <EventOverview />
 
     <!-- Back Button -->
     <router-link to="/events" class="back-link">
