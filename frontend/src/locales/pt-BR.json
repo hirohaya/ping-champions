@@ -17,7 +17,10 @@
     "search": "Pesquisar",
     "filter": "Filtrar",
     "sort": "Ordenar",
-    "actions": "Ações"
+    "actions": "Ações",
+    "management": "Gerenciamento",
+    "date": "Data",
+    "time": "Hora"
   },
   "navigation": {
     "home": "Início",
@@ -26,7 +29,9 @@
     "matches": "Partidas",
     "ranking": "Ranking",
     "status": "Status",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "back": "Voltar",
+    "goBack": "Voltar para a página anterior"
   },
   "home": {
     "welcome": "Bem-vindo ao Ping Champions",
@@ -52,9 +57,13 @@
     "newEvent": "Novo Evento",
     "deleteEvent": "Deletar Evento",
     "editEvent": "Editar Evento",
+    "activateEvent": "Ativar Evento",
+    "deactivateEvent": "Desativar Evento",
     "eventCreatedSuccess": "Evento criado com sucesso!",
     "eventDeletedSuccess": "Evento deletado com sucesso!",
     "eventUpdatedSuccess": "Evento atualizado com sucesso!",
+    "eventActivatedSuccess": "Evento ativado com sucesso!",
+    "eventDeactivatedSuccess": "Evento desativado com sucesso!",
     "selectEvent": "Selecione um evento",
     "noEvents": "Nenhum evento encontrado",
     "eventDetails": "Detalhes do Evento",
@@ -66,7 +75,7 @@
     "inactive": "Inativo",
     "statistics": "Estatísticas",
     "topPlayers": "Top 5 Jogadores",
-    "manageEvent": "Gerenciar este evento",
+    "manageEvent": "Gerenciamento",
     "managePlayers": "Gerenciar Jogadores",
     "manageMatches": "Gerenciar Partidas"
   },

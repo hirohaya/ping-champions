@@ -5,6 +5,7 @@
       <LanguageSwitcher />
     </div>
     <Breadcrumbs />
+    <BackButton />
     <!-- Feedback Snackbar/Alert -->
     <div v-if="feedback.message" :class="['feedback', feedback.type]">
       {{ feedback.message }}
@@ -17,10 +18,11 @@
 // Main App component: handles global feedback and renders breadcrumbs and router views
 import Breadcrumbs from "./components/Breadcrumbs.vue";
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
+import BackButton from "./components/BackButton.vue";
 
 export default {
   name: "App",
-  components: { Breadcrumbs, LanguageSwitcher },
+  components: { Breadcrumbs, LanguageSwitcher, BackButton },
   data() {
     return {
       // feedback: stores the current feedback message and type

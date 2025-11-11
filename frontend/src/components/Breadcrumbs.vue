@@ -35,6 +35,12 @@
     </template>
     <template v-else-if="$route.path.startsWith('/ranking')">
       <span> / </span>
+      <router-link to="/events">{{ $t('navigation.events') }}</router-link>
+      <span v-if="$route.query.event"> / </span>
+      <router-link v-if="$route.query.event" :to="`/events/${$route.query.event}`">{{
+        eventName ? eventName : `Event ${$route.query.event}`
+      }}</router-link>
+      <span> / </span>
       <span>{{ $t('navigation.ranking') }}</span>
     </template>
     <template v-else-if="$route.path.startsWith('/status')">
@@ -71,7 +77,7 @@ const fetchEventName = async (id) => {
 
 // Watch for changes in the route event id and update the event name accordingly
 watch(
-  () => route.params.id,
+  () => route.params.id || route.query.event,
   (id) => {
     fetchEventName(id);
   },

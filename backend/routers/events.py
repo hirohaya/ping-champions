@@ -1,8 +1,5 @@
 
 # FastAPI imports for API routing and dependency injection
-# Utilities
-from datetime import datetime
-
 from fastapi import APIRouter, Depends, HTTPException
 
 # SQLAlchemy imports for database session management
@@ -14,7 +11,7 @@ from database import SessionLocal
 from models.event import Event
 
 # Import schemas
-from schemas import EventCreate, EventRead
+from schemas import EventCreate, EventRead, EventUpdate
 
 router = APIRouter(prefix="/events", tags=["events"])
 
@@ -27,15 +24,15 @@ def get_db():
         db.close()
 
 
-# List all active events
+# List all events (active and inactive)
 @router.get("", response_model=list[EventRead])
 def list_events(db: Session = Depends(get_db)):
     """
-    List all active events.
+    List all events (active and inactive).
 
-    Returns a list of all non-deleted events.
+    Returns a list of all events, sorted by active status (active first) and then by date.
     """
-    return db.query(Event).filter(Event.active).all()
+    return db.query(Event).order_by(Event.active.desc(), Event.date.desc()).all()
 
 
 # Get a specific event
@@ -43,10 +40,12 @@ def list_events(db: Session = Depends(get_db)):
 def get_event(event_id: int, db: Session = Depends(get_db)):
     """
     Get details of a specific event.
+    
+    Works for both active and inactive events.
 
     - **event_id**: The event ID to retrieve
     """
-    event = db.query(Event).filter(Event.id == event_id, Event.active).first()
+    event = db.query(Event).filter(Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
     return event
@@ -62,17 +61,34 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
     - **date**: Event date in YYYY-MM-DD format
     - **time**: Event time in HH:MM format
     """
-    try:
-        # Validate date format
-        datetime.strptime(event.date, "%Y-%m-%d")
-    except ValueError as err:
-        raise HTTPException(status_code=400, detail="Invalid date format. Use YYYY-MM-DD") from err
-
     new_event = Event(name=event.name, date=event.date, time=event.time)
     db.add(new_event)
     db.commit()
     db.refresh(new_event)
     return new_event
+
+
+# Update event information
+@router.put("/{event_id}", response_model=EventRead)
+def update_event(event_id: int, event_data: EventUpdate, db: Session = Depends(get_db)):
+    """
+    Update event information.
+
+    - **name**: Event name (optional)
+    - **date**: Event date in YYYY-MM-DD format (optional)
+    - **time**: Event time in HH:MM format (optional)
+    """
+    event = db.query(Event).filter(Event.id == event_id).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+
+    update_data = event_data.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(event, field, value)
+
+    db.commit()
+    db.refresh(event)
+    return event
 
 
 # Soft delete an event (mark as inactive)

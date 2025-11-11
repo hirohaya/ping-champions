@@ -29,12 +29,14 @@ def get_db():
 def register_player(player_data: PlayerCreate, db: Session = Depends(get_db)):
     """
     Register a new player for an event.
+    
+    Works for both active and inactive events.
 
     - **name**: Player's name (1-100 characters)
     - **event_id**: Event ID player is registering for
     """
-    # Verify event exists
-    event = db.query(Event).filter(Event.id == player_data.event_id, Event.active).first()
+    # Verify event exists (active or inactive)
+    event = db.query(Event).filter(Event.id == player_data.event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 
@@ -50,11 +52,13 @@ def register_player(player_data: PlayerCreate, db: Session = Depends(get_db)):
 def list_players(event_id: int = Query(..., gt=0), db: Session = Depends(get_db)):
     """
     List all active players in an event.
+    
+    Works for both active and inactive events.
 
     - **event_id**: Event ID to filter players
     """
-    # Verify event exists
-    event = db.query(Event).filter(Event.id == event_id, Event.active).first()
+    # Verify event exists (active or inactive)
+    event = db.query(Event).filter(Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 

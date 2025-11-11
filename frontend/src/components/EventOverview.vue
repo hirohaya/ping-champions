@@ -17,6 +17,45 @@
         </span>
       </div>
 
+      <!-- Management bar at top -->
+      <div class="management-bar">
+        <router-link
+          :to="`/events/${event.id}/players`"
+          class="action-btn players-btn"
+        >
+          {{ $t('navigation.players') }}
+        </router-link>
+        <router-link
+          :to="`/events/${event.id}/matches`"
+          class="action-btn matches-btn"
+        >
+          {{ $t('navigation.matches') }}
+        </router-link>
+        <router-link
+          :to="`/ranking?event=${event.id}`"
+          class="action-btn ranking-btn"
+        >
+          {{ $t('navigation.ranking') }}
+        </router-link>
+        <!-- Status toggle button -->
+        <button
+          v-if="event.active"
+          @click="toggleStatus"
+          class="action-btn deactivate-btn"
+          :title="$t(i18nKeys.events.deactivateEvent)"
+        >
+          {{ $t(i18nKeys.events.deactivateEvent) }}
+        </button>
+        <button
+          v-else
+          @click="toggleStatus"
+          class="action-btn activate-btn"
+          :title="$t(i18nKeys.events.activateEvent)"
+        >
+          {{ $t(i18nKeys.events.activateEvent) }}
+        </button>
+      </div>
+
       <div class="overview-grid">
         <!-- Event details card -->
         <div class="overview-card details-card">
@@ -48,30 +87,6 @@
           </div>
         </div>
 
-        <!-- Quick actions card -->
-        <div class="overview-card actions-card">
-          <h3>{{ $t('common.actions') }}</h3>
-          <div class="actions-list">
-            <router-link
-              :to="`/events/${event.id}/players`"
-              class="action-btn players-btn"
-            >
-              {{ $t('navigation.players') }}
-            </router-link>
-            <router-link
-              :to="`/events/${event.id}/matches`"
-              class="action-btn matches-btn"
-            >
-              {{ $t('navigation.matches') }}
-            </router-link>
-            <router-link
-              :to="`/ranking?event=${event.id}`"
-              class="action-btn ranking-btn"
-            >
-              {{ $t('navigation.ranking') }}
-            </router-link>
-          </div>
-        </div>
       </div>
 
       <!-- Top players preview -->
@@ -105,6 +120,7 @@
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import { i18nKeys } from '@/i18n.keys';
 import eventsService from '../services/events';
 import playersService from '../services/players';
 import partidasService from '../services/partidas';
@@ -152,6 +168,22 @@ const loadEventDetails = async () => {
     console.error('Error loading event:', err);
   } finally {
     loading.value = false;
+  }
+};
+
+const toggleStatus = async () => {
+  try {
+    const newStatus = !event.value.active;
+    await eventsService.updateStatus(event.value.id, newStatus);
+    event.value.active = newStatus;
+    const successKey = newStatus
+      ? i18nKeys.events.eventActivatedSuccess
+      : i18nKeys.events.eventDeactivatedSuccess;
+    // Show success message (if needed, can be passed up via event)
+    console.log(t(successKey));
+  } catch (err) {
+    error.value = err.message || 'Failed to update event status';
+    console.error('Error updating status:', err);
   }
 };
 
@@ -213,6 +245,15 @@ onMounted(loadEventDetails);
 .event-status.active {
   background: #efe;
   color: #3c3;
+}
+
+.management-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .overview-grid {
@@ -287,6 +328,8 @@ onMounted(loadEventDetails);
   font-weight: 500;
   transition: all 0.3s ease;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .action-btn.players-btn {
@@ -313,6 +356,24 @@ onMounted(loadEventDetails);
 
 .action-btn.ranking-btn:hover {
   background: #d67e1d;
+  transform: translateY(-2px);
+}
+
+.action-btn.activate-btn {
+  background: #42b983;
+}
+
+.action-btn.activate-btn:hover {
+  background: #359268;
+  transform: translateY(-2px);
+}
+
+.action-btn.deactivate-btn {
+  background: #ff9800;
+}
+
+.action-btn.deactivate-btn:hover {
+  background: #f57c00;
   transform: translateY(-2px);
 }
 

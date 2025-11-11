@@ -34,10 +34,10 @@
             </td>
             <td class="name">{{ player.name }}</td>
             <td class="elo">
-              <span class="elo-badge">{{ formatElo(player.elo_rating) }}</span>
+              <span class="elo-badge">{{ formatElo(player.elo) }}</span>
             </td>
-            <td class="wins">{{ player.score }}</td>
-            <td class="losses">{{ calculateLosses(player) }}</td>
+            <td class="wins">{{ player.wins }}</td>
+            <td class="losses">{{ player.losses }}</td>
             <td class="winrate">
               <span class="winrate-badge">{{ formatWinRate(player) }}</span>
             </td>
@@ -55,7 +55,8 @@ import { i18nKeys } from "@/i18n.keys";
 import rankingService from "../services/ranking";
 
 const route = useRoute();
-const eventId = route.params.id;
+// eventId can come from route params or query string
+const eventId = route.params.id || route.query.event;
 const players = ref([]);
 const loading = ref(true);
 const sortByElo = ref(false);
@@ -70,7 +71,11 @@ const fetchRanking = async () => {
   loading.value = true;
   try {
     const res = await rankingService.getEventRanking(eventId);
-    if (res.data && res.data.entries) {
+    // API returns array directly, not wrapped in {entries}
+    if (Array.isArray(res.data)) {
+      players.value = res.data;
+    } else if (res.data && res.data.entries) {
+      // Fallback for wrapped response
       players.value = res.data.entries;
     }
   } catch (err) {
@@ -85,16 +90,16 @@ const sortedPlayers = computed(() => {
   
   if (sortByElo.value) {
     sorted.sort((a, b) => {
-      const eloA = a.elo_rating || 1600;
-      const eloB = b.elo_rating || 1600;
+      const eloA = a.elo || 1600;
+      const eloB = b.elo || 1600;
       return eloB - eloA;
     });
   } else {
     sorted.sort((a, b) => {
-      const winRateA = calculateWinRate(a);
-      const winRateB = calculateWinRate(b);
+      const winRateA = a.win_rate || 0;
+      const winRateB = b.win_rate || 0;
       if (winRateA !== winRateB) return winRateB - winRateA;
-      return (b.score || 0) - (a.score || 0);
+      return (b.wins || 0) - (a.wins || 0);
     });
   }
   
@@ -106,16 +111,8 @@ const formatElo = (elo) => {
   return Math.round(elo).toString();
 };
 
-const calculateLosses = (player) => {
-  const totalMatches = (player.score || 0) + (player.losses || 0);
-  return Math.max(0, totalMatches - (player.score || 0));
-};
-
 const calculateWinRate = (player) => {
-  const wins = player.score || 0;
-  const losses = calculateLosses(player);
-  const total = wins + losses;
-  return total === 0 ? 0 : (wins / total) * 100;
+  return (player.win_rate || 0) * 100;
 };
 
 const formatWinRate = (player) => {

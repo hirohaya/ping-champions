@@ -41,6 +41,28 @@ class EventRead(BaseModel):
     active: bool
     created_at: Optional[datetime] = None
 
+class EventUpdate(BaseModel):
+    """Schema for updating event data"""
+    name: Optional[str] = Field(None, min_length=1, max_length=100)
+    date: Optional[str] = Field(None, description="Event date in YYYY-MM-DD format")
+    time: Optional[str] = Field(None, description="Event time in HH:MM format")
+    
+    @field_validator('date')
+    @classmethod
+    def validate_date_format(cls, v):
+        """Validate date is in YYYY-MM-DD format"""
+        if v is not None and not re.match(r'^\d{4}-\d{2}-\d{2}$', v):
+            raise ValueError('Date must be in YYYY-MM-DD format')
+        return v
+
+    @field_validator('time')
+    @classmethod
+    def validate_time_format(cls, v):
+        """Validate time is in HH:MM format"""
+        if v is not None and not re.match(r'^\d{2}:\d{2}$', v):
+            raise ValueError('Time must be in HH:MM format')
+        return v
+
 # ============ Player Schemas ============
 class PlayerCreate(BaseModel):
     """Schema for creating a new player"""
@@ -147,11 +169,11 @@ class MatchRead(BaseModel):
 
 class MatchUpdate(BaseModel):
     """Schema for updating match data"""
-    winner_id: Optional[int] = Field(None, gt=0)
-    player1_games: Optional[int] = Field(None, ge=0)
-    player2_games: Optional[int] = Field(None, ge=0)
-    games_score: Optional[str] = None
-    finished: Optional[bool] = None
+    winner_id: Optional[int] = Field(None, gt=0, description="Winning player ID")
+    player1_games: Optional[int] = Field(None, ge=0, description="Number of games won by player 1")
+    player2_games: Optional[int] = Field(None, ge=0, description="Number of games won by player 2")
+    games_score: Optional[str] = Field(None, description="Detailed score per game")
+    finished: Optional[bool] = Field(None, description="Whether the match is finished")
 
 # ============ Ranking Schemas ============
 class RankingEntry(BaseModel):
@@ -160,6 +182,7 @@ class RankingEntry(BaseModel):
     
     player_id: int
     name: str
+    elo: float = Field(default=1600.0, description="ELO rating")
     wins: int = Field(default=0, ge=0)
     losses: int = Field(default=0, ge=0)
     win_rate: float = Field(default=0.0, ge=0.0, le=1.0)

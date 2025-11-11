@@ -33,14 +33,16 @@ def get_db():
 def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
     """
     Create a new match between two players.
+    
+    Works for both active and inactive events.
 
     - **event_id**: Event ID
     - **player1_id**: First player ID
     - **player2_id**: Second player ID
     - **best_of**: Best of N sets (1, 3, 5, or 7) - default 5
     """
-    # Validate event exists
-    event = db.query(Event).filter(Event.id == match_data.event_id, Event.active).first()
+    # Validate event exists (active or inactive)
+    event = db.query(Event).filter(Event.id == match_data.event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 
@@ -73,7 +75,7 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
         games_score=match_data.games_score,
         winner_id=match_data.winner_id,
         best_of=match_data.best_of,
-        finished=(match_data.winner_id is not None)  # Mark as finished if winner is set
+        finished=(match_data.winner_id is not None)
     )
     db.add(match)
     
@@ -83,16 +85,6 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
             raise HTTPException(
                 status_code=400,
                 detail="Winner must be one of the match players"
-            )
-        
-        # Get both players
-        player1 = db.query(Player).filter(Player.id == match_data.player1_id).first()
-        player2 = db.query(Player).filter(Player.id == match_data.player2_id).first()
-        
-        if not player1 or not player2:
-            raise HTTPException(
-                status_code=404,
-                detail="One or both players not found"
             )
         
         # Calculate new Elo ratings
@@ -109,9 +101,9 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
         player2.elo_rating = new_p2_rating
         
         if match_data.winner_id == player1.id:
-            player1.score += 1  # Increment wins
+            player1.score += 1
         else:
-            player2.score += 1  # Increment wins
+            player2.score += 1
     
     db.commit()
     db.refresh(match)
@@ -123,11 +115,13 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
 def list_matches(event_id: int = Query(..., gt=0), db: Session = Depends(get_db)):
     """
     Get all matches for an event.
+    
+    Works for both active and inactive events.
 
     - **event_id**: Event ID to filter matches
     """
-    # Verify event exists
-    event = db.query(Event).filter(Event.id == event_id, Event.active).first()
+    # Verify event exists (active or inactive)
+    event = db.query(Event).filter(Event.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 
@@ -173,15 +167,7 @@ def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends
     if not match:
         raise HTTPException(status_code=404, detail="Match not found")
 
-    # Update game scores if provided
-    if match_update.player1_games is not None:
-        match.player1_games = match_update.player1_games
-    if match_update.player2_games is not None:
-        match.player2_games = match_update.player2_games
-    if match_update.games_score is not None:
-        match.games_score = match_update.games_score
-
-    # If setting a winner, validate it's one of the players and update Elo ratings
+    # Validate winner_id if provided
     if match_update.winner_id is not None:
         if match_update.winner_id not in [match.player1_id, match.player2_id]:
             raise HTTPException(
@@ -189,19 +175,15 @@ def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends
                 detail="Winner must be one of the match players"
             )
         
-        # Get both players
+        # Get both players for Elo calculation
         player1 = db.query(Player).filter(Player.id == match.player1_id).first()
         player2 = db.query(Player).filter(Player.id == match.player2_id).first()
         
         if not player1 or not player2:
-            raise HTTPException(
-                status_code=404,
-                detail="One or both players not found"
-            )
+            raise HTTPException(status_code=404, detail="One or both players not found")
         
         # Only calculate Elo if winner wasn't already set (avoid double calculation)
         if match.winner_id is None:
-            # Calculate new Elo ratings
             new_p1_rating, new_p2_rating = update_ratings(
                 player1.elo_rating,
                 player2.elo_rating,
@@ -210,19 +192,24 @@ def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends
                 player2.id
             )
             
-            # Update player ratings and increment win count for winner
             player1.elo_rating = new_p1_rating
             player2.elo_rating = new_p2_rating
             
             if match_update.winner_id == player1.id:
-                player1.score += 1  # Increment wins
+                player1.score += 1
             else:
-                player2.score += 1  # Increment wins
-        
-        match.winner_id = match_update.winner_id
-
-    if match_update.finished is not None:
-        match.finished = match_update.finished
+                player2.score += 1
+    
+    # Update fields using model_dump pattern (like PlayerUpdate)
+    update_data = match_update.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        if field == "winner_id" and value is not None:
+            match.winner_id = value
+            match.finished = True
+        elif field == "finished" and value is not None:
+            match.finished = value
+        elif value is not None:
+            setattr(match, field, value)
 
     db.commit()
     db.refresh(match)

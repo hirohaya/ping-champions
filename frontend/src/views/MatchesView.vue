@@ -2,35 +2,60 @@
   <div class="matches-view">
     <h2>{{ $t(i18nKeys.matches.title) }}</h2>
 
+    <!-- Button to open modal -->
+    <div class="matches-header">
+      <button @click="openModal" class="btn-add-match">
+        ➕ {{ $t(i18nKeys.matches.createMatch) }}
+      </button>
+    </div>
+
+    <!-- Modal Overlay for Creating Match -->
+    <div v-if="showModal" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h3>{{ $t(i18nKeys.matches.createMatch) }}</h3>
+          <button class="modal-close" @click="closeModal">✕</button>
+        </div>
+        <form @submit.prevent="createMatch" class="match-form">
+          <div class="form-group">
+            <label :for="'player1Input'">{{ $t(i18nKeys.matches.player1) }}:</label>
+            <select
+              id="player1Input"
+              v-model="newMatch.player1_id"
+              class="form-input"
+              required
+            >
+              <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
+              <option v-for="player in players" :key="player.id" :value="player.id">
+                {{ player.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label :for="'player2Input'">{{ $t(i18nKeys.matches.player2) }}:</label>
+            <select
+              id="player2Input"
+              v-model="newMatch.player2_id"
+              class="form-input"
+              required
+            >
+              <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
+              <option v-for="player in players" :key="player.id" :value="player.id">
+                {{ player.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">{{ $t(i18nKeys.common.create) }}</button>
+            <button type="button" class="btn-cancel" @click="closeModal">{{ $t(i18nKeys.common.cancel) }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div v-if="loading" class="loading">{{ $t(i18nKeys.common.loading) }}</div>
 
     <div v-else class="match-controls">
-      <!-- STEP 1: Create Match -->
-      <div class="create-match">
-        <h3>{{ $t(i18nKeys.matches.step1) }}</h3>
-        <div class="form-group">
-          <label>{{ $t(i18nKeys.matches.player1) }}:</label>
-          <select v-model="newMatch.player1_id" class="select-input">
-            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
-            <option v-for="player in players" :key="player.id" :value="player.id">
-              {{ player.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>{{ $t(i18nKeys.matches.player2) }}:</label>
-          <select v-model="newMatch.player2_id" class="select-input">
-            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
-            <option v-for="player in players" :key="player.id" :value="player.id">
-              {{ player.name }}
-            </option>
-          </select>
-        </div>
-
-        <button @click="createMatch" class="btn-primary">{{ $t(i18nKeys.matches.createMatch) }}</button>
-      </div>
-
       <!-- STEP 2: Add Scores -->
       <div class="add-scores" v-if="editingMatchId">
         <h3>{{ $t(i18nKeys.matches.step2) }}</h3>
@@ -171,6 +196,23 @@ const newMatch = ref({
   games_score: "",
   winner_id: "",
 });
+const showModal = ref(false);
+
+const openModal = () => {
+  showModal.value = true;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+  newMatch.value = {
+    player1_id: "",
+    player2_id: "",
+    player1_games: 0,
+    player2_games: 0,
+    games_score: "",
+    winner_id: "",
+  };
+};
 
 const getPlayerName = (playerId) => {
   const numId = typeof playerId === 'string' ? parseInt(playerId) : playerId;
@@ -199,16 +241,9 @@ const createMatch = async () => {
     });
     
     // Open edit form for the new match
+    closeModal();
     editingMatchId.value = res.data.id;
     editingMatchData.value = { ...res.data };
-    newMatch.value = { 
-      player1_id: "", 
-      player2_id: "", 
-      player1_games: 0,
-      player2_games: 0,
-      games_score: "",
-      winner_id: "" 
-    };
   } catch (err) {
     console.error("Failed to create match:", err);
     alert(t(i18nKeys.messages.errorSavingData));
@@ -608,6 +643,8 @@ onMounted(fetchData);
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  background: var(--color-background);
+  color: var(--color-text);
 }
 
 .modal-header {
@@ -679,6 +716,123 @@ onMounted(fetchData);
   display: flex;
   gap: 1em;
   margin-top: 1.5em;
+}
+
+/* Matches Header and Modal Styles */
+.matches-header {
+  display: flex;
+  margin-bottom: 1.5em;
+  gap: 1em;
+}
+
+.btn-add-match {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.btn-add-match:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-add-match:active {
+  transform: translateY(0);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #f5f5f5;
+  color: var(--color-text);
+}
+
+.match-form {
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form-input {
+  padding: 0.8em 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  font-size: 1em;
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: flex-end;
+  margin-top: 0.5em;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.8em 1.5em;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-cancel {
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.8em 1.5em;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: var(--color-background-mute);
+  border-color: var(--color-border-hover);
 }
 
 @media (max-width: 768px) {

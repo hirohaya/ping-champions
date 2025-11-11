@@ -10,6 +10,9 @@ export default {
   create(name, date, time) {
     return api.post("/events", { name, date, time });
   },
+  updateStatus(id, active) {
+    return api.patch(`/events/${id}/status`, { active });
+  },
   delete(id) {
     return api.delete(`/events/${id}`);
   },
