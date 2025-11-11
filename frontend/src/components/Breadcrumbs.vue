@@ -1,9 +1,9 @@
 <template>
   <nav aria-label="breadcrumb" class="breadcrumbs">
-    <router-link to="/">Home</router-link>
+    <router-link to="/">{{ $t('navigation.home') }}</router-link>
     <template v-if="$route.path.startsWith('/events')">
       <span> / </span>
-      <router-link to="/events">Events</router-link>
+      <router-link to="/events">{{ $t('navigation.events') }}</router-link>
       <template v-if="$route.name === 'event-detail'">
         <span> / </span>
         <span>{{ eventName ? eventName : `Event ${$route.params.id}` }}</span>
@@ -14,7 +14,7 @@
           eventName ? eventName : `Event ${$route.params.id}`
         }}</router-link>
         <span> / </span>
-        <span>Players</span>
+        <span>{{ $t('navigation.players') }}</span>
       </template>
       <template v-else-if="$route.name === 'event-matches'">
         <span> / </span>
@@ -22,24 +22,24 @@
           eventName ? eventName : `Event ${$route.params.id}`
         }}</router-link>
         <span> / </span>
-        <span>Matches</span>
+        <span>{{ $t('navigation.matches') }}</span>
       </template>
     </template>
     <template v-else-if="$route.path.startsWith('/players')">
       <span> / </span>
-      <span>Players</span>
+      <span>{{ $t('navigation.players') }}</span>
     </template>
     <template v-else-if="$route.path.startsWith('/matches')">
       <span> / </span>
-      <span>Matches</span>
+      <span>{{ $t('navigation.matches') }}</span>
     </template>
     <template v-else-if="$route.path.startsWith('/ranking')">
       <span> / </span>
-      <span>Ranking</span>
+      <span>{{ $t('navigation.ranking') }}</span>
     </template>
     <template v-else-if="$route.path.startsWith('/status')">
       <span> / </span>
-      <span>Project Status</span>
+      <span>{{ $t('navigation.status') }}</span>
     </template>
   </nav>
 </template>
