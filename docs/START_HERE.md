@@ -20,20 +20,11 @@
 ### 🗂️ Para Navegar Toda Documentação
 👉 **[INDEX.md](./INDEX.md)** — Central de links e referências rápidas
 
-### 📋 Para Revisar o Que Mudou
-👉 **[CLEANUP_SUMMARY.md](./CLEANUP_SUMMARY.md)** — 78 arquivos removidos (96% menos espaço)
-
-### 📝 Para Ver Relatório da Sessão
-👉 **[SESSION_15_FINAL_SUMMARY.md](./SESSION_15_FINAL_SUMMARY.md)** — Checklist, métricas, próximos passos
-
-### 🎯 Para Ver Dashboard Final
-👉 **[DASHBOARD_FINAL.md](./DASHBOARD_FINAL.md)** — Status visual com métricas
-
-### 🏁 Para Ver Conclusão
-👉 **[CONCLUSAO_SESSAO_15.md](./CONCLUSAO_SESSAO_15.md)** — Relatório de conclusão
+### 📋 Para Guia Consolidado
+👉 **[DOCUMENTATION.md](./DOCUMENTATION.md)** — Tudo em um arquivo
 
 ### 🤖 Para AI Agents (Copilot)
-👉 **[.github/copilot-instructions.md](./.github/copilot-instructions.md)** — Contexto arquitetural
+👉 **[../.github/copilot-instructions.md](../.github/copilot-instructions.md)** — Contexto arquitetural
 
 ---
 
