@@ -4,6 +4,9 @@ export default {
   list() {
     return api.get("/events");
   },
+  get(id) {
+    return api.get(`/events/${id}`);
+  },
   create(name, date, time) {
     return api.post("/events", { name, date, time });
   },

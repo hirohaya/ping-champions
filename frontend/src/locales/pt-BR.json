@@ -16,7 +16,8 @@
     "noData": "Nenhum dado encontrado",
     "search": "Pesquisar",
     "filter": "Filtrar",
-    "sort": "Ordenar"
+    "sort": "Ordenar",
+    "actions": "Ações"
   },
   "navigation": {
     "home": "Início",
@@ -60,7 +61,14 @@
     "date": "Data",
     "time": "Hora",
     "status": "Status",
-    "actions": "Ações"
+    "actions": "Ações",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "statistics": "Estatísticas",
+    "topPlayers": "Top 5 Jogadores",
+    "manageEvent": "Gerenciar este evento",
+    "managePlayers": "Gerenciar Jogadores",
+    "manageMatches": "Gerenciar Jogos"
   },
   "players": {
     "title": "Jogadores",

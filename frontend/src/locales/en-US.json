@@ -16,7 +16,8 @@
     "noData": "No data found",
     "search": "Search",
     "filter": "Filter",
-    "sort": "Sort"
+    "sort": "Sort",
+    "actions": "Actions"
   },
   "navigation": {
     "home": "Home",
@@ -60,7 +61,14 @@
     "date": "Date",
     "time": "Time",
     "status": "Status",
-    "actions": "Actions"
+    "actions": "Actions",
+    "active": "Active",
+    "inactive": "Inactive",
+    "statistics": "Statistics",
+    "topPlayers": "Top 5 Players",
+    "manageEvent": "Manage this event",
+    "managePlayers": "Manage Players",
+    "manageMatches": "Manage Matches"
   },
   "players": {
     "title": "Players",

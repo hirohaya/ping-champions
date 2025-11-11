@@ -16,5 +16,12 @@
   "date": "Date",
   "time": "Time",
   "status": "Status",
-  "actions": "Actions"
+  "actions": "Actions",
+  "active": "Active",
+  "inactive": "Inactive",
+  "statistics": "Statistics",
+  "topPlayers": "Top 5 Players",
+  "manageEvent": "Manage this event",
+  "managePlayers": "Manage Players",
+  "manageMatches": "Manage Matches"
 }
