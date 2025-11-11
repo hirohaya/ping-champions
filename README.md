@@ -22,13 +22,13 @@
 
 - 🎉 **Event Management**: Create and organize tournaments
 - 👥 **Player Registration**: Register players for events
-- 🎮 **Match Recording**: Record match results and winners
-- � **Elo Rating System**: Automatic skill-based ranking calculation
+- 🎮 **Match Recording**: Record match results with detailed game scores
+- 🌐 **Internationalization**: Full support for Portuguese (BR) and English (US)
+- 🏆 **Elo Rating System**: Automatic skill-based ranking calculation
 - 📈 **Ranking System**: Automatic ranking with leaderboard view
-- 🏆 **Match History**: View all matches with rating changes
 - 📱 **Responsive UI**: Vue 3 frontend with modern styling
 - 🔄 **RESTful API**: FastAPI backend with SQLAlchemy ORM
-- 💾 **Persistent Storage**: SQLite database
+- 💾 **Persistent Storage**: SQLite database with Alembic migrations
 
 ---
 
@@ -102,6 +102,35 @@ python recreate_db.py
 
 ---
 
+## 🌐 Internationalization (i18n)
+
+Ping Champions supports **Portuguese (BR)** and **English (US)** out of the box.
+
+### Language Selection
+- Click the language dropdown in the header to switch between languages
+- Your preference is saved automatically to browser localStorage
+- The app auto-detects your browser language on first visit
+
+### Supported Languages
+- 🇧🇷 **Português (BR)** - Portuguese (Brazil)
+- 🇺🇸 **English (US)** - English (United States)
+
+### For Developers
+See **[I18N_CONFIG.md](./I18N_CONFIG.md)** for detailed documentation on:
+- How to add new translations
+- Using the i18n system in Vue components
+- Backend message localization API
+- Extending to new languages
+
+### Backend i18n API
+```
+GET  /api/i18n/locales              # Get available languages
+GET  /api/i18n/messages             # Get localized messages
+POST /api/i18n/set-locale           # Set preferred language
+```
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -111,21 +140,31 @@ ping-champions/
 │
 ├── backend/                    # FastAPI backend
 │   ├── main.py                # Entry point
+│   ├── i18n.py                # Internationalization utilities
 │   ├── database.py            # Database configuration
 │   ├── models/                # SQLAlchemy models
-│   ├── routers/               # API endpoints
+│   ├── routers/
+│   │   ├── i18n.py            # i18n API endpoints
+│   │   └── ...                # Other endpoints
 │   ├── requirements.txt        # Python dependencies
 │   └── README.md              # Backend documentation
 │
 ├── frontend/                  # Vue 3 + Vite frontend
 │   ├── src/
-│   │   ├── components/        # Reusable Vue components
+│   │   ├── components/
+│   │   │   └── LanguageSwitcher.vue  # Language selector
+│   │   ├── locales/           # Translation files
+│   │   │   ├── pt-BR.json     # Portuguese translations
+│   │   │   └── en-US.json     # English translations
+│   │   ├── i18n.js            # i18n configuration
+│   │   ├── services/
+│   │   │   └── translation.js # Translation API service
 │   │   ├── views/             # Page components
-│   │   ├── services/          # API integration
 │   │   └── router/            # Route configuration
-│   ├── package.json           # Node dependencies
+│   ├── package.json           # Node dependencies (includes vue-i18n)
 │   └── README.md              # Frontend documentation
 │
+├── I18N_CONFIG.md             # Internationalization guide
 ├── setup.py                   # Unified project setup script
 ├── run_backend.py             # Quick backend startup
 ├── recreate_db.py             # Database reset utility
@@ -191,9 +230,22 @@ ping-champions/
 - ✅ **Fix API endpoints**: Corrected all frontend service layer calls to match backend
 - ✅ **All 54 backend tests passing** with no integration issues
 
+### Sprint 6: Internationalization & Score Recording ✅ COMPLETED (Nov 10)
+- ✅ **Match Score Recording**: Added player1_games, player2_games, games_score fields
+  - Backend: Extended Match model with 3 new columns
+  - Frontend: Two-step form (Step 1: Create match, Step 2: Add sets won)
+  - Modal interface for optional detailed game scores
+  - Database migration: f4d825fe9491
+- ✅ **Comprehensive i18n System**: Portuguese (BR) and English (US)
+  - Frontend: Installed vue-i18n, created locale files with 50+ translation keys
+  - Backend: Implemented Messages class, i18n router with 3 API endpoints
+  - Language Switcher component in header with auto-detection
+  - All 54 tests passing with i18n support
+  - Complete documentation in I18N_CONFIG.md
+
 ---
 
-## � Development Workflow
+## 🎯 Development Workflow
 
 ### Starting Development Servers
 
