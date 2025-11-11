@@ -1,4 +1,4 @@
-# Ping Champions# Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions# 🏓 Ping Champions
+# Ping Champions
 
 
 
