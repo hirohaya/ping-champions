@@ -56,49 +56,12 @@
     <div v-if="loading" class="loading">{{ $t(i18nKeys.common.loading) }}</div>
 
     <div v-else class="match-controls">
-      <!-- STEP 2: Add Scores (Optional) -->
-      <div class="add-scores" v-if="editingMatchId">
-        <h3>{{ $t(i18nKeys.matches.step2) }} ({{ $t(i18nKeys.common.optional) }})</h3>
-        <div class="match-info">
-          <strong>{{ getPlayerName(editingMatchData?.player1_id) }}</strong> vs 
-          <strong>{{ getPlayerName(editingMatchData?.player2_id) }}</strong>
-        </div>
-
-        <div class="form-group">
-          <label>{{ getPlayerName(editingMatchData?.player1_id) }} {{ $t(i18nKeys.matches.player1Games) }}:</label>
-          <input v-model.number="editingMatchData.player1_games" type="number" min="0" class="input-field">
-        </div>
-
-        <div class="form-group">
-          <label>{{ getPlayerName(editingMatchData?.player2_id) }} {{ $t(i18nKeys.matches.player2Games) }}:</label>
-          <input v-model.number="editingMatchData.player2_games" type="number" min="0" class="input-field">
-        </div>
-
-        <div class="form-group">
-          <label>{{ $t(i18nKeys.matches.winner) }}: ({{ $t(i18nKeys.common.optional) }})</label>
-          <select v-model.number="editingMatchData.winner_id" class="select-input">
-            <option value="">{{ $t(i18nKeys.matches.selectWinner) }}</option>
-            <option :value="editingMatchData.player1_id">
-              {{ getPlayerName(editingMatchData?.player1_id) }}
-            </option>
-            <option :value="editingMatchData.player2_id">
-              {{ getPlayerName(editingMatchData?.player2_id) }}
-            </option>
-          </select>
-        </div>
-
-        <div class="buttons">
-          <button @click="finishMatch" class="btn-success">{{ $t(i18nKeys.matches.saveScores) }}</button>
-          <button @click="cancelEdit" class="btn-secondary">{{ $t(i18nKeys.common.cancel) }}</button>
-        </div>
-      </div>
-
       <!-- Match Results List -->
-      <div v-if="matches.length === 0 && !editingMatchId" class="empty-state">
+      <div v-if="matches.length === 0" class="empty-state">
         <p>{{ $t(i18nKeys.matches.noMatches) }}</p>
       </div>
 
-      <div v-else-if="!editingMatchId" class="matches-list">
+      <div v-else class="matches-list">
         <h3>{{ $t(i18nKeys.matches.matchDetails) }}</h3>
         <div v-for="match in matches" :key="match.id" class="match-item" :style="{ borderLeftColor: getStatusColor(getMatchStatus(match)) }">
           <div class="match-status-badge" :style="{ backgroundColor: getStatusColor(getMatchStatus(match)) }">
@@ -133,6 +96,51 @@
             <button @click="editMatch(match)" class="btn-edit">{{ $t(i18nKeys.common.edit) }}</button>
             <button @click="deleteMatch(match.id)" class="btn-delete">{{ $t(i18nKeys.common.delete) }}</button>
             <button @click="openScoresModal(match)" class="btn-scores">{{ $t(i18nKeys.matches.detailedScores) }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Editing Match Scores -->
+    <div v-if="showEditModal && editingMatchData" class="modal-overlay" @click="closeEditModal">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h3>{{ $t(i18nKeys.matches.step2) }} ({{ $t(i18nKeys.common.optional) }})</h3>
+          <button class="modal-close" @click="closeEditModal">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="match-title">
+            <strong>{{ getPlayerName(editingMatchData?.player1_id) }}</strong> vs 
+            <strong>{{ getPlayerName(editingMatchData?.player2_id) }}</strong>
+          </div>
+
+          <div class="form-group">
+            <label>{{ getPlayerName(editingMatchData?.player1_id) }} {{ $t(i18nKeys.matches.player1Games) }}:</label>
+            <input v-model.number="editingMatchData.player1_games" type="number" min="0" class="input-field">
+          </div>
+
+          <div class="form-group">
+            <label>{{ getPlayerName(editingMatchData?.player2_id) }} {{ $t(i18nKeys.matches.player2Games) }}:</label>
+            <input v-model.number="editingMatchData.player2_games" type="number" min="0" class="input-field">
+          </div>
+
+          <div class="form-group">
+            <label>{{ $t(i18nKeys.matches.winner) }}: ({{ $t(i18nKeys.common.optional) }})</label>
+            <select v-model.number="editingMatchData.winner_id" class="select-input">
+              <option value="">{{ $t(i18nKeys.matches.selectWinner) }}</option>
+              <option :value="editingMatchData.player1_id">
+                {{ getPlayerName(editingMatchData?.player1_id) }}
+              </option>
+              <option :value="editingMatchData.player2_id">
+                {{ getPlayerName(editingMatchData?.player2_id) }}
+              </option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button @click="finishMatch" class="btn-success">{{ $t(i18nKeys.matches.saveScores) }}</button>
+            <button @click="closeEditModal" class="btn-secondary">{{ $t(i18nKeys.common.cancel) }}</button>
           </div>
         </div>
       </div>
@@ -190,6 +198,7 @@ const loading = ref(true);
 const editingMatchId = ref(null);
 const editingMatchData = ref({});
 const showScoresModal = ref(false);
+const showEditModal = ref(false);
 const editingScoresMatchId = ref(null);
 
 const newMatch = ref({
@@ -283,11 +292,17 @@ const createMatch = async () => {
 const editMatch = (match) => {
   editingMatchId.value = match.id;
   editingMatchData.value = { ...match };
+  showEditModal.value = true;
+};
+
+const closeEditModal = () => {
+  showEditModal.value = false;
+  editingMatchId.value = null;
+  editingMatchData.value = {};
 };
 
 const cancelEdit = () => {
-  editingMatchId.value = null;
-  editingMatchData.value = {};
+  closeEditModal();
 };
 
 const finishMatch = async () => {
@@ -314,8 +329,7 @@ const finishMatch = async () => {
       matches.value.push(res.data);
     }
     
-    editingMatchId.value = null;
-    editingMatchData.value = {};
+    closeEditModal();
     alert(t(i18nKeys.matches.matchUpdatedSuccess));
   } catch (err) {
     console.error("Failed to finish match:", err);
