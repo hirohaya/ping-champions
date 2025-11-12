@@ -20,7 +20,8 @@
     "actions": "Actions",
     "management": "Management",
     "date": "Date",
-    "time": "Time"
+    "time": "Time",
+    "optional": "Optional"
   },
   "navigation": {
     "home": "Home",
@@ -101,6 +102,7 @@
     "player1": "Player 1",
     "player2": "Player 2",
     "winner": "Winner",
+    "selectWinner": "Select the winner",
     "player1Games": "Sets Won - Player 1",
     "player2Games": "Sets Won - Player 2",
     "gamesScore": "Detailed Score",
@@ -112,12 +114,16 @@
     "noMatches": "No matches found",
     "matchDetails": "Match Details",
     "finishMatch": "Finish Match",
+    "saveScores": "Save Scores",
     "step1": "Step 1: Create Match",
     "step2": "Step 2: Add Sets",
     "selectPlayers": "Select the players",
     "enterScore": "Enter the score",
     "detailedScores": "Detailed Scores",
-    "addScores": "Add Scores"
+    "addScores": "Add Scores",
+    "notStarted": "Not Started",
+    "inProgress": "In Progress",
+    "completed": "Completed"
   },
   "ranking": {
     "title": "Ranking",
@@ -147,7 +153,8 @@
     "errorSavingData": "Error saving data",
     "errorDeletingData": "Error deleting data",
     "tryAgain": "Try again",
-    "languageChanged": "Language changed successfully! The page will be reloaded..."
+    "languageChanged": "Language changed successfully! The page will be reloaded...",
+    "noWinnerYet": "No winner yet"
   },
   "settings": {
     "title": "Settings",

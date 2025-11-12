@@ -20,7 +20,8 @@
     "actions": "Ações",
     "management": "Gerenciamento",
     "date": "Data",
-    "time": "Hora"
+    "time": "Hora",
+    "optional": "Opcional"
   },
   "navigation": {
     "home": "Início",
@@ -101,6 +102,7 @@
     "player1": "Jogador 1",
     "player2": "Jogador 2",
     "winner": "Vencedor",
+    "selectWinner": "Selecione o vencedor",
     "player1Games": "Sets Ganhos - Jogador 1",
     "player2Games": "Sets Ganhos - Jogador 2",
     "gamesScore": "Pontuação Detalhada",
@@ -112,12 +114,16 @@
     "noMatches": "Nenhuma partida encontrada",
     "matchDetails": "Detalhes da Partida",
     "finishMatch": "Finalizar Partida",
+    "saveScores": "Salvar Pontuações",
     "step1": "Etapa 1: Criar Partida",
     "step2": "Etapa 2: Adicionar Sets",
     "selectPlayers": "Selecione os jogadores",
     "enterScore": "Digite a pontuação",
     "detailedScores": "Pontuações Detalhadas",
-    "addScores": "Adicionar Pontuações"
+    "addScores": "Adicionar Pontuações",
+    "notStarted": "Não Iniciada",
+    "inProgress": "Em Progresso",
+    "completed": "Concluída"
   },
   "ranking": {
     "title": "Ranking",
@@ -147,7 +153,8 @@
     "errorSavingData": "Erro ao salvar dados",
     "errorDeletingData": "Erro ao deletar dados",
     "tryAgain": "Tentar novamente",
-    "languageChanged": "Idioma alterado com sucesso! A página será recarregada..."
+    "languageChanged": "Idioma alterado com sucesso! A página será recarregada...",
+    "noWinnerYet": "Sem vencedor"
   },
   "settings": {
     "title": "Configurações",

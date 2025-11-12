@@ -29,6 +29,7 @@ export const i18nKeys = {
     filter: 'common.filter',
     sort: 'common.sort',
     management: 'common.management',
+    optional: 'common.optional',
   },
   navigation: {
     home: 'navigation.home',
@@ -103,9 +104,14 @@ export const i18nKeys = {
     step1: 'matches.step1',
     step2: 'matches.step2',
     selectPlayers: 'matches.selectPlayers',
+    selectWinner: 'matches.selectWinner',
     enterScore: 'matches.enterScore',
     detailedScores: 'matches.detailedScores',
     addScores: 'matches.addScores',
+    saveScores: 'matches.saveScores',
+    notStarted: 'matches.notStarted',
+    inProgress: 'matches.inProgress',
+    completed: 'matches.completed',
   },
   ranking: {
     title: 'ranking.title',
@@ -135,6 +141,7 @@ export const i18nKeys = {
     errorSavingData: 'messages.errorSavingData',
     errorDeletingData: 'messages.errorDeletingData',
     tryAgain: 'messages.tryAgain',
+    noWinnerYet: 'messages.noWinnerYet',
   },
   settings: {
     title: 'settings.title',

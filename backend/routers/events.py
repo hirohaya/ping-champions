@@ -12,6 +12,11 @@ from models.event import Event
 
 # Import schemas
 from schemas import EventCreate, EventRead, EventUpdate
+from pydantic import BaseModel
+
+# Schema for status update
+class EventStatusUpdate(BaseModel):
+    active: bool
 
 router = APIRouter(prefix="/events", tags=["events"])
 
@@ -86,6 +91,25 @@ def update_event(event_id: int, event_data: EventUpdate, db: Session = Depends(g
     for field, value in update_data.items():
         setattr(event, field, value)
 
+    db.commit()
+    db.refresh(event)
+    return event
+
+
+# Update event status (active/inactive)
+@router.patch("/{event_id}/status", response_model=EventRead)
+def update_event_status(event_id: int, status: EventStatusUpdate, db: Session = Depends(get_db)):
+    """
+    Update event status (active/inactive).
+
+    - **event_id**: The event ID to update
+    - **active**: Boolean to set active status
+    """
+    event = db.query(Event).filter(Event.id == event_id).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+
+    event.active = status.active
     db.commit()
     db.refresh(event)
     return event

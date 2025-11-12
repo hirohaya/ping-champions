@@ -56,9 +56,9 @@
     <div v-if="loading" class="loading">{{ $t(i18nKeys.common.loading) }}</div>
 
     <div v-else class="match-controls">
-      <!-- STEP 2: Add Scores -->
+      <!-- STEP 2: Add Scores (Optional) -->
       <div class="add-scores" v-if="editingMatchId">
-        <h3>{{ $t(i18nKeys.matches.step2) }}</h3>
+        <h3>{{ $t(i18nKeys.matches.step2) }} ({{ $t(i18nKeys.common.optional) }})</h3>
         <div class="match-info">
           <strong>{{ getPlayerName(editingMatchData?.player1_id) }}</strong> vs 
           <strong>{{ getPlayerName(editingMatchData?.player2_id) }}</strong>
@@ -75,9 +75,9 @@
         </div>
 
         <div class="form-group">
-          <label>{{ $t(i18nKeys.matches.winner) }}:</label>
+          <label>{{ $t(i18nKeys.matches.winner) }}: ({{ $t(i18nKeys.common.optional) }})</label>
           <select v-model.number="editingMatchData.winner_id" class="select-input">
-            <option value="">{{ $t(i18nKeys.matches.selectPlayers) }}</option>
+            <option value="">{{ $t(i18nKeys.matches.selectWinner) }}</option>
             <option :value="editingMatchData.player1_id">
               {{ getPlayerName(editingMatchData?.player1_id) }}
             </option>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="buttons">
-          <button @click="finishMatch" class="btn-success">{{ $t(i18nKeys.matches.finishMatch) }}</button>
+          <button @click="finishMatch" class="btn-success">{{ $t(i18nKeys.matches.saveScores) }}</button>
           <button @click="cancelEdit" class="btn-secondary">{{ $t(i18nKeys.common.cancel) }}</button>
         </div>
       </div>
@@ -100,7 +100,11 @@
 
       <div v-else-if="!editingMatchId" class="matches-list">
         <h3>{{ $t(i18nKeys.matches.matchDetails) }}</h3>
-        <div v-for="match in matches" :key="match.id" class="match-item">
+        <div v-for="match in matches" :key="match.id" class="match-item" :style="{ borderLeftColor: getStatusColor(getMatchStatus(match)) }">
+          <div class="match-status-badge" :style="{ backgroundColor: getStatusColor(getMatchStatus(match)) }">
+            {{ getStatusLabel(getMatchStatus(match)) }}
+          </div>
+
           <div class="match-header">
             <span class="player-name">{{ getPlayerName(match.player1_id) }}</span>
             <span class="vs">vs</span>
@@ -122,7 +126,7 @@
             <span v-if="match.winner_id" class="winner">
               {{ $t(i18nKeys.matches.winner) }}: <strong>{{ getPlayerName(match.winner_id) }}</strong>
             </span>
-            <span v-else class="pending">{{ $t(i18nKeys.messages.loadingData) }}</span>
+            <span v-else class="pending">{{ $t(i18nKeys.messages.noWinnerYet) }}</span>
           </div>
 
           <div class="match-actions">
@@ -220,6 +224,34 @@ const getPlayerName = (playerId) => {
   return player ? player.name : "Unknown";
 };
 
+const getMatchStatus = (match) => {
+  if (match.finished && match.winner_id) {
+    return 'completed';
+  } else if (match.player1_games > 0 || match.player2_games > 0) {
+    return 'in-progress';
+  } else {
+    return 'not-started';
+  }
+};
+
+const getStatusLabel = (status) => {
+  const statusMap = {
+    'not-started': t(i18nKeys.matches?.notStarted || 'Não iniciada'),
+    'in-progress': t(i18nKeys.matches?.inProgress || 'Em progresso'),
+    'completed': t(i18nKeys.matches?.completed || 'Concluída'),
+  };
+  return statusMap[status] || status;
+};
+
+const getStatusColor = (status) => {
+  const colorMap = {
+    'not-started': '#9e9e9e',
+    'in-progress': '#2196f3',
+    'completed': '#4caf50',
+  };
+  return colorMap[status] || '#9e9e9e';
+};
+
 const createMatch = async () => {
   if (!newMatch.value.player1_id || !newMatch.value.player2_id) {
     alert(t(i18nKeys.matches.selectPlayers));
@@ -236,14 +268,12 @@ const createMatch = async () => {
       event_id: parseInt(eventId),
       player1_id: parseInt(newMatch.value.player1_id),
       player2_id: parseInt(newMatch.value.player2_id),
-      player1_games: 0,
-      player2_games: 0,
     });
     
-    // Open edit form for the new match
+    // Add the new match to the list
+    matches.value.push(res.data);
     closeModal();
-    editingMatchId.value = res.data.id;
-    editingMatchData.value = { ...res.data };
+    alert(t(i18nKeys.matches.matchCreatedSuccess));
   } catch (err) {
     console.error("Failed to create match:", err);
     alert(t(i18nKeys.messages.errorSavingData));
@@ -261,19 +291,18 @@ const cancelEdit = () => {
 };
 
 const finishMatch = async () => {
-  if (!editingMatchData.value.winner_id) {
-    alert(t(i18nKeys.validation.selectWinner));
-    return;
-  }
-
   try {
     const updateData = {
-      player1_games: parseInt(editingMatchData.value.player1_games),
-      player2_games: parseInt(editingMatchData.value.player2_games),
+      player1_games: parseInt(editingMatchData.value.player1_games) || 0,
+      player2_games: parseInt(editingMatchData.value.player2_games) || 0,
       games_score: editingMatchData.value.games_score || null,
-      winner_id: parseInt(editingMatchData.value.winner_id),
-      finished: true,
     };
+
+    // Only set winner_id if one was selected
+    if (editingMatchData.value.winner_id) {
+      updateData.winner_id = parseInt(editingMatchData.value.winner_id);
+      updateData.finished = true;
+    }
 
     const res = await partidasService.update(editingMatchId.value, updateData);
     
@@ -544,10 +573,23 @@ onMounted(fetchData);
   display: flex;
   flex-direction: column;
   gap: 1em;
+  transition: all 0.3s ease;
 }
 
 .match-item:hover {
   box-shadow: 0 2px 8px #0002;
+}
+
+.match-status-badge {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: white;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .match-header {
