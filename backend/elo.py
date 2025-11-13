@@ -10,8 +10,8 @@ Reference: https://en.wikipedia.org/wiki/Elo_rating_system
 import math
 
 # Standard Elo parameters
-K_FACTOR = 32  # Controls the maximum rating change per game
-INITIAL_RATING = 1600  # Standard starting rating for new players
+K_FACTOR = 32  # Controls the maximum rating change per game (default, per-player adjusted in get_k_factor)
+INITIAL_RATING = 1200  # Initial rating for new players (from REFINAMENTO_FEATURE_1.md)
 RATING_MULTIPLIER = 400  # Used in win probability calculation
 
 
@@ -178,3 +178,93 @@ def get_rating_change(
 def get_initial_rating() -> float:
     """Get the initial rating for a new player."""
     return float(INITIAL_RATING)
+
+
+def get_k_factor(rating: float, match_count: int = 0) -> int:
+    """
+    Get the appropriate K-factor based on player rating and match history.
+    
+    K-Factor defines volatility (how much rating changes per match):
+    - Novice (< 5 matches): K=32 (large changes)
+    - Intermediate (5+ matches, rating < 2200): K=24 (medium changes)  
+    - Master (rating >= 2200): K=16 (small changes)
+    
+    Args:
+        rating: Player's current rating
+        match_count: Number of matches played
+    
+    Returns:
+        K-factor value (int)
+    """
+    if match_count < 5:
+        return 32  # Novice
+    elif rating >= 2200:
+        return 16  # Master
+    else:
+        return 24  # Intermediate
+
+
+def calculate_match_outcome(
+    player1_rating: float,
+    player2_rating: float,
+    winner_id: int,
+    player1_id: int,
+    player2_id: int,
+    k_factor: int = None,
+    player1_match_count: int = 0,
+    player2_match_count: int = 0
+) -> dict:
+    """
+    Calculate detailed match outcome including rating changes.
+    
+    Returns a dictionary with new ratings and rating changes for both players.
+    
+    Args:
+        player1_rating: Player 1's rating before match
+        player2_rating: Player 2's rating before match
+        winner_id: ID of winning player (player1_id or player2_id)
+        player1_id: Player 1's ID
+        player2_id: Player 2's ID
+        k_factor: K-factor (if None, calculated dynamically)
+        player1_match_count: Number of matches player 1 played
+        player2_match_count: Number of matches player 2 played
+    
+    Returns:
+        Dictionary with:
+            - player1_new_rating: Player 1's new rating
+            - player2_new_rating: Player 2's new rating
+            - player1_change: Rating change for player 1
+            - player2_change: Rating change for player 2
+            - player1_k_factor: K-factor used for player 1
+            - player2_k_factor: K-factor used for player 2
+    """
+    # Calculate K-factors if not provided
+    if k_factor is None:
+        k_factor_p1 = get_k_factor(player1_rating, player1_match_count)
+        k_factor_p2 = get_k_factor(player2_rating, player2_match_count)
+        # Use player1's k_factor for consistency
+        k_factor_to_use = k_factor_p1
+    else:
+        k_factor_p1 = k_factor
+        k_factor_p2 = k_factor
+        k_factor_to_use = k_factor
+    
+    # Calculate new ratings
+    new_rating_p1, new_rating_p2 = update_ratings(
+        player1_rating,
+        player2_rating,
+        winner_id,
+        player1_id,
+        player2_id,
+        k_factor_to_use
+    )
+    
+    return {
+        'player1_new_rating': new_rating_p1,
+        'player2_new_rating': new_rating_p2,
+        'player1_change': round(new_rating_p1 - player1_rating, 1),
+        'player2_change': round(new_rating_p2 - player2_rating, 1),
+        'player1_k_factor': k_factor_p1,
+        'player2_k_factor': k_factor_p2
+    }
+

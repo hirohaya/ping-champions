@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 from database import SessionLocal
-from elo import update_ratings
+from elo import update_ratings, calculate_match_outcome
 from models.event import Event
 
 # Import Match and Player models
@@ -15,7 +15,7 @@ from models.match import Match
 from models.player import Player
 
 # Import schemas
-from schemas import MatchCreate, MatchRead, MatchUpdate
+from schemas import MatchCreate, MatchRead, MatchUpdate, MatchResultResponse
 
 # Router for match-related endpoints
 router = APIRouter(prefix="/matches", tags=["matches"])
@@ -87,18 +87,20 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
                 detail="Winner must be one of the match players"
             )
         
-        # Calculate new Elo ratings
-        new_p1_rating, new_p2_rating = update_ratings(
+        # Calculate new Elo ratings using match_outcome function
+        outcome = calculate_match_outcome(
             player1.elo_rating,
             player2.elo_rating,
             match_data.winner_id,
             player1.id,
-            player2.id
+            player2.id,
+            player1_match_count=player1.score,  # Use wins as match count approximation
+            player2_match_count=player2.score
         )
         
         # Update player ratings and increment win count for winner
-        player1.elo_rating = new_p1_rating
-        player2.elo_rating = new_p2_rating
+        player1.elo_rating = outcome['player1_new_rating']
+        player2.elo_rating = outcome['player2_new_rating']
         
         if match_data.winner_id == player1.id:
             player1.score += 1
@@ -184,16 +186,18 @@ def update_match(match_id: int, match_update: MatchUpdate, db: Session = Depends
         
         # Only calculate Elo if winner wasn't already set (avoid double calculation)
         if match.winner_id is None:
-            new_p1_rating, new_p2_rating = update_ratings(
+            outcome = calculate_match_outcome(
                 player1.elo_rating,
                 player2.elo_rating,
                 match_update.winner_id,
                 player1.id,
-                player2.id
+                player2.id,
+                player1_match_count=player1.score,
+                player2_match_count=player2.score
             )
             
-            player1.elo_rating = new_p1_rating
-            player2.elo_rating = new_p2_rating
+            player1.elo_rating = outcome['player1_new_rating']
+            player2.elo_rating = outcome['player2_new_rating']
             
             if match_update.winner_id == player1.id:
                 player1.score += 1

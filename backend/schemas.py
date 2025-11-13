@@ -167,6 +167,22 @@ class MatchRead(BaseModel):
     player2_games: int
     games_score: Optional[str] = None
 
+
+class MatchResultResponse(BaseModel):
+    """Schema for match result with ELO calculations"""
+    match_id: int
+    winner_id: int
+    player1_id: int
+    player2_id: int
+    player1_rating_before: float
+    player1_rating_after: float
+    player1_rating_change: float
+    player2_rating_before: float
+    player2_rating_after: float
+    player2_rating_change: float
+    player1_k_factor: int = Field(description="K-factor used for player 1")
+    player2_k_factor: int = Field(description="K-factor used for player 2")
+
 class MatchUpdate(BaseModel):
     """Schema for updating match data"""
     winner_id: Optional[int] = Field(None, gt=0, description="Winning player ID")

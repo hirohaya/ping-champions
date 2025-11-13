@@ -1,0 +1,37 @@
+ Feature 1 - Nova estrutura de organização de partidas:
+ 
+ Hierarquia:
+ - Grupo
+ -- Evento
+ 
+ Faremos uma nova hierarquiva, os grupos. 
+ Um grupo pode conter vários eventos.
+ Jogadores devem estar atrelados a grupos.
+ Um jogador pode estar em mais de um grupo.
+ O ranking de cada jogador será calculado dentro de cada grupo individualmente. O ranking de cada jogador será influenciado pelo seu desempenho dentro de cada evento naquele grupo
+ - Exemplo: o ranking do jogador A no grupo 1 será calculado baseado apenas nos eventos de dentro grupo 1. O ranking do jogador A no grupo 2 será calculado baseado apenas nos eventos de dentro do grupo 2. Os jogos e eventos do jogador A dentro do grupo 1 não devem afetar o ranking do jogador A dentro do grupo 2.
+ Eventos podem conter as seguintes formas de partidas:
+ - Partidas simples
+ - Torneio eliminatório simples por chaves
+ - Fase de grupos seguido por eliminatório simples
+ - Rodada suíça
+ 
+ 
+ Feature 2 - Nova estrutura de usuários
+ 
+ 3 tipos:
+  - Administrado
+  - Organizador
+  - Jogador
+ 
+ Todos os usuários devem se registrar e ter contas na plataforma.
+ Organizadores são jogadores, além de seus privilégios administrativos.
+ Cada jogador terá seu ranking atrelado a um grupo.
+ - Exemplo: o ranking do jogador A no grupo 1 será calculado baseado apenas nos eventos de dentro grupo 1. O ranking do jogador A no grupo 2 será calculado baseado apenas nos eventos de dentro do grupo 2. Os jogos e eventos do jogador A dentro do grupo 1 não devem afetar o ranking do jogador A dentro do grupo 2.
+ Organizadores podem incluir jogadores em eventos.
+ Jogadores podem se incluir em eventos criados em organizações que eles participam.
+ 
+ 
+ Feature 3 - Nova página inicial
+ 
+ Com as novas mudanças, também devemos refazer a página inicial. Faça sugestões do que podemos fazer.
