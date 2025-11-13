@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
+import * as authService from "@/services/auth";
 
 import HomeView from "../views/HomeView.vue";
 import EventsView from "../views/EventsView.vue";
 import StatusView from "../views/StatusView.vue";
 
 const routes = [
+  // Rotas de autenticação
+  { path: "/login", name: "login", component: () => import("../views/Login.vue") },
+  { path: "/register", name: "register", component: () => import("../views/Register.vue") },
+
+  // Rotas públicas
   { path: "/", name: "home", component: HomeView },
   { path: "/events", name: "events", component: EventsView },
   {
@@ -40,6 +46,22 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+// Guard global para redirecionar usuários não autenticados
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = authService.isAuthenticated();
+
+  // Se não autenticado e tentando acessar rota protegida, redireciona para login
+  // (Adicionar rotas protegidas aqui conforme necessário)
+  
+  // Se já está logado e tenta acessar login/register, redireciona para home
+  if (isAuthenticated && (to.path === "/login" || to.path === "/register")) {
+    next("/");
+    return;
+  }
+
+  next();
 });
 
 export default router;

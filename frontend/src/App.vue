@@ -2,7 +2,10 @@
   <div>
     <div class="header">
       <h1>{{ $t('common.appName') }}: pinging the ponging</h1>
-      <LanguageSwitcher />
+      <div class="header-right">
+        <LanguageSwitcher />
+        <UserMenu />
+      </div>
     </div>
     <Breadcrumbs />
     <BackButton />
@@ -19,10 +22,12 @@
 import Breadcrumbs from "./components/Breadcrumbs.vue";
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
 import BackButton from "./components/BackButton.vue";
+import UserMenu from "./components/UserMenu.vue";
+import * as authService from "@/services/auth";
 
 export default {
   name: "App",
-  components: { Breadcrumbs, LanguageSwitcher, BackButton },
+  components: { Breadcrumbs, LanguageSwitcher, BackButton, UserMenu },
   data() {
     return {
       // feedback: stores the current feedback message and type
@@ -32,6 +37,13 @@ export default {
       },
       feedbackTimeout: null, // timeout id for auto-hiding feedback
     };
+  },
+  beforeCreate() {
+    // Inicializar autenticação ANTES da criação de componentes
+    authService.initializeAuth();
+  },
+  mounted() {
+    // Nada a fazer aqui
   },
   methods: {
     // showFeedback: displays a feedback message for a set duration
@@ -59,6 +71,12 @@ export default {
 h1 {
   margin: 0;
   flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 /* Feedback styles */
