@@ -10,12 +10,19 @@ Provides RESTful endpoints for:
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
-from database import get_db
+from database import SessionLocal
 from models.translation import TranslationMessage, LocaleConfig, TranslationAudit
 from schemas import TranslationSchema, LocaleConfigSchema
 from datetime import datetime
 
 router = APIRouter(prefix="/i18n", tags=["i18n"])
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 # ============================================================================

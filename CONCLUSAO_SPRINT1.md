@@ -1,4 +1,4 @@
-# 🎯 IMPLEMENTAÇÃO SPRINT 1 - CONCLUSÃO
+                                                                              # 🎯 IMPLEMENTAÇÃO SPRINT 1 - CONCLUSÃO
 
 **Data:** 13 de novembro de 2025, ~14:00 - 16:30  
 **Duração:** ~2.5 horas  

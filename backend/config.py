@@ -20,7 +20,7 @@ CORS_ORIGINS = [
 # Configuração de servidor
 HOST = "127.0.0.1"
 PORT = 8000
-RELOAD = True
+RELOAD = False
 
 # Outras configurações
 DEBUG = True

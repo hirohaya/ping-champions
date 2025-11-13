@@ -8,13 +8,7 @@ from sqlalchemy.orm import Session
 
 from database import SessionLocal
 from elo import update_ratings, calculate_match_outcome
-from models.event import Event
-
-# Import Match and Player models
-from models.match import Match
-from models.player import Player
-
-# Import schemas
+from models import Event, Match, Player, Membership, MembershipStatus
 from schemas import MatchCreate, MatchRead, MatchUpdate, MatchResultResponse
 
 # Router for match-related endpoints
@@ -26,6 +20,33 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def validate_player_can_play(player_id: int, event_id: int, db: Session) -> None:
+    """
+    Validar que jogador está ATIVO no evento (pode jogar).
+    
+    Levanta HTTPException se:
+    - Jogador não tem membership no evento
+    - Membership não está em status ATIVO
+    """
+    membership = db.query(Membership).filter(
+        Membership.player_id == player_id,
+        Membership.event_id == event_id
+    ).first()
+    
+    if not membership:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Jogador {player_id} não tem membership no evento {event_id}"
+        )
+    
+    if membership.status != MembershipStatus.ATIVO:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Jogador {player_id} não pode jogar. Status: {membership.status.value}. "
+                   f"Apenas membros ATIVO podem participar."
+        )
 
 
 # Register a new match in an event
@@ -65,6 +86,10 @@ def register_match(match_data: MatchCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Player 2 not found in event")
     if player1.id == player2.id:
         raise HTTPException(status_code=400, detail="Player cannot play against themselves")
+
+    # ✨ VALIDAÇÃO DE MEMBERSHIP: Apenas ATIVO podem jogar
+    validate_player_can_play(player1.id, match_data.event_id, db)
+    validate_player_can_play(player2.id, match_data.event_id, db)
 
     match = Match(
         event_id=match_data.event_id,

@@ -18,3 +18,4 @@ class Event(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     players = relationship("Player", back_populates="event", cascade="all, delete-orphan")
     matches = relationship("Match", back_populates="event", cascade="all, delete-orphan")
+    memberships = relationship("Membership", back_populates="event", cascade="all, delete-orphan")

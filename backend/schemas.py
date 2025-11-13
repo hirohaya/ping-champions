@@ -2,6 +2,7 @@
 import re
 from datetime import datetime
 from typing import Optional
+from enum import Enum
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -209,3 +210,61 @@ class RankingResponse(BaseModel):
     
     event_id: int
     entries: list[RankingEntry]
+
+
+# ============ Membership Schemas ============
+class MembershipStatusEnum(str, Enum):
+    """Membership status options"""
+    CONVIDADO = "convidado"
+    ATIVO = "ativo"
+    INATIVO = "inativo"
+    SUSPENSO = "suspenso"
+    DELETADO = "deletado"
+
+
+class MembershipCreate(BaseModel):
+    """Schema for creating a membership (inviting a player)"""
+    event_id: int = Field(..., gt=0, description="Event ID")
+    player_id: int = Field(..., gt=0, description="Player ID to invite")
+
+
+class MembershipRead(BaseModel):
+    """Schema for reading membership data"""
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    event_id: int
+    player_id: int
+    status: MembershipStatusEnum
+    data_entrada: Optional[datetime] = Field(None, description="Date when player joined")
+    data_saida: Optional[datetime] = Field(None, description="Date when player left")
+    data_suspensao: Optional[datetime] = Field(None, description="Date when player was suspended")
+    motivo_suspensao: Optional[str] = Field(None, description="Reason for suspension")
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class MembershipUpdate(BaseModel):
+    """Schema for updating membership status"""
+    status: Optional[MembershipStatusEnum] = None
+    motivo_suspensao: Optional[str] = Field(None, max_length=255, description="Reason for suspension")
+
+
+class MembershipAcceptInvite(BaseModel):
+    """Schema for accepting membership invite"""
+    pass  # No fields needed, just acceptance
+
+
+class MembershipLeave(BaseModel):
+    """Schema for leaving a group"""
+    pass  # No fields needed, just confirmation
+
+
+class MembershipSuspend(BaseModel):
+    """Schema for suspending a member"""
+    motivo_suspensao: Optional[str] = Field(None, max_length=255, description="Reason for suspension")
+
+
+class MembershipReactivate(BaseModel):
+    """Schema for reactivating a suspended member"""
+    pass  # No fields needed, just confirmation

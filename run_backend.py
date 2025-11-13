@@ -28,6 +28,6 @@ if __name__ == '__main__':
         'main:app',
         host=config.HOST,
         port=config.PORT,
-        reload=config.RELOAD,
+        reload=False,  # Disable reload to prevent shutdown issues
     )
 
