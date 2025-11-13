@@ -19,3 +19,4 @@ class Event(Base):
     players = relationship("Player", back_populates="event", cascade="all, delete-orphan")
     matches = relationship("Match", back_populates="event", cascade="all, delete-orphan")
     memberships = relationship("Membership", back_populates="event", cascade="all, delete-orphan")
+    tournaments = relationship("Tournament", back_populates="event", cascade="all, delete-orphan")

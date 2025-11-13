@@ -9,7 +9,12 @@ test.describe('Internationalization (i18n) E2E Tests', () => {
   test.beforeEach(async ({ page, context }) => {
     // Clear localStorage and cookies before each test
     await context.clearCookies()
-    await page.evaluate(() => localStorage.clear())
+    try {
+      await page.evaluate(() => localStorage.clear())
+    } catch (e) {
+      // localStorage may not be available in sandboxed context
+      console.log('localStorage not available in test context')
+    }
     
     // Set timeout for the entire test
     page.setDefaultTimeout(10000)

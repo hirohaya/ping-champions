@@ -148,6 +148,95 @@ export async function fillFieldByLabel(page, label, value) {
 }
 
 /**
+ * Create a tournament
+ */
+export async function createTournament(eventId, name = 'Test Tournament', tournamentType = 'SINGLE_ELIMINATION') {
+  try {
+    return await apiCall('/tournaments', {
+      method: 'POST',
+      body: JSON.stringify({
+        event_id: eventId,
+        name,
+        tournament_type: tournamentType,
+        best_of: 1,
+        num_groups: 2,
+        swiss_rounds: 3,
+        allow_draws: false,
+      }),
+    });
+  } catch (err) {
+    console.error('createTournament failed:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Delete a tournament
+ */
+export async function deleteTournament(tournamentId) {
+  try {
+    return await apiCall(`/tournaments/${tournamentId}`, { method: 'DELETE' });
+  } catch (err) {
+    console.error(`deleteTournament(${tournamentId}) failed:`, err.message);
+    throw err;
+  }
+}
+
+/**
+ * Add participant to tournament
+ */
+export async function addParticipantToTournament(tournamentId, playerId) {
+  try {
+    return await apiCall(`/tournaments/${tournamentId}/participants`, {
+      method: 'POST',
+      body: JSON.stringify({ player_id: playerId }),
+    });
+  } catch (err) {
+    console.error('addParticipantToTournament failed:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Start tournament
+ */
+export async function startTournament(tournamentId) {
+  try {
+    return await apiCall(`/tournaments/${tournamentId}/start`, {
+      method: 'POST',
+      body: JSON.stringify({}),
+    });
+  } catch (err) {
+    console.error('startTournament failed:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Get tournament
+ */
+export async function getTournament(tournamentId) {
+  try {
+    return await apiCall(`/tournaments/${tournamentId}`, { method: 'GET' });
+  } catch (err) {
+    console.error('getTournament failed:', err.message);
+    throw err;
+  }
+}
+
+/**
+ * Get tournament bracket
+ */
+export async function getTournamentBracket(tournamentId) {
+  try {
+    return await apiCall(`/tournaments/${tournamentId}/bracket`, { method: 'GET' });
+  } catch (err) {
+    console.error('getTournamentBracket failed:', err.message);
+    throw err;
+  }
+}
+
+/**
  * Clear database by deleting all events
  */
 export async function clearTestDatabase() {

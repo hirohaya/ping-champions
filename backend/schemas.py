@@ -268,3 +268,100 @@ class MembershipSuspend(BaseModel):
 class MembershipReactivate(BaseModel):
     """Schema for reactivating a suspended member"""
     pass  # No fields needed, just confirmation
+
+
+# ============ Tournament Schemas ============
+class TournamentTypeEnum(str, Enum):
+    """Tournament type options"""
+    SINGLE_ELIMINATION = "SINGLE_ELIMINATION"
+    SWISS = "SWISS"
+    GROUP_KNOCKOUT = "GROUP_KNOCKOUT"
+    ROUND_ROBIN = "ROUND_ROBIN"
+
+
+class TournamentStatusEnum(str, Enum):
+    """Tournament status options"""
+    CREATED = "CREATED"
+    STARTING = "STARTING"
+    IN_PROGRESS = "IN_PROGRESS"
+    FINISHED = "FINISHED"
+    CANCELLED = "CANCELLED"
+
+
+class TournamentCreate(BaseModel):
+    """Schema for creating a tournament"""
+    event_id: int = Field(..., gt=0, description="Event ID")
+    name: str = Field(..., min_length=1, max_length=255, description="Tournament name")
+    tournament_type: TournamentTypeEnum = Field(..., description="Type of tournament")
+    max_participants: Optional[int] = Field(None, gt=1, description="Maximum participants (None = unlimited)")
+    best_of: int = Field(default=1, ge=1, le=7, description="For SINGLE_ELIMINATION: 1, 3, 5, or 7")
+    num_groups: int = Field(default=2, ge=2, le=16, description="For GROUP_KNOCKOUT: number of groups")
+    swiss_rounds: int = Field(default=3, ge=1, le=10, description="For SWISS: number of rounds")
+    allow_draws: bool = Field(default=False, description="For ROUND_ROBIN: allow draws")
+
+    @field_validator('best_of')
+    @classmethod
+    def validate_best_of(cls, v):
+        """Validate best_of for SINGLE_ELIMINATION"""
+        if v not in [1, 3, 5, 7]:
+            raise ValueError('best_of must be 1, 3, 5, or 7')
+        return v
+
+
+class TournamentRead(BaseModel):
+    """Schema for reading tournament data"""
+    model_config = ConfigDict(from_attributes=True)
+    
+    id: int
+    event_id: int
+    name: str
+    tournament_type: TournamentTypeEnum
+    status: TournamentStatusEnum
+    current_round: int
+    participant_count: int
+    max_participants: Optional[int] = None
+    best_of: int
+    num_groups: int
+    swiss_rounds: int
+    allow_draws: bool
+    created_at: datetime
+    started_at: Optional[datetime] = None
+    finished_at: Optional[datetime] = None
+    participants_ids: list[int] = Field(default_factory=list)
+    bracket: Optional[dict] = Field(default=None, description="Tournament bracket structure")
+
+
+class TournamentUpdate(BaseModel):
+    """Schema for updating tournament"""
+    name: Optional[str] = Field(None, min_length=1, max_length=255)
+    max_participants: Optional[int] = Field(None, gt=1)
+
+
+class TournamentAddParticipant(BaseModel):
+    """Schema for adding a participant to tournament"""
+    player_id: int = Field(..., gt=0, description="Player ID to add")
+
+
+class TournamentRemoveParticipant(BaseModel):
+    """Schema for removing a participant from tournament"""
+    player_id: int = Field(..., gt=0, description="Player ID to remove")
+
+
+class TournamentStart(BaseModel):
+    """Schema for starting a tournament"""
+    pass  # No fields needed, just confirmation
+
+
+class TournamentAdvanceRound(BaseModel):
+    """Schema for advancing to next round"""
+    pass  # No fields needed, just confirmation
+
+
+class TournamentFinish(BaseModel):
+    """Schema for finishing a tournament"""
+    pass  # No fields needed, just confirmation
+
+
+class TournamentCancel(BaseModel):
+    """Schema for cancelling a tournament"""
+    pass  # No fields needed, just confirmation

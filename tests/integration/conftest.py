@@ -1,4 +1,4 @@
-"""Fixtures and test database setup"""
+"""Fixtures and test database setup for integration tests"""
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +9,7 @@ import sys
 import os
 
 # Add backend to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../..', 'backend'))
 
 # Module-level test database setup
 _test_engine = None
@@ -67,7 +67,7 @@ def db_session():
 def client():
     """Create a test client with database dependency overridden"""
     from main import app
-    from routers import events, players, matches, ranking
+    from routers import events, players, matches, ranking, tournament
     
     def override_get_db():
         """Override database dependency with test session"""
@@ -82,6 +82,7 @@ def client():
     app.dependency_overrides[players.get_db] = override_get_db
     app.dependency_overrides[matches.get_db] = override_get_db
     app.dependency_overrides[ranking.get_db] = override_get_db
+    app.dependency_overrides[tournament.get_db] = override_get_db
     
     # Create and yield client
     test_client = TestClient(app)
@@ -90,3 +91,36 @@ def client():
     # Clear overrides after test
     app.dependency_overrides.clear()
 
+
+@pytest.fixture
+def event(db_session):
+    """Create a test event"""
+    from models import Event
+    
+    event = Event(
+        name="Test Event",
+        date="2025-01-15",
+        time="18:00",
+        active=True
+    )
+    db_session.add(event)
+    db_session.commit()
+    return event
+
+
+@pytest.fixture
+def players(db_session, event):
+    """Create test players"""
+    from models import Player
+    
+    players_list = []
+    for i in range(1, 9):  # 8 players for various test scenarios
+        player = Player(
+            name=f"Player {i}",
+            event_id=event.id,
+            elo_rating=1600
+        )
+        db_session.add(player)
+        players_list.append(player)
+    db_session.commit()
+    return players_list
