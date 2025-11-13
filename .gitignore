@@ -88,8 +88,10 @@ docs/
 DOCUMENTACAO.md
 ORGANIZACAO_TESTES.md
 RESUMO_FINAL_REORGANIZACAO.md
+PROXIMOS_PASSOS.md
 
 # Misc
 .cache/
 .temp/
 tmp/
+features.txt
