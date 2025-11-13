@@ -7,8 +7,7 @@ from sqlalchemy.orm import Session
 from database import SessionLocal
 
 # Import models
-from models.event import Event
-from models.player import Player
+from models import Event, Player, Membership, MembershipStatus
 
 # Import schemas
 from schemas import PlayerCreate, PlayerRead, PlayerUpdate
@@ -30,6 +29,8 @@ def register_player(player_data: PlayerCreate, db: Session = Depends(get_db)):
     """
     Register a new player for an event.
     
+    Automatically creates an ATIVO membership so player can participate in matches.
+    
     Works for both active and inactive events.
 
     - **name**: Player's name (1-100 characters)
@@ -42,6 +43,16 @@ def register_player(player_data: PlayerCreate, db: Session = Depends(get_db)):
 
     player = Player(name=player_data.name, event_id=player_data.event_id)
     db.add(player)
+    db.flush()  # Generate player ID without committing
+    
+    # ✨ Automatically create ATIVO membership so player can play immediately
+    membership = Membership(
+        event_id=player_data.event_id,
+        player_id=player.id,
+        status=MembershipStatus.CONVIDADO  # Começa como CONVIDADO
+    )
+    membership.accept_invite()  # Transiciona para ATIVO imediatamente
+    db.add(membership)
     db.commit()
     db.refresh(player)
     return player
