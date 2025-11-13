@@ -4,8 +4,10 @@ from .match import Match
 from .player import Player
 from .membership import Membership, MembershipStatus
 from .tournament import Tournament, TournamentType, TournamentStatus
+from .user import User, UserRole
 
 __all__ = [
     'Event', 'Player', 'Match', 'Membership', 'MembershipStatus',
-    'Tournament', 'TournamentType', 'TournamentStatus'
+    'Tournament', 'TournamentType', 'TournamentStatus',
+    'User', 'UserRole'
 ]
