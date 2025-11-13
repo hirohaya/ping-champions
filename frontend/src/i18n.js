@@ -2,6 +2,12 @@ import { createI18n } from 'vue-i18n'
 import ptBR from './locales/pt-BR.json'
 import enUS from './locales/en-US.json'
 
+// ===== FEATURE FLAG: Disable English translation =====
+// Set to false to disable English translation and force Portuguese (pt-BR)
+// Set to true to enable English translation selector
+const I18N_ENABLE_ENGLISH = false
+// ====================================================
+
 // Safe localStorage access
 const safeGetLocaleStorage = () => {
   try {
@@ -26,6 +32,11 @@ const safeSetLocaleStorage = (locale) => {
 
 // Detect user's language preference
 const getLocale = () => {
+  // If English is disabled, always use Portuguese
+  if (!I18N_ENABLE_ENGLISH) {
+    return 'pt-BR'
+  }
+
   // Check localStorage first
   const saved = safeGetLocaleStorage()
   if (saved) return saved
@@ -45,8 +56,8 @@ const getLocale = () => {
     console.warn('Browser language detection failed:', err.message)
   }
 
-  // Default to English
-  return 'en-US'
+  // Default to Portuguese when English is disabled
+  return 'pt-BR'
 }
 
 const i18n = createI18n({
@@ -69,9 +80,14 @@ export const setLocale = (locale) => {
 }
 
 // Export function to get available locales
-export const getAvailableLocales = () => [
-  { code: 'pt-BR', name: 'Português (BR)' },
-  { code: 'en-US', name: 'English (US)' }
-]
+export const getAvailableLocales = () => {
+  const locales = [
+    { code: 'pt-BR', name: 'Português (BR)' }
+  ]
+  if (I18N_ENABLE_ENGLISH) {
+    locales.push({ code: 'en-US', name: 'English (US)' })
+  }
+  return locales
+}
 
 export default i18n

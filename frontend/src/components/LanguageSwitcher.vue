@@ -1,5 +1,6 @@
 <template>
-  <div class="language-switcher">
+  <!-- Language switcher is hidden when only one language is available -->
+  <div v-if="availableLocales.length > 1" class="language-switcher">
     <select
       v-model="currentLocale"
       @change="changeLocale"
