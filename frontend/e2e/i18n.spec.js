@@ -7,21 +7,20 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Internationalization (i18n) E2E Tests', () => {
   test.beforeEach(async ({ page, context }) => {
-    // Clear localStorage and cookies before each test
+    // Clear cookies before each test
     await context.clearCookies()
-    try {
-      await page.evaluate(() => localStorage.clear())
-    } catch (e) {
-      // localStorage may not be available in sandboxed context
-      console.log('localStorage not available in test context')
-    }
     
     // Set timeout for the entire test
     page.setDefaultTimeout(10000)
     page.setDefaultNavigationTimeout(10000)
     
+    // Initialize localStorage via addInitScript to avoid sandbox issues
+    await page.addInitScript(() => {
+      localStorage.clear()
+    })
+    
     // Navigate to home page
-    await page.goto('http://localhost:5174/', { waitUntil: 'domcontentloaded' })
+    await page.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded' })
     
     // Wait briefly for JavaScript to initialize
     await page.waitForTimeout(500)
@@ -60,11 +59,13 @@ test.describe('Internationalization (i18n) E2E Tests', () => {
       page.setDefaultTimeout(10000)
       page.setDefaultNavigationTimeout(10000)
       
-      // Clear storage
-      await page.evaluate(() => localStorage.clear())
+      // Initialize localStorage via addInitScript
+      await page.addInitScript(() => {
+        localStorage.clear()
+      })
       
       // Navigate to app
-      await page.goto('http://localhost:5174/', { waitUntil: 'domcontentloaded' })
+      await page.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded' })
       await page.waitForTimeout(500)
       
       // Check if Portuguese was auto-selected
@@ -171,7 +172,7 @@ test.describe('Internationalization (i18n) E2E Tests', () => {
       // Wait for storage update
       await page.waitForTimeout(500)
       
-      // Check localStorage
+      // Check localStorage using addInitScript
       const locale = await page.evaluate(() => localStorage.getItem('locale'))
       expect(locale).toBe('pt-BR')
     })
@@ -208,7 +209,7 @@ test.describe('Internationalization (i18n) E2E Tests', () => {
       newPage.setDefaultTimeout(10000)
       newPage.setDefaultNavigationTimeout(10000)
       
-      await newPage.goto('http://localhost:5174/', { waitUntil: 'domcontentloaded' })
+      await newPage.goto('http://localhost:5173/', { waitUntil: 'domcontentloaded' })
       await newPage.waitForTimeout(500)
       
       // Check if Portuguese is still selected

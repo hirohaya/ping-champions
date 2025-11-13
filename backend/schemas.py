@@ -155,7 +155,10 @@ class MatchCreate(BaseModel):
 
 class MatchRead(BaseModel):
     """Schema for reading match data"""
-    model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(
+        from_attributes=True,
+        arbitrary_types_allowed=True,
+    )
     
     id: int
     event_id: int

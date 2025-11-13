@@ -1,0 +1,98 @@
+🚀 PRÓXIMOS PASSOS - RESUMO RÁPIDO
+═══════════════════════════════════════════════════════════════════════════
+
+STATUS ATUAL:
+✅ Sprint 1: ELO System (completo)
+✅ Sprint 2: Membership Lifecycle (completo)
+✅ Sprint 3: Tournament Types (completo)
+✅ Session 18: Reorganização (completo)
+✅ Testes: 45/45 (100%)
+✅ Commit: a8e1f45
+
+═══════════════════════════════════════════════════════════════════════════
+
+O QUE FAZER AGORA:
+
+📌 OPÇÃO 1: Corrigir E2E Tests (⭐ RECOMENDADO)
+   Tempo: 2-3 dias
+   O que: Consertar localStorage SecurityError em testes i18n
+   Por quê: Valida Sprint 3, estabelece base sólida
+   Comando: git checkout -b test-fixes-e2e
+
+📌 OPÇÃO 2: Começar Feature 2 (Users & RBAC)
+   Tempo: 4-5 semanas
+   O que: Autenticação JWT, RBAC, Roles
+   Por quê: Crítico para features futuras
+   Comando: git checkout -b feature-2-users-rbac
+
+📌 OPÇÃO 3: Planejar em Detalhes
+   Tempo: 1-2 dias
+   O que: Revisar specs de todas as features
+   Por quê: Entender dependências e roadmap
+   Comando: cat docs/PROXIMOS_PASSOS.md
+
+═══════════════════════════════════════════════════════════════════════════
+
+TIMELINE (12 Semanas):
+
+Semana 1:      ✓ Corrigir E2E tests
+Semana 2-6:    → Feature 2: Users & RBAC (4-5 semanas)
+Semana 7-9:    → Feature 3: Grupos/Orgs (2-3 semanas)
+Semana 10-11:  → Feature 4: Dashboard (2 semanas)
+Semana 12+:    → Deploy & Docs finais
+
+═══════════════════════════════════════════════════════════════════════════
+
+PRÓXIMAS FEATURES:
+
+1️⃣  Feature 2: Users & RBAC (CRÍTICO)
+   • Modelo User (username, email, password, roles)
+   • Autenticação JWT (access + refresh tokens)
+   • RBAC (Admin, Organizer, Player)
+   • Endpoints: login, register, me, refresh
+
+2️⃣  Feature 3: Grupos/Organizações (IMPORTANTE)
+   • Hierarquia: Grupos → Eventos → Matches
+   • Isolamento de ranking por grupo
+   • Membros e permissões por grupo
+   • CRUD endpoints para grupos
+
+3️⃣  Feature 4: Dashboard (COMPLEMENTAR)
+   • Homepage refatorada
+   • Dashboard do usuário
+   • Próximos eventos
+   • Rankings e estatísticas
+
+═══════════════════════════════════════════════════════════════════════════
+
+DOCUMENTAÇÃO:
+
+📄 PROXIMOS_PASSOS_SESSION_19.md ← NOVO (resumido)
+📄 docs/PROXIMOS_PASSOS.md (detalhado com checklist)
+📄 docs/INDEX.md (navegação geral)
+📄 README.md (overview)
+
+═══════════════════════════════════════════════════════════════════════════
+
+⭐ RECOMENDAÇÃO FINAL:
+
+Comece com: OPÇÃO 1 (Corrigir E2E Tests - 2-3 dias)
+Depois: OPÇÃO 2 (Feature 2 - Usuários é mandatório)
+
+Motivo:
+✓ Rápido = feedback rápido
+✓ Valida tudo que foi feito
+✓ Prepara infraestrutura para próximas features
+✓ Menos débito técnico depois
+
+═══════════════════════════════════════════════════════════════════════════
+
+PRÓXIMA AÇÃO:
+
+git checkout -b test-fixes-e2e
+
+Depois: 
+vim frontend/e2e/i18n.spec.js
+npm run test:e2e
+
+═══════════════════════════════════════════════════════════════════════════

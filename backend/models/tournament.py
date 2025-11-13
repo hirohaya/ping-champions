@@ -100,9 +100,6 @@ class Tournament(Base):
     bracket = Column(JSON, nullable=True)  # Estrutura do bracket atualizada
     participants_ids = Column(JSON, default=[], nullable=False)  # Lista de player_ids
     
-    # Relacionamento com matches (será definido após criar Match)
-    matches = relationship("Match", back_populates="tournament")
-    
     def __repr__(self):
         return (f"<Tournament(id={self.id}, name='{self.name}', "
                 f"type={self.tournament_type}, status={self.status})>")
